@@ -58,19 +58,19 @@ export const menuList=[
         ]
 
     },
-    {mainMenu:"reports",displayText:"Reports",icon:faColumns,
+    {mainMenu:"reports",displayText:"Reports",icon:faClipboardList,
         subMenu:[
             {displayText:'Auto-Transfer of Enrollment Report',url:''}
         ]
 
     },
-    {mainMenu:"dashboard",displayText:"Batch Dashboard",icon:faColumns,
+    {mainMenu:"dashboard",displayText:"Monitoring",icon:faHeartbeat,
         subMenu:[
             {displayText:'Auto-Transfer of Enrollment Report',url:''}
         ]
 
     },
-    {mainMenu:"letter",displayText:"Letter Management",icon:faColumns,
+    {mainMenu:"letter",displayText:"Letter Management",icon:faEnvelopeOpenText,
     subMenu:[
         {displayText:'Auto-Transfer of Enrollment Report',url:''}
     ]

@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme)=>({
     bottom: 0,
     color:blue[500],
     minHeight:60,
-    zIndex: theme.zIndex.drawer + 1,
+    // zIndex: theme.zIndex.drawer + 1,
     //  background:theme.palette.background.paper
     background:"#f2f2f2"
     
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme)=>({
     color:theme.palette.secondary.main,
   },
   container: {
-    maxHeight: 440,
+    maxHeight: 480,
   },
 }));
 

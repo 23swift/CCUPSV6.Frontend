@@ -83,11 +83,11 @@ const cutomeTheme = createMuiTheme({
         color: "#054594",
       },
       stickyHeader:{
-        backgroundColor: amber[400],
+        // backgroundColor: amber[400],
         // backgroundColor:"#0072ce",
-        
-        // color:indigo[600],
-        fontWeight:300,
+        backgroundColor:"#fff",
+        color:blue[600],
+        fontWeight:400,
    
     
       }

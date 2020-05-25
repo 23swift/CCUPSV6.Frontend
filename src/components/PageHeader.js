@@ -23,7 +23,8 @@ const useStyles = makeStyles(theme => ({
     toolbar:{
       // background: 'linear-gradient(90deg, #054594 30%, #043673 60%)',
       // background: theme.palette.primary.main,
-       background:"#efefef",
+      //  background:"#efefef",
+      background:amber[500],
         // paddingLeft:12,
         paddingLeft:10,
         paddingRight:10,

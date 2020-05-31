@@ -89,7 +89,7 @@ const ApplicationDataEntry = () => {
               
               <Box mr={1}>
                 <Button
-                  color="primary"
+                  color="secondary"
                   variant="outlined"
                   startIcon={<SearchIcon />}
                   size="small"
@@ -112,7 +112,7 @@ const ApplicationDataEntry = () => {
               </Box>
 
               <Box mr={1}>
-                <Button color="primary" startIcon={<AddIcon />} variant="contained"
+                <Button color="secondary" startIcon={<AddIcon />} variant="contained"
                   size="small" component={Link} to="/applicationForm" >
                   Add New Application
                 </Button>
@@ -128,7 +128,7 @@ const ApplicationDataEntry = () => {
                 {/* <IconButton component={Link} to="/" size="small">
                   <CloseIcon />
                 </IconButton> */}
-                <Button variant="outlined" color="primary"
+                <Button variant="outlined" color="secondary"
                   component={Link}
                   to="/"
                   size="small"

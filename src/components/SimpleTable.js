@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles,withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -53,10 +53,31 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = applicatiionList;
+// const rows = applicatiionList;
 
 export default function SimpleTable() {
   const classes = useStyles();
+const [dataRows, setDataRows] = useState(null);
+  useEffect(() => {
+    fetch("/api/applications")
+      .then(res => res.json())
+      .then(
+        (result) => {
+         
+          // console.log(result._embedded.applications);
+          setDataRows(result._embedded.applications);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          // setIsLoaded(true);
+          // setError(error);
+          console.log(error);
+          
+        }
+      )
+  }, [])
 
   return (
    
@@ -71,21 +92,21 @@ export default function SimpleTable() {
             <TableCell align="left">Institution</TableCell>
             <TableCell align="left">Product</TableCell>
             <TableCell align="left">Reference</TableCell>
-            <TableCell align="left">Merchant</TableCell>
+            {/* <TableCell align="left">Merchant</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {dataRows && dataRows.map((row) => (
             <TableRow key={row.id}>
               {/* <TableCell component="th" scope="row">
                 {row.name}
               </TableCell> */}
-              <TableCell align="left">{row.card_number}</TableCell>
+              <TableCell align="left">{row['card_number']}</TableCell>
               <TableCell align="left">{row.first_name + ' ' +row.last_name}</TableCell>
               <TableCell align="left">{row.institution}</TableCell>
-              <TableCell align="left">{row.product}</TableCell>
+              <TableCell align="left">{row.product.description}</TableCell>
               <TableCell align="left">{row.reference_no}</TableCell>
-              <TableCell align="left">{row.merchant}</TableCell>
+              {/* <TableCell align="left">{row.merchant}</TableCell> */}
             </TableRow>
           ))}
         </TableBody>

@@ -129,24 +129,24 @@ const ApplicationForm = () => {
             
           { ApplicationFormConfig.formConfig.map((item,index)=>(
                 
-              <>
+                <Grid item xs={12} md={6} key={index}>
                   { item.formControl=="text" &&
-                  ( <Grid item xs={12} md={6} key={index}>
+                  ( 
                           <Field  name={item.name} component={TextField} fullWidth variant='outlined' size="small" 
                           label={item.label}
                           error={errors[item.name] || touched[item.name] }
                           helperText={<ErrorMessage name={item.name} component={Typography} variant="caption" />}
                           />
-                      </Grid>)
+                    )
                       }
                 {/* If type is select display Dropdown */}
                 { item.formControl=="select" &&
-                    <Grid item xs={12} md={6} key={index}>
+                   
                         < FormikDropDown label={item.label} name={item.name} menuItems={item.menuItems}/>
-                        </Grid>
+                   
                     }
                   { item.formControl=="date" &&
-                    <Grid item xs={12} md={6} key={index}>
+                    
                         <Field  name={item.name} component={DatePicker}  
                         variant="dialog"
                           label={item.label}
@@ -157,9 +157,10 @@ const ApplicationForm = () => {
                           // autoOk
                           // rightArrowIcon={<CalendarTodayIcon/>}
                           />  
-                  </Grid>
+                  
                 }
                 { item.formControl=="checkBox" &&
+               
                     <FormControlLabel 
                     control={
                        <Checkbox  onChange={handleChange} name={item.name} color="secondary" />
@@ -167,16 +168,12 @@ const ApplicationForm = () => {
                     label={<Typography variant="subtitle2" color="secondary">{item.label}</Typography>}
                       
                   />
+               
+                   
                 }
-              </>
-                
               
-                    
-                    
-                    
-                  
-                    
-
+                
+              </Grid>
                 
           ))}
 

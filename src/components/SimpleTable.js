@@ -12,6 +12,8 @@ import { Slide, AppBar, Toolbar, Box, Button, TablePagination, Divider } from '@
 import { Link } from 'react-router-dom';
 
 import {applicatiionList} from "../testData/ApplicationTestData";
+import ProductTableDisplay from './ProductTableDisplay';
+import {proxy} from '././ProxyConfig';
 const StyledTableCell = withStyles((theme) => ({
   root: {
     width: '100%',
@@ -58,14 +60,17 @@ function createData(name, calories, fat, carbs, protein) {
 export default function SimpleTable() {
   const classes = useStyles();
 const [dataRows, setDataRows] = useState(null);
+
+
   useEffect(() => {
-    fetch("/api/applications")
+    fetch("/applications")
       .then(res => res.json())
       .then(
         (result) => {
          
           // console.log(result._embedded.applications);
-          setDataRows(result._embedded.applications);
+          // console.log(result);
+          setDataRows(result);
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -96,15 +101,17 @@ const [dataRows, setDataRows] = useState(null);
           </TableRow>
         </TableHead>
         <TableBody>
-          {dataRows && dataRows.map((row) => (
-            <TableRow key={row.id}>
+          {dataRows && dataRows.map((row,index) => (
+            <TableRow key={index}>
               {/* <TableCell component="th" scope="row">
                 {row.name}
               </TableCell> */}
               <TableCell align="left">{row['card_number']}</TableCell>
               <TableCell align="left">{row.first_name + ' ' +row.last_name}</TableCell>
               <TableCell align="left">{row.institution}</TableCell>
-              <TableCell align="left">{row.product.description}</TableCell>
+              <TableCell align="left"> 
+                {row.product.description}
+              </TableCell>
               <TableCell align="left">{row.reference_no}</TableCell>
               {/* <TableCell align="left">{row.merchant}</TableCell> */}
             </TableRow>
@@ -114,7 +121,7 @@ const [dataRows, setDataRows] = useState(null);
      
     </TableContainer>
    
-     <Slide direction="up" in={true} mountOnEnter unmountOnExit timeout={700}>
+     {/* <Slide direction="up" in={true} mountOnEnter unmountOnExit timeout={700}>
      <AppBar position="fixed" className={classes.appBar} elevation={0}>
       <Divider/>
          <TablePagination  rowsPerPageOptions={[5, 10, 20]} component="div" count={20} rowsPerPage={10}
@@ -126,7 +133,7 @@ const [dataRows, setDataRows] = useState(null);
                />
  </AppBar>
   
- </Slide>
+ </Slide> */}
  </>
   );
 }

@@ -21,7 +21,7 @@ const MenuBar = () => {
         const menuList=MenuManager(mainMenuText);
         setOpenDrawer({open:isOpen,menu:menuList});
         // setState({ ...state, [anchor]: open });
-        console.log(openDrawer);
+        
         
       };
     return (

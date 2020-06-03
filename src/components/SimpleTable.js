@@ -65,7 +65,7 @@ const [dataRows, setDataRows] = useState(null);
         (result) => {
          
           // console.log(result._embedded.applications);
-          setDataRows(result._embedded.applications);
+          setDataRows(result);
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -103,8 +103,10 @@ const [dataRows, setDataRows] = useState(null);
               </TableCell> */}
               <TableCell align="left">{row['card_number']}</TableCell>
               <TableCell align="left">{row.first_name + ' ' +row.last_name}</TableCell>
-              <TableCell align="left">{row.institution}</TableCell>
-              <TableCell align="left">{row.product.description}</TableCell>
+              <TableCell align="left">{row.institution.name}</TableCell>
+              <TableCell align="left">
+               {row.product.description}
+                </TableCell>
               <TableCell align="left">{row.reference_no}</TableCell>
               {/* <TableCell align="left">{row.merchant}</TableCell> */}
             </TableRow>

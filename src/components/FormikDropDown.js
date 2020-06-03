@@ -1,8 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Select} from 'formik-material-ui';
 import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import { MenuItem, FormControl, InputLabel } from '@material-ui/core';
+
 const FormikDropDown = (props) => {
+
+const [data, setData] = useState([]);
+const getMenuItems= async (url)=>{
+  const response = await fetch(url);
+  const json = await response.json();
+
+    setData(json);
+}
+
+useEffect(() => {
+  if(props.menuItems){
+    setData( props.menuItems );
+  }else{
+
+    getMenuItems(props.itemsUrl);
+  }
+  
+  return () => {
+    
+  }
+}, [])
+
+
     return (
         <div>
              <FormControl variant="outlined" fullWidth size="small" >
@@ -17,8 +41,8 @@ const FormikDropDown = (props) => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {props.menuItems.map((item)=>(
-                <MenuItem value={item.value} key={item.value}>{item.displayText}</MenuItem>
+          {data && data.map((item)=>(
+                <MenuItem value={item} key={item.id}>{item.name}</MenuItem>
 
           ))}
           

@@ -5,7 +5,7 @@
     first_name:"",
     institution:"",
     middle_name:"",
-    product:0,
+    product:{id:0,name:""},
     reference_no:"",
     merchant:false
 
@@ -14,7 +14,7 @@
 export const ApplicationFormConfig=
     {
         model:ApplicationModel,
-        formConfig:[
+        formElements:[
             {label:"Card Number", formControl:"text",name:"card_number"},
             {label:"Reference Number", formControl:"text",name:"reference_no"},
             {label:"Last Name", formControl:"text",name:"last_name"},
@@ -24,13 +24,13 @@ export const ApplicationFormConfig=
             {label:"Product", formControl:"select",name:"product",
             menuItems:[
                 
-                {value:10,displayText:"SSS"},
-                {value:20,displayText:"Smart"},
-                {value:30,displayText:"Globe"},
+                {id:10,name:"SSS"},
+                {id:20,name:"Smart"},
+                {id:30,name:"Globe"},
 
                 ]},
-            {label:"Merchant", formControl:"checkBox",name:"merchant"},
-            {label:"Date of Birth", formControl:"date",name:"dob"},
+            // {label:"Merchant", formControl:"checkBox",name:"merchant"},
+            // {label:"Date of Birth", formControl:"date",name:"dob"},
         ]
     
     }

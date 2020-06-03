@@ -19,6 +19,9 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import {ApplicationFormConfig} from "./ApplicationModel";
 import FormikDropDown from '../../../components/FormikDropDown';
 
+import CCUPSTextbox from '../../../components/CCUPSTextBox';
+import CCUPSForm from '../../../components/CCUPSForm';
+
 const useStyles = makeStyles((theme)=>({
   root: {
     flexGrow: 1,
@@ -72,7 +75,7 @@ const ApplicationForm = () => {
     ];
     
    
-    const [selectedDate, handleDateChange] = useState(new Date());
+   
     return (
         <div>
             <PageHeader title="Application Data Entry" 
@@ -102,120 +105,7 @@ const ApplicationForm = () => {
               <Box ml={1} mr={1} mt={0} >
              
                 
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-    <Formik
-          initialValues={ApplicationFormConfig.model}
-          validate={values => {
-            const errors = {};
-            if (!values.card_number) {
-              errors.card_number = 'Required';
-            }
-            return errors;
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            console.log("Submitted");
-            
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 200);
-          }}
-        >
-        {({ values, errors, touched,  handleChange, handleBlur, handleSubmit, isSubmitting,}) => (
-          <Form>
-          
-          <Grid container spacing={1}  >
-            
-            
-          { ApplicationFormConfig.formConfig.map((item,index)=>(
-                
-              <>
-                  { item.formControl=="text" &&
-                  ( <Grid item xs={12} md={6} key={index}>
-                          <Field  name={item.name} component={TextField} fullWidth variant='outlined' size="small" 
-                          label={item.label}
-                          error={errors[item.name] || touched[item.name] }
-                          helperText={<ErrorMessage name={item.name} component={Typography} variant="caption" />}
-                          />
-                      </Grid>)
-                      }
-                {/* If type is select display Dropdown */}
-                { item.formControl=="select" &&
-                    <Grid item xs={12} md={6} key={index}>
-                        < FormikDropDown label={item.label} name={item.name} menuItems={item.menuItems}/>
-                        </Grid>
-                    }
-                  { item.formControl=="date" &&
-                    <Grid item xs={12} md={6} key={index}>
-                        <Field  name={item.name} component={DatePicker}  
-                        variant="dialog"
-                          label={item.label}
-                          inputVariant="outlined"
-                          error={errors[item.name] || touched[item.name] }
-                          fullWidth  size="small" 
-                          format="MM/dd/yyyy"
-                          // autoOk
-                          // rightArrowIcon={<CalendarTodayIcon/>}
-                          />  
-                  </Grid>
-                }
-                { item.formControl=="checkBox" &&
-                    <FormControlLabel 
-                    control={
-                       <Checkbox  onChange={handleChange} name={item.name} color="secondary" />
-                     }
-                    label={<Typography variant="subtitle2" color="secondary">{item.label}</Typography>}
-                      
-                  />
-                }
-              </>
-                
-              
-                    
-                    
-                    
-                  
-                    
-
-                
-          ))}
-
-            
-        
-        </Grid>
-
-
-                        <Slide direction="up" in={true} mountOnEnter unmountOnExit timeout={700}>
-                            <AppBar position="fixed" className={classes.appBar} elevation={1}>
-                            <Divider/>
-                                <Box display="flex" padding={1} >
-                                    <Box flexGrow={1}>
-
-                                    </Box>
-                                    <Box style={{marginRight:3}}>
-                                        <Button variant="outlined" color="primary"  size="small"
-                                          className={classes.actionButton}>
-                                                    Cancel
-                                        </Button>
-                                    </Box>
-                                    <Box>
-                                        <Button variant="contained" color="primary" size="small" onClick={handleSubmit}
-                                          disabled={isSubmitting }
-                                        className={classes.actionButton} >
-                                                    Save
-                                        </Button>
-                                        
-                                    </Box>
-                                </Box>
-                            </AppBar>
-                          
-                        </Slide>
-
-          </Form>
-          )
-        }
-      </Formik>
-    </MuiPickersUtilsProvider>
+                    <CCUPSForm formConfig={ApplicationFormConfig}/>
        
 
         

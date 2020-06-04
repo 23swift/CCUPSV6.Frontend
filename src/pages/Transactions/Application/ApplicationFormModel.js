@@ -28,9 +28,9 @@ const ApplicationFormValidation = Yup.object().shape({
     //   .min(2, 'First Name Too Short!')
       .max(50, 'First Name Too Long!')
       .required('First Name Required'),
-    email: Yup.string()
-      .email('Invalid email')
-      .required('Required'),
+    // email: Yup.string()
+    //   .email('Invalid email')
+    //   .required('Required'),
   });
 export const ApplicationFormConfig=
     {

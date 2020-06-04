@@ -21,13 +21,17 @@ const ApplicationFormValidation = Yup.object().shape({
       .max(50, 'Card Number Too Long!')
       .required('Card Number Required'),
       last_name: Yup.string()
-    //   .min(2, 'Last Name Too Short!')
+    
       .max(50, 'Last Name Too Long!')
       .required('Last Name Required'),
     first_name:Yup.string()
-    //   .min(2, 'First Name Too Short!')
+   
       .max(50, 'First Name Too Long!')
       .required('First Name Required'),
+      middle_name:Yup.string()
+   
+      .max(50, 'Middle Name Too Long!')
+      .required('Middle Name Required'),
     // email: Yup.string()
     //   .email('Invalid email')
     //   .required('Required'),

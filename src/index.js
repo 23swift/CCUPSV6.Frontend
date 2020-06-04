@@ -9,7 +9,7 @@ ReactDOM.render(
   //   <App />
   // </React.StrictMode>
   <React.Fragment>
-     <SnackbarProvider maxSnack={3} anchorOrigin={{
+     <SnackbarProvider maxSnack={7} anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'left',
     }}>

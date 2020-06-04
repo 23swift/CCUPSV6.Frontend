@@ -6,7 +6,7 @@ const FormikDropDown = (props) => {
     return (
         <div>
              <FormControl variant="outlined" fullWidth size="small" >
-        <InputLabel id="demo-simple-select-outlined-label">Product</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">{props.label}</InputLabel>
         <Field component={Select}
           labelId="demo-simple-select-outlined-label"
         //   id="product"
@@ -17,8 +17,8 @@ const FormikDropDown = (props) => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {props.menuItems.map((item)=>(
-                <MenuItem value={item.value} key={item.value}>{item.displayText}</MenuItem>
+          {props.menuItems && props.menuItems.map((item)=>(
+                <MenuItem value={item} key={item.id}>{item.name}</MenuItem>
 
           ))}
           

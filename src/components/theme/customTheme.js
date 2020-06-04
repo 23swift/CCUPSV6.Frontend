@@ -95,9 +95,9 @@ const cutomeTheme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: "#054594",
+      // main: "#054594",
       // dark:"#f7af19",
-      // main:"#043673",
+      main:"#043673",
       contrastText:"#fff"
     },
     secondary: {

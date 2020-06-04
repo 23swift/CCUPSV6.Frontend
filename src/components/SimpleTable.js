@@ -63,7 +63,7 @@ const [dataRows, setDataRows] = useState(null);
 
 
   useEffect(() => {
-    fetch("/applications")
+    fetch("/api/applications")
       .then(res => res.json())
       .then(
         (result) => {
@@ -108,7 +108,7 @@ const [dataRows, setDataRows] = useState(null);
               </TableCell> */}
               <TableCell align="left">{row['card_number']}</TableCell>
               <TableCell align="left">{row.first_name + ' ' +row.last_name}</TableCell>
-              <TableCell align="left">{row.institution}</TableCell>
+              <TableCell align="left">{row.institution.name}</TableCell>
               <TableCell align="left"> 
                 {row.product.description}
               </TableCell>

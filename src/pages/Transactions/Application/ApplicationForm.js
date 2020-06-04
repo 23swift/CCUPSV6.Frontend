@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PageHeader from '../../../components/PageHeader'
 import { Box, Divider, Button, IconButton, Slide, AppBar, Grid, FormControl, InputLabel, MenuItem, FormControlLabel, Checkbox, fade, Typography, InputAdornment } from '@material-ui/core'
 import { Link } from 'react-router-dom'
@@ -16,8 +16,10 @@ import {
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import {ApplicationFormConfig} from "./ApplicationModel";
+// import {ApplicationFormConfig} from "./ApplicationModel";
 import FormikDropDown from '../../../components/FormikDropDown';
+import FormikForm from '../../../components/FormikForm';
+import FormField from '../../../components/FormField';
 
 const useStyles = makeStyles((theme)=>({
   root: {
@@ -62,17 +64,89 @@ const validate = values => {
     errors.email = 'Invalid email address';
   }
 }
+const  ApplicationModel={
+  id:0,
+  card_number:"",
+  last_name:"",
+  first_name:"",
+  institution:{id:0,name:"",code:"",merchant_id:""},
+  middle_name:"",
+  product:{id:0,name:"",code:""},
+  reference_no:"",
+  merchant:false
+
+}
+// const getProducts =async ()=> {
+//   let response = await fetch('api/dd/products');
+//   let data = await response.json();
+// console.log(data._embedded.products);
+
+//   return data._embedded.products;
+
+// }
+const ApplicationFormConfig= ()=>
+    {
+     
+      //  const formConfig=[
+      //       {label:"Card Number", formControl:"text",name:"card_number"},
+      //       {label:"Reference Number", formControl:"text",name:"reference_no"},
+      //       {label:"Last Name", formControl:"text",name:"last_name"},
+      //       {label:"Middle Name", formControl:"text",name:"middle_name"},
+      //       {label:"First Name", formControl:"text",name:"first_name"},
+      //       // {label:"Institution", formControl:"select",name:"institution",menuItems:[]},
+      //       // {label:"Product", formControl:"select",name:"product",
+      //       // menuItems:getProducts()},
+      //       {label:"Merchant", formControl:"checkBox",name:"merchant"},
+      //       // {label:"Date of Birth", formControl:"date",name:"dob"},
+      //   ]
+      const formConfig=[
+        {formControl:(error,touched)=><FormField name="card_number" label="Card Number" errors={error} touched={touched} />},
+        {formControl:(error,touched)=><FormField label="Reference Number" name="reference_no" errors={error} touched={touched}/>},
+        {formControl:(error,touched)=><FormField label="Last Name" name="last_name" errors={error} touched={touched}/>},
+        {formControl:(error,touched)=><FormField label="Middle Name" name="middle_name" errors={error} touched={touched}/>},
+        {formControl:(error,touched)=><FormField label="First Name" name="first_name" errors={error} touched={touched}/>},
+        // {formControl:(error,touched)=><FormField label="Middle Name" name="middle_name" errors={error} touched={touched}/>},
+       
+    ]
+
+        return formConfig;
+    
+    }
+
 const ApplicationForm = () => {
     const classes = useStyles();
-    const institutionItems=[
-      {value:10,displayText:"SSS"},
-      {value:20,displayText:"Smart"},
-      {value:30,displayText:"Globe"},
-
-    ];
     
-   
-    const [selectedDate, handleDateChange] = useState(new Date());
+    // const [AppFormConfigState, setAppFormConfigState] = useState(null);
+    
+      
+
+    useEffect(() => {
+      
+      
+        fetch("api/dd/institutions")
+        .then(res => res.json())
+        .then(
+          (result) => {
+            
+            // console.log(result._embedded.products);
+            // console.log(result);
+            // setDataRows(result);
+            // setAppFormConfigState({...AppFormConfigState,ProductMenuItems:result._embedded.products});
+            //  setAppFormConfigState([...ApplicationFormConfig(),{label:"Institution", formControl:"select",name:"institution",
+            // menuItems:result}]);
+          },
+          // Note: it's important to handle errors here
+          
+          (error) => {
+            // setIsLoaded(true);
+            // setError(error);
+            console.log(error);
+            
+          }
+        );
+
+
+    }, [])
     return (
         <div>
             <PageHeader title="Application Data Entry" 
@@ -99,126 +173,7 @@ const ApplicationForm = () => {
             }
             />
           
-              <Box ml={1} mr={1} mt={0} >
-             
-                
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-    <Formik
-          initialValues={ApplicationFormConfig.model}
-          validate={values => {
-            const errors = {};
-            if (!values.card_number) {
-              errors.card_number = 'Required';
-            }
-            return errors;
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            console.log("Submitted");
-            
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 200);
-          }}
-        >
-        {({ values, errors, touched,  handleChange, handleBlur, handleSubmit, isSubmitting,}) => (
-          <Form>
-          
-          <Grid container spacing={1}  >
-            
-            
-          { ApplicationFormConfig.formConfig.map((item,index)=>(
-                
-                <Grid item xs={12} md={6} key={index}>
-                  { item.formControl=="text" &&
-                  ( 
-                          <Field  name={item.name} component={TextField} fullWidth variant='outlined' size="small" 
-                          label={item.label}
-                          error={errors[item.name] || touched[item.name] }
-                          helperText={<ErrorMessage name={item.name} component={Typography} variant="caption" />}
-                          />
-                    )
-                      }
-                {/* If type is select display Dropdown */}
-                { item.formControl=="select" &&
-                   
-                        < FormikDropDown label={item.label} name={item.name} menuItems={item.menuItems}/>
-                   
-                    }
-                  { item.formControl=="date" &&
-                    
-                        <Field  name={item.name} component={DatePicker}  
-                        variant="dialog"
-                          label={item.label}
-                          inputVariant="outlined"
-                          error={errors[item.name] || touched[item.name] }
-                          fullWidth  size="small" 
-                          format="MM/dd/yyyy"
-                          // autoOk
-                          // rightArrowIcon={<CalendarTodayIcon/>}
-                          />  
-                  
-                }
-                { item.formControl=="checkBox" &&
-               
-                    <FormControlLabel 
-                    control={
-                       <Checkbox  onChange={handleChange} name={item.name} color="secondary" />
-                     }
-                    label={<Typography variant="subtitle2" color="secondary">{item.label}</Typography>}
-                      
-                  />
-               
-                   
-                }
-              
-                
-              </Grid>
-                
-          ))}
-
-            
-        
-        </Grid>
-
-
-                        <Slide direction="up" in={true} mountOnEnter unmountOnExit timeout={700}>
-                            <AppBar position="fixed" className={classes.appBar} elevation={1}>
-                            <Divider/>
-                                <Box display="flex" padding={1} >
-                                    <Box flexGrow={1}>
-
-                                    </Box>
-                                    <Box style={{marginRight:3}}>
-                                        <Button variant="outlined" color="primary"  size="small"
-                                          className={classes.actionButton}>
-                                                    Cancel
-                                        </Button>
-                                    </Box>
-                                    <Box>
-                                        <Button variant="contained" color="primary" size="small" onClick={handleSubmit}
-                                          disabled={isSubmitting }
-                                        className={classes.actionButton} >
-                                                    Save
-                                        </Button>
-                                        
-                                    </Box>
-                                </Box>
-                            </AppBar>
-                          
-                        </Slide>
-
-          </Form>
-          )
-        }
-      </Formik>
-    </MuiPickersUtilsProvider>
-       
-
-        
-                    
-                  
-              </Box>
+          {   <FormikForm model={ApplicationModel} FormConfig={ApplicationFormConfig()}/>}
 
 
 

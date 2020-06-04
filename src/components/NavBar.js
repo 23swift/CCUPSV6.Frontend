@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
       },
       toolbar:{
         // background: 'linear-gradient(90deg, #054594 30%, #043673 90%)',
-        background: 'linear-gradient(90deg, #054594  15%, #0072ce 50%)',
+        background: 'linear-gradient(90deg, #043673  15%, #0072ce 50%)',
         //  background:"#fff",
 
         // background:"#054594",

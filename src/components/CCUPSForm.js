@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme)=>({
 
 
 const generateFormElements=(props)=>{
-    const { errors, touched,formElements,handleChange} = props;
+    const { errors, touched,formElements,handleChange,handleBlur} = props;
 
  
  
@@ -73,7 +73,7 @@ const generateFormElements=(props)=>{
           <Grid item xs={12} md={6} key={index}>
            
                     {item.formControl=="text" && 
-                            <CCUPSTextBox fieldName={item.name} errors={errors} touched={touched} label={item.label} handleChange={handleChange}/>
+                            <CCUPSTextBox fieldName={item.name} errors={errors} touched={touched} label={item.label} handleChange={handleChange} handleBlur={handleBlur}/>
 
                     }
                     {item.formControl=="select" && 

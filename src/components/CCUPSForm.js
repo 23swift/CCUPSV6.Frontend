@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Divider, Button, IconButton, Slide, AppBar, Grid, FormControl, InputLabel, MenuItem, FormControlLabel, Checkbox, fade, Typography, InputAdornment } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import CloseIcon from '@material-ui/icons/Close';
@@ -16,9 +16,12 @@ import {
 import DateFnsUtils from '@date-io/date-fns';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 
-import FormikDropDown from '../components/FormikDropDown';
+import { useSnackbar } from 'notistack';
 
 import CCUPSTextBox from './CCUPSTextBox';
+import CCUPSDropDown from './CCUPSDropDown';
+import CCUPSCheckBox from './CCUPSCheckBox';
+import CCUPSCalendar from './CCUPSCalendar';
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -55,51 +58,35 @@ const useStyles = makeStyles((theme)=>({
         },
         
   }));
-  const validate = values => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
-    }
-  }
-
-//   const formConfig=[
-//     {label:"Card Number", formControl:"text",name:"card_number"},
-//     {label:"Reference Number", formControl:"text",name:"reference_no"},
-//     {label:"Last Name", formControl:"text",name:"last_name"},
-//     {label:"Middle Name", formControl:"text",name:"middle_name"},
-//     {label:"First Name", formControl:"text",name:"first_name"},
-//     {label:"Institution", formControl:"text",name:"institution"},
-//     {label:"Product", formControl:"select",name:"product",
-//     menuItems:[]}
-// ];
 
 
-// const createTextBox=(props)=>{
-
-//     return(
-//         <CCUPSTextBox fieldName="card_number" errors={props.errors} touched={props.touched} label="Card Number"/>
-//     )
-// }
 const generateFormElements=(props)=>{
-    const { errors, touched} = props;
+    const { errors, touched,formElements,handleChange} = props;
+
+ 
+ 
     return(
        
         <Grid container spacing={1}  >
-            { props.formElements.map((item,index)=>(
+            { formElements.map((item,index)=>(
                 
-          <Grid item xs={12} md={6} >
+          <Grid item xs={12} md={6} key={index}>
            
                     {item.formControl=="text" && 
-                            <CCUPSTextBox fieldName={item.name} errors={errors} touched={touched} label={item.label}/>
+                            <CCUPSTextBox fieldName={item.name} errors={errors} touched={touched} label={item.label} handleChange={handleChange}/>
 
                     }
                     {item.formControl=="select" && 
-                        <FormikDropDown label={item.label} name={item.name} menuItems={item.menuItems} />
+                        <CCUPSDropDown label={item.label} fieldName={item.name} control={item} errors={errors} touched={touched}/>
                     }
-                    
-
+                    { item.formControl=="checkBox" && 
+                    <CCUPSCheckBox  name={item.name} handleChange={handleChange} label= {item.label} errors={errors} touched={touched}/>
+                         
+                  }
+                  { item.formControl=="date" && 
+                    <CCUPSCalendar fieldName={item.name} label= {item.label} errors={errors} touched={touched}/>
+                  }
+                 
                   </Grid>  
                  
               ))}
@@ -111,29 +98,47 @@ const generateFormElements=(props)=>{
         
 }
 
+
+
 function CCUPSForm(props) {
     const classes = useStyles();
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+    const validateValues = values => {
+      const errors = {};
+      // if (!values.email) {
+      //   errors.email = 'Required';
+      // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+      //   errors.email = 'Invalid email address';
+      // }
+      
+      
+      if (!values.card_number) {
+        errors.card_number = 'Card Number Required';
+      }
+      if (!values.first_name) {
+        errors.first_name = 'First Name Required';
+      }
+
+      return errors;
+    }
+
     
-
-
     return (
         <div>
              <MuiPickersUtilsProvider utils={DateFnsUtils}>
     <Formik
           initialValues={props.formConfig.model}
-          validate={values => {
-            const errors = {};
-            if (!values.card_number) {
-              errors.card_number = 'Required';
-            }
-            return errors;
-          }}
+          // validate={validateValues}
+          validationSchema={props.formConfig.validationSchema}
           onSubmit={(values, { setSubmitting }) => {
-            console.log("Submitted");
+           
             
             setTimeout(() => {
               alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
+              enqueueSnackbar('Submitted', { 
+                variant: 'success',
+            });
             }, 200);
           }}
         >
@@ -141,9 +146,9 @@ function CCUPSForm(props) {
           <Form>
           
          
-          {generateFormElements({errors, touched,formElements:props.formConfig.formElements})}
+          {generateFormElements({errors, touched,formElements:props.formConfig.formElements,handleChange,handleBlur})}
          
-         
+          
             
         
        

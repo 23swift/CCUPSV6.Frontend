@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 
 import {applicatiionList} from "../testData/ApplicationTestData";
 import ProductTableDisplay from './ProductTableDisplay';
-import {proxy} from '././ProxyConfig';
+
 const StyledTableCell = withStyles((theme) => ({
   root: {
     width: '100%',
@@ -109,7 +109,7 @@ const [dataRows, setDataRows] = useState(null);
               <TableCell align="left">{row.first_name + ' ' +row.last_name}</TableCell>
               <TableCell align="left">{row.institution.name}</TableCell>
               <TableCell align="left">
-               {row.product.description}
+               {row.product.name}
                 </TableCell>
               <TableCell align="left">{row.reference_no}</TableCell>
               {/* <TableCell align="left">{row.merchant}</TableCell> */}

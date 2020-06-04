@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import {  Field, ErrorMessage, useFormik } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { Typography,  InputAdornment, IconButton } from '@material-ui/core';
+// import { TextField } from 'formik-material-ui';
+import {TextField, Typography,  InputAdornment, IconButton } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import { useSnackbar } from 'notistack';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+
 const CCUPSTextBox = (props) => {
     const { errors, touched,handleChange,handleBlur,fieldName,label} = props;
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -28,7 +30,8 @@ const CCUPSTextBox = (props) => {
 
     return (
         <div>
-              {/* <TextField  name={fieldName}  fullWidth variant='outlined' size="small" onChange={handleChange} onBlur={handleBlur} onTouchEnd={handleBlur}
+              <TextField   name={fieldName}   fullWidth variant='outlined' size="small" 
+              onChange={handleChange} onBlur={handleBlur} 
                           label={label}
                           error={errors[fieldName] && touched[fieldName] }
                         //   helperText={<ErrorMessage name={fieldName} component={Typography} variant="caption" />}
@@ -45,17 +48,33 @@ const CCUPSTextBox = (props) => {
                           }}
                           
                           
-                        /> */}
-                        <Field name={fieldName} component={TextField}  fullWidth   variant="outlined"
+                        />
+                        {/* <Field name={fieldName} component={TextField}  fullWidth   variant="outlined"
                               size="small"  label={label}   error={errors[fieldName] || touched[fieldName]}
-                              helperText={
-                                <ErrorMessage
-                                  name={fieldName}
-                                  component={Typography}
-                                  variant="caption"
-                                />
-                              }
-                            />
+                              helperText={<div>Testing 1234</div>}
+                              InputProps={{
+                                 startAdornment: (errors[fieldName] && touched[fieldName] ?
+                                  <InputAdornment position="start">
+                                  <IconButton onClick={()=>showErrorMessage(errors[fieldName])} size="small">
+                                      <InfoIcon fontSize="small" color="error" />
+                                  </IconButton>
+                                      
+                                 </InputAdornment>:""
+                                
+                                  
+                                ),
+
+                                
+                              }}
+                              helperText=""
+                              // helperText={
+                              //   <ErrorMessage
+                              //     name={fieldName}
+                              //     component={Typography}
+                              //     variant="caption"
+                              //   />
+                              // }
+                            /> */}
 
         </div>
            

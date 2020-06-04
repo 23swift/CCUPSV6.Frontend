@@ -130,8 +130,11 @@ function CCUPSForm(props) {
           initialValues={props.formConfig.model}
           // validate={validateValues}
           validationSchema={props.formConfig.validationSchema}
+          
+          validateOnBlur={true}
+          
           onSubmit={(values, { setSubmitting }) => {
-           
+          
             
             setTimeout(() => {
               alert(JSON.stringify(values, null, 2));
@@ -142,7 +145,7 @@ function CCUPSForm(props) {
             }, 200);
           }}
         >
-        {({ values, errors, touched,  handleChange, handleBlur, handleSubmit, isSubmitting,}) => (
+        {({ values, errors, touched,  handleChange, handleBlur, handleSubmit, isSubmitting}) => (
           <Form>
           
          

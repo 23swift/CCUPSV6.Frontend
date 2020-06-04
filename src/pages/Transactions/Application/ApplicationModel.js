@@ -6,7 +6,7 @@ const  ApplicationModel={
     first_name:"",
     institution:"",
     middle_name:"",
-    product:0,
+    product:{id:0,name:""},
     reference_no:"",
     merchant:false
 
@@ -21,8 +21,8 @@ const  ApplicationModel={
 // }
 export const ApplicationFormConfig=
     {
-        model:ApplicationModel,ProductMenuItems:[],InstitutionMenuItems:[],
-        formConfig:[
+        model:ApplicationModel,
+        formElements:[
             {label:"Card Number", formControl:"text",name:"card_number"},
             {label:"Reference Number", formControl:"text",name:"reference_no"},
             {label:"Last Name", formControl:"text",name:"last_name"},
@@ -30,9 +30,15 @@ export const ApplicationFormConfig=
             {label:"First Name", formControl:"text",name:"first_name"},
             // {label:"Institution", formControl:"select",name:"institution",menuItems:[]},
             {label:"Product", formControl:"select",name:"product",
-            menuItems:[]},
-            {label:"Merchant", formControl:"checkBox",name:"merchant"},
-            {label:"Date of Birth", formControl:"date",name:"dob"},
+            menuItems:[
+                
+                {id:10,name:"SSS"},
+                {id:20,name:"Smart"},
+                {id:30,name:"Globe"},
+
+                ]},
+            // {label:"Merchant", formControl:"checkBox",name:"merchant"},
+            // {label:"Date of Birth", formControl:"date",name:"dob"},
         ]
     
     }

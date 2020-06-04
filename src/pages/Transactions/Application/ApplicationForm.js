@@ -21,6 +21,9 @@ import FormikDropDown from '../../../components/FormikDropDown';
 import FormikForm from '../../../components/FormikForm';
 import FormField from '../../../components/FormField';
 
+import CCUPSTextbox from '../../../components/CCUPSTextBox';
+import CCUPSForm from '../../../components/CCUPSForm';
+
 const useStyles = makeStyles((theme)=>({
   root: {
     flexGrow: 1,
@@ -116,6 +119,7 @@ const ApplicationFormConfig= ()=>
 const ApplicationForm = () => {
     const classes = useStyles();
     
+<<<<<<< HEAD
     // const [AppFormConfigState, setAppFormConfigState] = useState(null);
     
       
@@ -147,6 +151,10 @@ const ApplicationForm = () => {
 
 
     }, [])
+=======
+   
+   
+>>>>>>> fd4429c0df61fb0d006125f38e7a921015afc179
     return (
         <div>
             <PageHeader title="Application Data Entry" 
@@ -173,7 +181,20 @@ const ApplicationForm = () => {
             }
             />
           
+<<<<<<< HEAD
           {   <FormikForm model={ApplicationModel} FormConfig={ApplicationFormConfig()}/>}
+=======
+              <Box ml={1} mr={1} mt={0} >
+             
+                
+                    <CCUPSForm formConfig={ApplicationFormConfig}/>
+       
+
+        
+                    
+                  
+              </Box>
+>>>>>>> fd4429c0df61fb0d006125f38e7a921015afc179
 
 
 

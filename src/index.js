@@ -10,9 +10,9 @@ ReactDOM.render(
   // </React.StrictMode>
   <React.Fragment>
      <SnackbarProvider maxSnack={7} anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-    }}>
+        vertical: 'bottom',
+        horizontal: 'left',
+    }} >
         <App />
      </SnackbarProvider>
    

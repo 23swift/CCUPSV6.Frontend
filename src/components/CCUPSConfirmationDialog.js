@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 // import DialogTitle from '@material-ui/core/DialogTitle';
-import { Typography, Box, Slide, Grow, makeStyles, IconButton } from '@material-ui/core';
+import { Typography, Box, Slide, Grow, makeStyles, IconButton,CircularProgress } from '@material-ui/core';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import SaveIcon from '@material-ui/icons/Save';
 import CheckIcon from '@material-ui/icons/Check';
@@ -58,22 +58,24 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function CCUPSConfirmationDialog(props) {
 const classes=useStyles();
 const{open,handleClose,action,message,isSubmitting}=props;
+
+const [isConfirmed, setIsConfirmed] = useState(false);
 const handleAction=()=>{
-   
+  // setIsConfirmed(true);
   if(action){
         action();
     
         
     }
     
-    // handleClose();
+    handleClose();
 }
 
   return (
     <div>
       <Dialog
         open={open}
-        // onClose={handleClose}
+        onExited={()=>setIsConfirmed(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         TransitionComponent={Transition}
@@ -91,29 +93,41 @@ const handleAction=()=>{
         <DialogContent> 
           <DialogContentText id="alert-dialog-description" color="inherit" variant="subtitle2" >
         
-          {message}
+          {isConfirmed ? 
+          <div>
+            <Typography>   <CheckIcon/> Saving Confirmed! </Typography>
+           
           
-            
-          </DialogContentText>
+          </div> 
+          
+          :message}
+          
+          </DialogContentText> 
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="inherit" variant="outlined"
-            disabled={isSubmitting}
-          >
-            Cancel
-          </Button>
-          <Button startIcon={<CheckIcon/>}
-            // onClick={handleClose}
-            color="secondary"
-            variant="contained"
-            autoFocus
-            onClick={handleAction}
-            disabled={isSubmitting}
-          >
-            Confirmed
-            
+
+          {isSubmitting ? <Typography>   <CircularProgress size={40} thickness={3} color="inherit"/>  Please wait...</Typography>
+          :
+          <>
+          <Button onClick={handleClose} color="inherit" variant="outlined"  >
+                Cancel
+              </Button>
+              <Button startIcon={<CheckIcon/>}
+                // onClick={handleClose}
+                color="secondary"
+                variant="contained"
+                autoFocus
+                onClick={handleAction}
+              
+              >
+                Confirmed
+                
+              
+              </Button>
+          </>
+              
+          }
           
-          </Button>
         </DialogActions>
       </Dialog>
     </div>

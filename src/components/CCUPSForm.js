@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react'
-import { Box, Divider, Button, IconButton, Slide, AppBar, Grid, CircularProgress} from '@material-ui/core'
+import { Box, Divider, Button, IconButton, Slide, AppBar, Grid, CircularProgress, Typography} from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/styles';
 import { blue, amber } from '@material-ui/core/colors';
@@ -11,8 +11,11 @@ import CCUPSTextBox from './CCUPSTextBox';
 import CCUPSDropDown from './CCUPSDropDown';
 import CCUPSCheckBox from './CCUPSCheckBox';
 import CCUPSCalendar from './CCUPSCalendar';
-
+import CheckIcon from '@material-ui/icons/Check';
 import CCUPSConfirmationDialog from './CCUPSConfirmationDialog';
+import Backdrop from '@material-ui/core/Backdrop';
+import CCUPSProgress from './CCUPSProgress';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -92,28 +95,30 @@ const generateFormElements=(props)=>{
 function CCUPSForm(props) {
     const classes = useStyles();
     const [confirmationOpen, setConfirmationOpen] = useState(false);
+    let history = useHistory();
     const handleConfirmationClose=()=>{
       setConfirmationOpen(false);
+    }
+    const handleSnackExit=()=>{
+
+      setConfirmationOpen(false);
+      
+      history.push("/applicationDataEntry");
+    
     }
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
    
     const showSuccessMessage=(message)=>{
-      enqueueSnackbar(message, { 
+      enqueueSnackbar( message , { 
                        variant: 'success',
-                       onExited:  setConfirmationOpen(false)
+                       onExited: handleSnackExit() 
+                      
                        
                      
                   });
     
     }
-    const showInfoMessage=(message)=>{
-      enqueueSnackbar(message, { 
-                       variant: 'info',
-                       
-                     
-                  });
-    
-    }
+   
     return (
         <div>
              <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -123,7 +128,7 @@ function CCUPSForm(props) {
           validationSchema={props.formConfig.validationSchema}
           validateOnMount={true}
           onSubmit={(values, { setSubmitting }) => {
-            showInfoMessage("Saving Please wait...")
+            
             
             setTimeout(() => {
               // alert(JSON.stringify(values, null, 2));
@@ -133,7 +138,7 @@ function CCUPSForm(props) {
             //   enqueueSnackbar('Record Saved!', { 
             //     variant: 'success',
             // });
-            }, 3000);
+            }, 5000);
           }}
         >
         {({ values, errors, touched,  handleChange, handleBlur, handleSubmit,validateForm,setSubmitting,status ,setTouched, isSubmitting}) => (
@@ -193,6 +198,7 @@ function CCUPSForm(props) {
                           
                         </Slide>
               <CCUPSConfirmationDialog open={confirmationOpen} handleClose={handleConfirmationClose} isSubmitting={isSubmitting} action={handleSubmit} message="Saving your entry, Please Confirm..."/>
+          <CCUPSProgress open={isSubmitting} displayText="Saving Auto Debit Application Please wait..."/>
           </Form>
           )
         }

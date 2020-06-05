@@ -21,16 +21,16 @@ const useStyles = makeStyles(theme => ({
           "0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
       },
     toolbar:{
-      // background: 'linear-gradient(90deg, #054594 30%, #043673 60%)',
+       
       // background: theme.palette.primary.main,
-      //  background:"#efefef",
-      background:amber[500],
+       background:"#efefef",
+      //  background:amber[500],
         // paddingLeft:12,
         paddingLeft:10,
         paddingRight:10,
       //background:"inherit",
       
-      color:"#054594"
+      // color:"#054594"
       // color:grey[300]
     },
     root: {
@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
       paddingRight:7,
       borderRadius:4,
       marginRight:5,
-      // color:"#fff"
+      //  color:"#fff"
     },
   subTitle:{
     marginTop: 10,

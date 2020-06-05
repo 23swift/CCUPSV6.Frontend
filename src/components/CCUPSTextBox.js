@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Fragment } from 'react'
 import {  Field, ErrorMessage, useFormik } from 'formik';
 // import { TextField } from 'formik-material-ui';
-import {TextField, Typography,  InputAdornment, IconButton } from '@material-ui/core';
+import {TextField, Typography,  InputAdornment, IconButton, Button } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import { useSnackbar } from 'notistack';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -21,9 +21,12 @@ const CCUPSTextBox = (props) => {
         }
       }, [errors[fieldName] && touched[fieldName]])
 
-    const showErrorMessage=(message)=>{
+
+    
+      const showErrorMessage=(message)=>{
         enqueueSnackbar(message, { 
-                        variant: 'error',
+                         variant: 'error',
+                       
                     });
 
     }
@@ -34,10 +37,12 @@ const CCUPSTextBox = (props) => {
               onChange={handleChange} onBlur={handleBlur} 
                           label={label}
                           error={errors[fieldName] && touched[fieldName] }
+                          // error={errors[fieldName] && true }
                         //   helperText={<ErrorMessage name={fieldName} component={Typography} variant="caption" />}
                         InputProps={{
                             endAdornment: 
                             errors[fieldName] && touched[fieldName] ?
+                            // errors[fieldName] && true ?
                             <InputAdornment position="end">
                                         <IconButton onClick={()=>showErrorMessage(errors[fieldName])} size="small">
                                             <InfoIcon fontSize="small" color="error" />

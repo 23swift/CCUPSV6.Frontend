@@ -9,17 +9,17 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 const CCUPSTextBox = (props) => {
     const { errors, touched,handleChange,handleBlur,fieldName,label} = props;
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-    // useEffect(() => {
-    //     if(errors[fieldName] || touched[fieldName] ){
-    //          enqueueSnackbar(errors[fieldName], { 
-    //             variant: 'error',
-    //         });
-    //     }
+    useEffect(() => {
+        if(errors[fieldName] && touched[fieldName] ){
+             enqueueSnackbar(errors[fieldName], { 
+                variant: 'error',
+            });
+        }
        
-    //     return () => {
-    //       // cleanup
-    //     }
-    //   }, [errors[fieldName] && touched[fieldName]])
+        return () => {
+          // cleanup
+        }
+      }, [errors[fieldName] && touched[fieldName]])
 
     const showErrorMessage=(message)=>{
         enqueueSnackbar(message, { 
@@ -36,9 +36,9 @@ const CCUPSTextBox = (props) => {
                           error={errors[fieldName] && touched[fieldName] }
                         //   helperText={<ErrorMessage name={fieldName} component={Typography} variant="caption" />}
                         InputProps={{
-                            startAdornment: 
+                            endAdornment: 
                             errors[fieldName] && touched[fieldName] ?
-                            <InputAdornment position="start">
+                            <InputAdornment position="end">
                                         <IconButton onClick={()=>showErrorMessage(errors[fieldName])} size="small">
                                             <InfoIcon fontSize="small" color="error" />
                                         </IconButton>
@@ -49,32 +49,7 @@ const CCUPSTextBox = (props) => {
                           
                           
                         />
-                        {/* <Field name={fieldName} component={TextField}  fullWidth   variant="outlined"
-                              size="small"  label={label}   error={errors[fieldName] || touched[fieldName]}
-                              helperText={<div>Testing 1234</div>}
-                              InputProps={{
-                                 startAdornment: (errors[fieldName] && touched[fieldName] ?
-                                  <InputAdornment position="start">
-                                  <IconButton onClick={()=>showErrorMessage(errors[fieldName])} size="small">
-                                      <InfoIcon fontSize="small" color="error" />
-                                  </IconButton>
-                                      
-                                 </InputAdornment>:""
-                                
-                                  
-                                ),
-
-                                
-                              }}
-                              helperText=""
-                              // helperText={
-                              //   <ErrorMessage
-                              //     name={fieldName}
-                              //     component={Typography}
-                              //     variant="caption"
-                              //   />
-                              // }
-                            /> */}
+                       
 
         </div>
            

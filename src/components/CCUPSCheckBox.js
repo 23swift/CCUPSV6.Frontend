@@ -8,6 +8,7 @@ function CCUPSCheckBox(props) {
                               control={
                                 <Checkbox
                                   onChange={handleChange}
+                                  
                                   name={name}
                                   color="secondary"
                                 />}

@@ -93,22 +93,13 @@ const handleAction=()=>{
         <DialogContent> 
           <DialogContentText id="alert-dialog-description" color="inherit" variant="subtitle2" >
         
-          {isConfirmed ? 
-          <div>
-            <Typography>   <CheckIcon/> Saving Confirmed! </Typography>
-           
-          
-          </div> 
-          
-          :message}
+          {message}
           
           </DialogContentText> 
         </DialogContent>
         <DialogActions>
 
-          {isSubmitting ? <Typography>   <CircularProgress size={40} thickness={3} color="inherit"/>  Please wait...</Typography>
-          :
-          <>
+         
           <Button onClick={handleClose} color="inherit" variant="outlined"  >
                 Cancel
               </Button>
@@ -124,9 +115,9 @@ const handleAction=()=>{
                 
               
               </Button>
-          </>
+          
               
-          }
+          
           
         </DialogActions>
       </Dialog>

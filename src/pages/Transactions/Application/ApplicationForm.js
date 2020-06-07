@@ -7,65 +7,17 @@ import { makeStyles } from '@material-ui/styles';
 import { blue, amber } from '@material-ui/core/colors';
 
 import CCUPSForm from '../../../components/CCUPSForm';
-import { ApplicationFormConfig } from './ApplicationFormModel';
-
+import { ApplicationFormValidation,formConfig } from './ApplicationFormModel';
+import { createField,Type } from '../../../components/CCUPSFormHelper';
+import * as Yup from 'yup';
 const useStyles = makeStyles((theme)=>({
-  root: {
-    flexGrow: 1,
-  },
-    appBar: {
-        top: 'auto',
-        bottom: 0,
-        color:blue[500],
-        minHeight:30,
-        // zIndex: theme.zIndex.drawer + 1,
-        //  background:theme.palette.background.paper
-        background:"#f2f2f2"
-        
-      },
-      actionButton:{
-        minWidth:110
-      },
-      CheckboxLabel:{
-        color:theme.palette.secondary.main,
-        fontSize:14,
-        marginLeft:0
-      },
+  
       closeBUtton:{
         color:theme.palette.common.black,
         opacity:.4
-      },
-      textHelperText:{
-        marginLeft:2
-      },
-      formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-      },
+      }
       
 }));
-
-const validate = values => {
-  const errors = {};
-  if (!values.email) {
-    errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
-  }
-}
-const  ApplicationModel={
-  id:0,
-  card_number:"",
-  last_name:"",
-  first_name:"",
-  institution:{id:0,name:"",code:"",merchant_id:""},
-  middle_name:"",
-  product:{id:0,name:"",code:""},
-  reference_no:"",
-  merchant:false
-
-}
-
 
 
 const ApplicationForm = () => {
@@ -99,12 +51,9 @@ const ApplicationForm = () => {
           
               <Box ml={1} mr={1} mt={2} >
              
-                 <CCUPSForm formConfig={ApplicationFormConfig}/>
+                 <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications"/>
              
-                   
-       
               </Box>
-
 
 
         </div>

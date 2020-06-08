@@ -10,6 +10,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 import ApplicationForm from '../pages/Transactions/Application/ApplicationForm';
 import NavBar from './NavBar';
 import MobileMenu from '../pages/MobileMenu';
+import InstitutionSelection from '../pages/InstitutionSelection';
 function usePageViews() {
   let location = useLocation();
   React.useEffect(() => {
@@ -42,6 +43,8 @@ const Routes = () => {
           <Route exact path="/addEmployee" component={AddEmployee} />
           <Route exact path="/view" component={SimpleTable} />
           <Route exact path="/mobileMenu" component={MobileMenu} />
+          <Route exact path="/institutionSelection" component={InstitutionSelection} />
+          
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>

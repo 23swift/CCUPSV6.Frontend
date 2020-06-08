@@ -13,6 +13,8 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import meralcoLogo from '../../../img/meralco.png'
 import smartLogo from '../../../img/smart-logo.png'
+import pldtLogo from '../../../img/pldtLogo.png'
+import globeLogo from '../../../img/globeLogo.jpeg'
 import manilaWaterLogo from '../../../img/manilaWater.jpeg'
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -83,9 +85,11 @@ const useStyles = makeStyles((theme) => ({
 const ApplicationDataEntry = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const institutions = [{avatar:  <img src={smartLogo} style={{height:50,width:120, borderRadius:4}}/>,name:'SMART'},
-   {avatar: <img src={meralcoLogo} style={{height:60,borderRadius:4}}/>,name:'MERALCO'},
-   {avatar: <img src={manilaWaterLogo} style={{height:60,borderRadius:4}}/>,name:'MANILA WATER'}];
+  const institutions = [{avatar:  <img src={smartLogo} style={{height:80, borderRadius:4}}/>,name:'SMART'},
+   {avatar: <img src={meralcoLogo} style={{height:80, borderRadius:4}}/>,name:'MERALCO'},
+   {avatar: <img src={manilaWaterLogo} style={{height:80,borderRadius:4}}/>,name:'MANILA WATER'},
+   {avatar: <img src={globeLogo} style={{height:80,borderRadius:4}} />,name:'GLOBE'},
+   {avatar: <img src={pldtLogo} style={{height:80,borderRadius:4}} />,name:'PLDT'}];
    
   const [selectedValue, setSelectedValue] = React.useState(institutions[1].name);
 

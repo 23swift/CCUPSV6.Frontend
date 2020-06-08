@@ -13,15 +13,29 @@ import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 import { blue } from '@material-ui/core/colors';
+import { Box } from '@material-ui/core';
 
 
 
-const useStyles = makeStyles({
-  avatar: {
-    backgroundColor: blue[100],
-    color: blue[600],
+const useStyles = makeStyles((theme)=>({
+  root:{
+
+    minWidth:300
   },
-});
+  avatar: {
+    // backgroundColor: "#fff",
+    // color: blue[600],
+    width: theme.spacing(9),
+    height: theme.spacing(9),
+    marginRight:theme.spacing(2),
+    boxShadow:
+      "0 16px 30px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+}));
 
 const InstitutionSelection = (props) => {
     const classes = useStyles();
@@ -37,19 +51,26 @@ const InstitutionSelection = (props) => {
 
  
     return (
-        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} pare>
         <DialogTitle id="simple-dialog-title">Please select Institution</DialogTitle>
-        <List>
+        <List className={classes.root}>
           {institutions.map((item) => (
             <ListItem button onClick={() => handleListItemClick(item.name)} key={item.name} >
-              {/* <ListItemAvatar style={{marginRight:10}}>
-                <Avatar className={classes.avatar}> 
+              <ListItemAvatar>
+                <Avatar className={classes.avatar} sizes="large"> 
                            
-                  
+                  {item.avatar? item.avatar :  <PersonIcon /> }
                </Avatar>
-              </ListItemAvatar> */}
-              {/* <ListItemText primary={item.name} /> */}
-              {item.avatar? item.avatar :  <PersonIcon /> }
+               
+              </ListItemAvatar>
+              
+                
+                  <ListItemText primary={item.name} />
+
+              
+             
+              
+              
             </ListItem>
           ))}
   
@@ -59,7 +80,7 @@ const InstitutionSelection = (props) => {
                 <AddIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Add account" />
+            <ListItemText primary="Add Institution" />
           </ListItem>
         </List>
       </Dialog>

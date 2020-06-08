@@ -11,13 +11,16 @@ import { blue, amber, grey } from '@material-ui/core/colors';
 import SimpleTable from '../../../components/SimpleTable';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-
+import meralcoLogo from '../../../img/meralco.png'
+import smartLogo from '../../../img/smart-logo.png'
+import manilaWaterLogo from '../../../img/manilaWater.jpeg'
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import customTheme from '../../../components/theme/customTheme';
 import HomeIcon from '@material-ui/icons/Home';
 import PageHeader from '../../../components/PageHeader';
+import InstitutionSelection from '../../../components/InstitutionSelection';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -79,6 +82,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 const ApplicationDataEntry = () => {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const institutions = [{avatar:  <img src={smartLogo} style={{height:50,width:120, borderRadius:4}}/>,name:'SMART'},
+   {avatar: <img src={meralcoLogo} style={{height:60,borderRadius:4}}/>,name:'MERALCO'},
+   {avatar: <img src={manilaWaterLogo} style={{height:60,borderRadius:4}}/>,name:'MANILA WATER'}];
+   
+  const [selectedValue, setSelectedValue] = React.useState(institutions[1].name);
+
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
     return (
       <div>
         <PageHeader
@@ -86,7 +105,11 @@ const ApplicationDataEntry = () => {
           //   icon={faFileAlt}
           tools={
             <Box display="flex" flexWrap="nowrap" mt={1} pb={1}>
-              
+              <Box>
+                <Button onClick={handleClickOpen}  style={{ minWidth: 30,minHeight:30,padding:2 }}>
+                  Select Institution
+                </Button>
+              </Box>
               <Box mr={1}>
                 <Button
                   color="secondary"
@@ -145,6 +168,7 @@ const ApplicationDataEntry = () => {
         <Box mr={2} ml={1}>
           <SimpleTable />
         </Box>
+        <InstitutionSelection selectedValue={selectedValue} open={open} onClose={handleClose} institutions={institutions} />
       </div>
     );
 }

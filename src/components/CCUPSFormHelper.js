@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import * as Yup from 'yup';
-import { createTextBox, createCheckBox, createDropDown } from '../components/CCUPSFormElement'
+import { createTextBox, createCheckBox, createDropDown, createDropDownNumber } from '../components/CCUPSFormElement'
 
 
 
@@ -9,6 +9,7 @@ export const Type={
   text:"text",
   bool:"bool",
   object:"object",
+  number:"number"
   
 
 }
@@ -43,18 +44,18 @@ export const ccupsFormModel={}
   
   return {fieldName,label,type,itemsUrl,menuItems};
 }
-const config=[
-  createField("card_number","Card Nnumber",Type.text)
-  ,createField("reference_no","Reference Number",  Type.text)
-  ,createField("first_name","First Name",  Type.text)
-  ,createField("last_name","Last Name",  Type.text)
-  ,createField("middle_name","Middle Name",  Type.text)
-  ,createField("product", "Product", Type.object,"api/dd/products",null)
-  ,createField("institution","Institution",  Type.object,"api/dd/institutions",null)
-  ,createField("merchant", "Merchant", Type.bool)
-  // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
-//   
-]
+// const config=[
+//   createField("card_number","Card Nnumber",Type.text)
+//   ,createField("reference_no","Reference Number",  Type.text)
+//   ,createField("first_name","First Name",  Type.text)
+//   ,createField("last_name","Last Name",  Type.text)
+//   ,createField("middle_name","Middle Name",  Type.text)
+//   ,createField("product", "Product", Type.object,"api/dd/products",null)
+//   ,createField("institution","Institution",  Type.object,"api/dd/institutions",null)
+//   ,createField("merchant", "Merchant", Type.bool)
+//   // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
+// //   
+// ]
 const createElement=(fieldName,label,type,itemsUrl,menuItems)=>{
   switch(type) {
     case 'text':
@@ -70,6 +71,15 @@ const createElement=(fieldName,label,type,itemsUrl,menuItems)=>{
       
       // ccupsFormModel[fieldName]='0';
         return  createDropDown(fieldName,label,itemsUrl,menuItems)
+        break;
+    case 'number':
+      ccupsFormModel[fieldName]=0
+      
+      // ccupsFormModel[fieldName]='0';
+      if(itemsUrl || menuItems){
+        return  createDropDownNumber(fieldName,label,itemsUrl,menuItems)
+      }
+       
         break;
     default:
       ccupsFormModel[fieldName]="";

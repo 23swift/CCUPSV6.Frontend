@@ -30,6 +30,7 @@ import { useHistory } from "react-router-dom";
 import { postData } from "./CCUPSApiService";
 import { createFormConfig, ccupsFormModel } from "./CCUPSFormHelper";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import CCUPSDropDownNumber from "./CCUPSDropDownNumber";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -90,6 +91,15 @@ const generateFormElements = (props) => {
           )}
           {item.formControl === "select" && (
             <CCUPSDropDown
+              label={item.label}
+              fieldName={item.name}
+              control={item}
+              errors={errors}
+              touched={touched}
+            />
+          )}
+           {item.formControl === "selectNumber" && (
+            <CCUPSDropDownNumber
               label={item.label}
               fieldName={item.name}
               control={item}
@@ -168,6 +178,16 @@ function CCUPSForm(props) {
     pErrors=null
     
   };
+  const showSubmitErrorMessage = (error) => {
+   
+        enqueueSnackbar(error, {
+          variant: "error",
+          // onExited: handleSnackExit(),
+        })
+       
+
+
+};
   const hasError = (errors,touched) => {
   
     for (var key in errors) {
@@ -190,11 +210,17 @@ function CCUPSForm(props) {
           //  validateOnMount={true}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
+              // alert(JSON.stringify(values, null, 2));
               // console.log(JSON.stringify(values, null, 2));
               postData(submitUrl,values).then(data => {
-                console.log(data); // JSON data parsed by `response.json()` call
+                // console.log(data); // JSON data parsed by `response.json()` call
                 setSubmitting(false);
                 showSuccessMessage("Entry Saved!");
+              },
+              (error) => {
+                // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');
+                showSubmitErrorMessage(JSON.stringify(error, null, 2));
+                setSubmitting(false);
               })
             }, 5000);
           }}

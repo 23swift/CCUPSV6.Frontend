@@ -10,6 +10,7 @@ import CCUPSForm from '../../../components/CCUPSForm';
 import { ApplicationFormValidation,formConfig } from './ApplicationFormModel';
 import { createField,Type } from '../../../components/CCUPSFormHelper';
 import * as Yup from 'yup';
+import InstitutionSelection from '../../../components/InstitutionSelection';
 const useStyles = makeStyles((theme)=>({
   
       closeBUtton:{
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme)=>({
 
 const ApplicationForm = () => {
     const classes = useStyles();
-    
+ 
     return (
         <div>
             <PageHeader title="Application Data Entry" 
@@ -32,6 +33,7 @@ const ApplicationForm = () => {
              <Box mr={1}>
                 <Divider orientation="vertical" />
               </Box>
+              
               <Box >
                
                 <Button variant="outlined" className={classes.closeBUtton}
@@ -55,7 +57,7 @@ const ApplicationForm = () => {
              
               </Box>
 
-
+               
         </div>
     )
 }

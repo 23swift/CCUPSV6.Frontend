@@ -13,3 +13,7 @@ export const createTextBox=(name,label)=> {
 
     return {label, formControl:"select",name, itemsUrl,menuItems}
   }
+  export const createDropDownNumber=(name,label,itemsUrl,menuItems)=>{
+
+    return {label, formControl:"selectNumber",name, itemsUrl,menuItems}
+  }

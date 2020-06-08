@@ -67,7 +67,7 @@ const showErrorMessage=()=>{
      
       <FormControl variant="outlined" fullWidth size="small" 
       // error={errors[fieldName] && touched[fieldName]}
-       error={errors[fieldName] }
+       error={errors[fieldName] && true}
       >
        
         

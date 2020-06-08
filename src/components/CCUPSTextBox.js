@@ -37,7 +37,7 @@ const CCUPSTextBox = (props) => {
               <TextField   name={fieldName}   fullWidth variant='outlined' size="small" 
               onChange={handleChange} onBlur={handleBlur} 
                           label={label}
-                          error={errors[fieldName]  }
+                          error={errors[fieldName] && true  }
                           // error={errors[fieldName] && true }
                         //   helperText={<ErrorMessage name={fieldName} component={Typography} variant="caption" />}
                         // InputProps={{

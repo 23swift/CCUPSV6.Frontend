@@ -7,9 +7,15 @@ import { createField, Type } from '../../../components/CCUPSFormHelper';
 //Validaton
 export const ApplicationFormValidation = Yup.object().shape({
   card_number: Yup.string()
-    //   .min(2, 'Card Number Too Short!')
-    .max(50, 'Card Number Too Long!')
-    .required('Card Number Required!'),
+  .trim()
+  .matches('^[0-9]+$' , 'Card Number is not in correct format')
+  .min(16, 'Card Product must be 16 digit!')
+  .required('Card Number Required!'),
+   
+  card_product: Yup.number()
+  .min(1, 'Card Product Required!'),
+    // .max(50, 'Card Number Too Long!')
+    // .required('Card Number Required!'),
 
   last_name: Yup.string()
     .max(50, 'Last Name Too Long!')
@@ -45,12 +51,14 @@ export const ApplicationFormValidation = Yup.object().shape({
 
 export const formConfig=[
   createField("card_number","Card Nnumber *",Type.text)
+  ,createField("card_product", "Card Product", Type.number,null,[{id:19,name:"PHP"},{id:20,name:"USD"}])
   ,createField("reference_no","Reference Number *",  Type.text)
   ,createField("first_name","First Name *",  Type.text)
   ,createField("last_name","Last Name *",  Type.text)
   ,createField("middle_name","Middle Name *",  Type.text)
-  ,createField("product", "Product", Type.object,"api/dd/products",null)
   ,createField("institution","Institution *",  Type.object,"api/dd/institutions",null)
+ 
+  ,createField("product", "Product", Type.object,"api/dd/products",null)
   ,createField("merchant", "Merchant", Type.bool)
   // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
 //   

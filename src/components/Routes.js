@@ -43,7 +43,7 @@ const Routes = () => {
           <Route exact path="/addEmployee" component={AddEmployee} />
           <Route exact path="/view" component={SimpleTable} />
           <Route exact path="/mobileMenu" component={MobileMenu} />
-          <Route exact path="/institutionSelection" component={InstitutionSelection} />
+          {/* <Route path="/institutionSelection" component={InstitutionSelection} /> */}
           
           <Route path="*" component={NotFoundPage} />
         </Switch>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PageHeader from '../../../components/PageHeader'
-import { Box, Divider, Button, IconButton, Slide, AppBar, Grid, FormControl, InputLabel, MenuItem, FormControlLabel, Checkbox, fade, Typography, InputAdornment } from '@material-ui/core'
+import { Box, Divider, Button, IconButton, Slide, AppBar, Grid, FormControl, InputLabel, MenuItem, FormControlLabel, Checkbox, fade, Typography, InputAdornment, Paper } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/styles';
@@ -51,7 +51,7 @@ const ApplicationForm = () => {
             }
             />
           
-              <Box ml={1} mr={1} mt={2} >
+              <Box component={Paper} ml={1} mr={1} mt={2} p={2} pt={3} borderRadius={25} elevation={1}>
              
                  <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications"/>
              

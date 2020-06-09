@@ -1,45 +1,77 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
-import PersonIcon from '@material-ui/icons/Person';
-import AddIcon from '@material-ui/icons/Add';
-import Typography from '@material-ui/core/Typography';
+
+import { Drawer,    List,    ListItem,    ListItemIcon,    ListItemText,    makeStyles, Box, Typography, Divider, FormControl, InputLabel, Input, } from "@material-ui/core";
+import DrawerHeader from './DrawerHeader';
+import { Link, useHistory } from 'react-router-dom';
 import { blue } from '@material-ui/core/colors';
-import { Box } from '@material-ui/core';
-
-
-
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 const useStyles = makeStyles((theme)=>({
-  root:{
+  list: {
+    width: 'auto',
+    marginRight:10,
+    // color:blue[700],
+    borderBottom:1
+    
+  },
+  buttonRoot: {
+    // fontSize: 11,
+    color: blue[700],
+    padding:10,
+    maxHeight:40,
+    '&:hover, &:focus': {
+    background: blue[500],
+    borderRadius: 3,
+    color: '#fff',
+    
+    '&:before': {
+      background: '#8a4baf',
+      // transform: 'scale(1)',
+    },
+},
 
-    minWidth:300
   },
-  avatar: {
-    // backgroundColor: "#fff",
-    // color: blue[600],
-    width: theme.spacing(9),
-    height: theme.spacing(9),
-    marginRight:theme.spacing(2),
-    boxShadow:
-      "0 16px 30px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
+  label: {
+    textTransform: 'capitalize',
+    
   },
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+  ListItemIconRoot:{
+    minWidth:28,
+    color:'inherit'
   },
+  drawerTop:{
+    // top:300,
+    marginTop:71,
+    // left:102
+  },
+  drawerpaper:{
+    top:1
+  }
 }));
+
+
+// const institutions=[{id:1,displayText:"SMART"},{id:2,displayText:"MERALCO"},{id:3,displayText:"PLDT"}
+
+// ]
+
+
+
 
 const InstitutionSelection = (props) => {
     const classes = useStyles();
-  const { onClose, selectedValue, open,institutions } = props;
+  const { onClose, selectedValue, open } = props;
+const [selectedIcon, setSelectedIcon] = useState(false);
+const [institutions, setInstitutions] = useState();
+let history = useHistory();
+    useEffect(() => {
+      fetch('api/institutions').then(respose=>respose.json())
+      .then(data=>{  setInstitutions(data);   });
+
+      return () => {
+        // cleanup
+      }
+    }, [])
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -47,43 +79,78 @@ const InstitutionSelection = (props) => {
 
   const handleListItemClick = (value) => {
     onClose(value);
+    localStorage.setItem('selectedInst', JSON.stringify(value));
+    history.push('/applicationForm');
   };
 
  
     return (
-        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} pare>
-        <DialogTitle id="simple-dialog-title">Please select Institution</DialogTitle>
-        <List className={classes.root}>
-          {institutions.map((item) => (
-            <ListItem button onClick={() => handleListItemClick(item.name)} key={item.name} >
-              <ListItemAvatar>
-                <Avatar className={classes.avatar} sizes="large"> 
+      
+           <div onClick={handleClose}>
+ <Drawer
+        anchor="right"
+        open={open}
+        onClose={handleClose}
+        classes={{
+          // paperAnchorTop:classes.drawerTop,
+          paperAnchorRight:classes.drawerTop,
+          paper:classes.drawerpaper
+        }}
+        variant="persistent"
+      >
+        <Divider/>
+        <DrawerHeader title="Please Select Institution" 
+        // icon={props.mainMenu.icon}
+        />
+        <Divider/>
+        <Box display="flex"   mt={1} mb={3} ml={1}  minWidth={250} flexDirection="column" flexWrap="wrap"
+        >
+          
+                {institutions &&
+                  institutions.map((item, index) => (
+                    <Box key={index}   mr={1}  > 
+                      <ListItem button    onClick={()=>handleListItemClick(item)}
+                      //  style={{maxWidth:300}}
+                      classes={{
+                        root: classes.buttonRoot, // class name, e.g. `classes-nesting-root-x`
+                       
+                      }}
+                      >
+                        <ListItemIcon
+                          classes={{
+                            root: classes.ListItemIconRoot, 
                            
-                  {item.avatar? item.avatar :  <PersonIcon /> }
-               </Avatar>
-               
-              </ListItemAvatar>
-              
-                
-                  <ListItemText primary={item.name} />
-
-              
-             
-              
-              
-            </ListItem>
-          ))}
-  
-          <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
-            <ListItemAvatar>
-              <Avatar>
-                <AddIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Add Institution" />
-          </ListItem>
-        </List>
-      </Dialog>
+                          }}
+                        >
+                          <RadioButtonCheckedIcon color="inherit"/>
+                          
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={
+                          
+                             item.name
+                          
+                              
+                           
+                          }
+                        />
+                       
+                       
+                      </ListItem>
+                      <Divider/>
+                     
+                      </Box>
+                    
+                  ))}
+              <ListItem  >
+                           <FormControl variant="outlined" fullWidth size="small" >
+                          <InputLabel htmlFor="component-simple">Name</InputLabel>
+                          <Input id="component-simple" variant="outlined" />
+                        </FormControl>
+                        </ListItem>
+        </Box>
+      </Drawer>
+      </div>
     )
 }
 

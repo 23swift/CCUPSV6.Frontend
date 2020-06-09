@@ -109,11 +109,7 @@ const ApplicationDataEntry = () => {
           //   icon={faFileAlt}
           tools={
             <Box display="flex" flexWrap="nowrap" mt={1} pb={1}>
-              <Box>
-                <Button onClick={handleClickOpen}  style={{ minWidth: 30,minHeight:30,padding:2 }}>
-                  Select Institution
-                </Button>
-              </Box>
+              
               <Box mr={1}>
                 <Button
                   color="secondary"
@@ -140,7 +136,9 @@ const ApplicationDataEntry = () => {
 
               <Box mr={1}>
                 <Button color="secondary" startIcon={<AddIcon />} variant="contained"
-                  size="small" component={Link} to="/applicationForm" >
+                  // size="small" component={Link} to="/applicationForm" 
+                  onClick={handleClickOpen}
+                  >
                   Add New Application
                 </Button>
                 {/* <IconButton color="inherit" >

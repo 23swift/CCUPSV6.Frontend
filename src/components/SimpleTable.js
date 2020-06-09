@@ -86,8 +86,8 @@ const [dataRows, setDataRows] = useState(null);
   return (
    
 <>
- <TableContainer component={Paper} elevation={0} className={classes.container}>
-      <Table className={classes.table} aria-label="simple table" size="small" 
+ <TableContainer component={Paper} elevation={1} className={classes.container} >
+      <Table className={classes.table} aria-label="simple table" 
       stickyHeader>
         <TableHead >
           <TableRow>

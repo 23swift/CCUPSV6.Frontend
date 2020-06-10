@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import PageHeader from '../../../components/PageHeader'
-import { Box, Divider, Button, IconButton, Slide, AppBar, Grid, FormControl, InputLabel, MenuItem, FormControlLabel, Checkbox, fade, Typography, InputAdornment, Paper } from '@material-ui/core'
+import { Box, Divider, Button, IconButton, Slide, AppBar, Grid, FormControl, InputLabel, MenuItem, FormControlLabel, Checkbox, fade, Typography, InputAdornment, Paper, Toolbar } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/styles';
 import { blue, amber } from '@material-ui/core/colors';
 
 import CCUPSForm from '../../../components/CCUPSForm';
-import { ApplicationFormValidation,formConfig } from './ApplicationFormModel';
+import { ApplicationFormValidation,formConfig, formConfigWithValues } from './ApplicationFormModel';
 import { createField,Type } from '../../../components/CCUPSFormHelper';
 import * as Yup from 'yup';
 import InstitutionSelection from '../../../components/InstitutionSelection';
+import { GetSelectedInstitution } from '../../../components/CCUPSHelper';
 const useStyles = makeStyles((theme)=>({
   
       closeBUtton:{
@@ -51,9 +52,15 @@ const ApplicationForm = () => {
             }
             />
           
-              <Box component={Paper} ml={1} mr={1} mt={2} p={2} pt={3} borderRadius={25} elevation={1}>
+              <Box mr={2} ml={2} component={Paper} p={2} pt={1} variant="outlined" >
              
-                 <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications"/>
+                      <Typography variant="h6" color="primary"  style={{marginBottom:35,marginTop:5}} >{GetSelectedInstitution().name}</Typography>
+             
+             
+           
+             {/* <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" legend={GetSelectedInstitution().name}/> */}
+           
+             <CCUPSForm formConfig={formConfigWithValues()} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" legend={GetSelectedInstitution().name}/>
              
               </Box>
 

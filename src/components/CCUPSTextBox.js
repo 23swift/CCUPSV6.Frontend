@@ -39,7 +39,7 @@ const CCUPSTextBox = (props) => {
                           label={label}
                           error={errors[fieldName] && true  }
                           // error={errors[fieldName] && true }
-                        //   helperText={<ErrorMessage name={fieldName} component={Typography} variant="caption" />}
+                          // helperText={errors[fieldName]}
                         // InputProps={{
                         //     endAdornment: 
                         //     errors[fieldName] && touched[fieldName] ?

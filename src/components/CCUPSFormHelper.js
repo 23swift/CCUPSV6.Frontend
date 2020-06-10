@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import * as Yup from 'yup';
 import { createTextBox, createCheckBox, createDropDown, createDropDownNumber } from '../components/CCUPSFormElement'
+import { createHidden } from './CCUPSFormElement';
 
 
 
@@ -9,7 +10,8 @@ export const Type={
   text:"text",
   bool:"bool",
   object:"object",
-  number:"number"
+  number:"number",
+  hidden:"hidden"
   
 
 }
@@ -40,9 +42,9 @@ export const ccupsFormModel={}
 
  }
 
- export const createField=(fieldName,label,type,itemsUrl,menuItems)=>{
+ export const createField=(fieldName,label,type,itemsUrl,menuItems,defaultValue)=>{
   
-  return {fieldName,label,type,itemsUrl,menuItems};
+  return {fieldName,label,type,itemsUrl,menuItems,defaultValue};
 }
 // const config=[
 //   createField("card_number","Card Nnumber",Type.text)
@@ -56,20 +58,20 @@ export const ccupsFormModel={}
 //   // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
 // //   
 // ]
-const createElement=(fieldName,label,type,itemsUrl,menuItems)=>{
+const createElement=(fieldName,label,type,itemsUrl,menuItems,defaultValue)=>{
   switch(type) {
     case 'text':
-      ccupsFormModel[fieldName]="";
+      ccupsFormModel[fieldName]=defaultValue?defaultValue:"";
     return  createTextBox(fieldName,label)
       break;
     case 'bool':
-      ccupsFormModel[fieldName]=false;
+      ccupsFormModel[fieldName]=defaultValue?defaultValue:false;
       return  createCheckBox(fieldName,label)
       break;
     case 'object':
-      ccupsFormModel[fieldName]=0
-      
-      // ccupsFormModel[fieldName]='0';
+      // ccupsFormModel[fieldName]=0
+      ccupsFormModel[fieldName]= defaultValue? defaultValue:'0';
+
         return  createDropDown(fieldName,label,itemsUrl,menuItems)
         break;
     case 'number':
@@ -81,6 +83,10 @@ const createElement=(fieldName,label,type,itemsUrl,menuItems)=>{
       }
        
         break;
+      case 'hidden':
+        ccupsFormModel[fieldName]= defaultValue? defaultValue:'0';
+            return  createHidden(fieldName,label,itemsUrl,menuItems)
+            break;
     default:
       ccupsFormModel[fieldName]="";
       return  createTextBox(fieldName,label)
@@ -93,7 +99,7 @@ export const createFormConfig=(pconfig)=>{
       
     //  displayFields(pconfig[item]);
       formElements.push(createElement(pconfig[item].fieldName,pconfig[item].label,
-      pconfig[item].type,pconfig[item].itemsUrl,pconfig[item].menuItems));
+      pconfig[item].type,pconfig[item].itemsUrl,pconfig[item].menuItems,pconfig[item].defaultValue));
 
       // console.log(createElement(config[item].fieldName,config[item].label,
       // config[item].type,config[item].itemsUrl,config[item].menuItems));
@@ -119,51 +125,4 @@ const  ApplicationModel={
 }
 
 
-// //Validaton
-// const ApplicationFormValidation = Yup.object().shape({
-//   card_number: Yup.string()
-//     //   .min(2, 'Card Number Too Short!')
-//     .max(50, 'Card Number Too Long!')
-//     .required('Card Number Required!'),
-
-//   last_name: Yup.string()
-//     .max(50, 'Last Name Too Long!')
-//     .required('Last Name Required'),
-
-//   first_name:Yup.string()
-//     .max(50, 'First Name Too Long!')
-//     .required('First Name Required'),
-
-//   middle_name:Yup.string()
-//     .max(50, 'Middle Name Too Long!')
-//     .required('Middle Name Required'),
-
-//   reference_no:Yup.string()
-//     .max(50, 'Reference Number Too Long!')
-//     .required('Reference Number Required'),
-//   // email: Yup.string()
-//   //   .email('Invalid email')
-//   //   .required('Required'),
-// });
-
-// export const ApplicationFormConfig=
-//     {
-//         validationSchema:ApplicationFormValidation,
-//         model:ccupsFormModel,
-//         formElements:createFormConfig(config)
-//         // [
-//         //     createTextBox("card_number","Card Number"),
-//         //     createTextBox("reference_no","Reference Number"),
-//         //     createTextBox("first_name","First Name"),
-//         //     createTextBox("last_name","Last Name"),
-//         //     createTextBox("middle_name","Middle Name"),
-//         //     createDropDown("product","Product","api/dd/products",null),
-//         //     createDropDown("institution","Institution","api/dd/institutions",null),
-//         //     createCheckBox("merchant","Merchant"),
-//         //     //  {label:"Date of Birth", formControl:"date",name:"dob"},
-//         // ]
-    
-//     }
-
-    
     

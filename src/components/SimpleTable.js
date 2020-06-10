@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { blue } from '@material-ui/core/colors';
 import { Slide, AppBar, Toolbar, Box, Button, TablePagination, Divider } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import {applicatiionList} from "../testData/ApplicationTestData";
 import ProductTableDisplay from './ProductTableDisplay';
@@ -31,7 +31,8 @@ const StyledTableCell = withStyles((theme) => ({
 const useStyles = makeStyles((theme)=>({
   table: {
     minWidth: 300,
-    color:"#054594"
+    color:"#054594",
+    
   },
   appBar: {
     top: 'auto',
@@ -48,6 +49,9 @@ const useStyles = makeStyles((theme)=>({
   },
   container: {
     maxHeight: 480,
+    padding:10,
+    paddingTop:15,
+    paddingBottom:20,
   },
 }));
 
@@ -59,8 +63,14 @@ function createData(name, calories, fat, carbs, protein) {
 
 export default function SimpleTable() {
   const classes = useStyles();
+  let history = useHistory();
 const [dataRows, setDataRows] = useState(null);
+const handleClick = (event, item) => {
+  console.log(item);
+  localStorage.setItem('selectedApp',JSON.stringify(item))
+  history.push('/applicationForm');
 
+}
 
   useEffect(() => {
     fetch("/api/applications")
@@ -101,7 +111,7 @@ const [dataRows, setDataRows] = useState(null);
         </TableHead>
         <TableBody>
           {dataRows && dataRows.map((row,index) => (
-            <TableRow key={index}>
+            <TableRow key={index} hover  onClick={(event) => handleClick(event, row)}> 
               {/* <TableCell component="th" scope="row">
                 {row.name}
               </TableCell> */}

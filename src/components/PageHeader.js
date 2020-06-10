@@ -22,8 +22,9 @@ const useStyles = makeStyles(theme => ({
       },
     toolbar:{
        
-      // background: theme.palette.primary.main,
-       background:"#efefef",
+       backgroundColor: "inherit",
+       
+        // background:"#f2f2f2",
       //  background:amber[500],
         // paddingLeft:12,
         paddingLeft:10,

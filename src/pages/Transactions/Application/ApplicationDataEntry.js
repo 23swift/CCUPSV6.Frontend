@@ -108,7 +108,7 @@ const ApplicationDataEntry = () => {
           title="Application Data Entry"
           //   icon={faFileAlt}
           tools={
-            <Box display="flex" flexWrap="nowrap" mt={1} pb={1}>
+            <Box display="flex" flexWrap="nowrap"  p={1}>
               
               <Box mr={1}>
                 <Button
@@ -134,25 +134,20 @@ const ApplicationDataEntry = () => {
                 </div> */}
               </Box>
 
-              <Box mr={1}>
+              <Box ml={1} ml={1}>
                 <Button color="secondary" startIcon={<AddIcon />} variant="contained"
                   // size="small" component={Link} to="/applicationForm" 
-                  onClick={handleClickOpen}
+                  onClick={handleClickOpen} size="small"
                   >
                   Add New Application
                 </Button>
-                {/* <IconButton color="inherit" >
-                    <AddIcon  />
-                   
-                  </IconButton> */}
+              
               </Box>
               <Box mr={1}>
                 <Divider orientation="vertical" />
               </Box>
               <Box mr={1}>
-                {/* <IconButton component={Link} to="/" size="small">
-                  <CloseIcon />
-                </IconButton> */}
+              
                 <Button variant="outlined" color="secondary"
                   component={Link}
                   to="/"

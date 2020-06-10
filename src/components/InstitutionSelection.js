@@ -137,17 +137,14 @@ let history = useHistory();
                        
                        
                       </ListItem>
-                      <Divider/>
+                      
                      
                       </Box>
                     
                   ))}
               <ListItem  >
-                           <FormControl variant="outlined" fullWidth size="small" >
-                          <InputLabel htmlFor="component-simple">Name</InputLabel>
-                          <Input id="component-simple" variant="outlined" />
-                        </FormControl>
-                        </ListItem>
+                           
+            </ListItem>
         </Box>
       </Drawer>
       </div>

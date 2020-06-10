@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuBar from '../components/MenuBar';
+import { amber, grey, blue } from '@material-ui/core/colors';
 const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1
@@ -20,7 +21,9 @@ const useStyles = makeStyles(theme => ({
        
     },
     drawerPaper: {
-        // background:"#efefef",
+        // background:blue[700],
+        // background:"linear-gradient(60deg, #ffa726, #f7af19)",
+        // color:"#e6e6e6",
          color:theme.palette.secondary.main
       },
 }));

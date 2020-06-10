@@ -10,12 +10,12 @@ function CCUPSCheckBox(props) {
                                   onChange={handleChange}
                                   
                                   name={name}
-                                  color="secondary"
+                                  // color="secondary"
                                 />}
                                 label={
                                   <Typography
-                                    variant="subtitle2"
-                                    color="secondary"
+                                    variant="body2"
+                                    color="primary"
                                   >
                                     {label}
                                   </Typography>

@@ -115,7 +115,7 @@ const NavBar = (props) => {
             </Box>
           </Toolbar>
           <Box mt={0}>
-            <Divider variant="fullWidth" />
+            {/* <Divider variant="fullWidth" /> */}
           </Box>
         </AppBar>
       </div>

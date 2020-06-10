@@ -50,19 +50,40 @@ export const ApplicationFormValidation = Yup.object().shape({
 });
 
 export const formConfig=[
-  createField("card_number","Card Nnumber *",Type.text)
+  createField("card_number","Card Number *",Type.text)
   ,createField("card_product", "Card Product", Type.number,null,[{id:19,name:"PHP"},{id:20,name:"USD"}])
   ,createField("reference_no","Reference Number *",  Type.text)
   ,createField("first_name","First Name *",  Type.text)
   ,createField("last_name","Last Name *",  Type.text)
   ,createField("middle_name","Middle Name *",  Type.text)
-  ,createField("institution","Institution *",  Type.object,"api/dd/institutions",null)
- 
   ,createField("product", "Product", Type.object,"api/dd/products",null)
   ,createField("merchant", "Merchant", Type.bool)
+  ,createField("institution","Institution *",  Type.hidden,"api/dd/institutions",null, JSON.parse(localStorage.getItem('selectedInst')))
   // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
 //   
 ]
+export const formConfigWithValues=()=>{ 
+const selectedApp=JSON.parse(localStorage.getItem('selectedApp'));
+
+if(selectedApp){
+  console.log(selectedApp);
+  
+   return [
+  createField("card_number","Card Number *",Type.text,selectedApp.card_number)
+  ,createField("card_product", "Card Product", Type.number,null,[{id:19,name:"PHP"},{id:20,name:"USD"}],selectedApp.card_product)
+  ,createField("reference_no","Reference Number *",  Type.text,selectedApp.reference_no)
+  ,createField("first_name","First Name *",  Type.text,selectedApp.first_name)
+  ,createField("last_name","Last Name *",  Type.text,selectedApp.last_name)
+  ,createField("middle_name","Middle Name *",  Type.text,selectedApp.middle_name)
+  ,createField("product", "Product", Type.object,"api/dd/products",null,selectedApp.product)
+  ,createField("merchant", "Merchant", Type.bool,selectedApp.merchant)
+  ,createField("institution","Institution *",  Type.hidden,"api/dd/institutions",null, JSON.parse(localStorage.getItem('selectedInst')))
+  // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
+//   
+]
+}
+ 
+}
 
     
     

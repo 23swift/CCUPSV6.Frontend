@@ -17,3 +17,9 @@ export const createTextBox=(name,label)=> {
 
     return {label, formControl:"selectNumber",name, itemsUrl,menuItems}
   }
+  export const createHidden=(name,label,itemsUrl,menuItems)=>{
+
+    return {label, formControl:"hidden",name, itemsUrl,menuItems}
+  }
+
+  

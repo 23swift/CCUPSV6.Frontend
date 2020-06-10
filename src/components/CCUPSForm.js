@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 30,
     // zIndex: theme.zIndex.drawer + 1,
     //  background:theme.palette.background.paper
-    background: "#f2f2f2",
+    // background: "#f2f2f2",
+    background:"#fff"
   },
   actionButton: {
     minWidth: 110,
@@ -76,7 +77,7 @@ const generateFormElements = (props) => {
   } = props;
 
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={2}>
       {formElements.map((item, index) => (
         <Grid item xs={12} md={6} key={index}>
           {item.formControl === "text" && (
@@ -134,13 +135,18 @@ const generateFormElements = (props) => {
 
 
 function CCUPSForm(props) {
-  const { formConfig, submitUrl, validationScheme } = props;
+  const { formConfig, submitUrl, validationScheme,legend } = props;
   let formConfiguration = createFormConfig(formConfig);
 
   const classes = useStyles();
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [errorAlarmOPen, setErrorAlarmOPen] = useState(false);
   let history = useHistory();
+console.log('default');
+
+ console.log(ccupsFormModel);
+ 
+  
   const handleConfirmationClose = () => {
     setConfirmationOpen(false);
   };
@@ -239,19 +245,20 @@ function CCUPSForm(props) {
             isSubmitting,
           }) => (
          
-            <Form>
+            <Form >
             
-              {/* <div>{JSON.stringify(errors)}</div> */}
-                {/* {errors && Object.values(errors).map(error => (
-                  <div>{JSON.stringify(error)}</div>
-          ))} */}
-              {generateFormElements({
-                errors,
-                touched,
-                formElements: formConfiguration,
-                handleChange,
-                handleBlur,
-              })}
+           {
+            generateFormElements({
+              errors,
+              touched,
+              formElements: formConfiguration,
+              handleChange,
+              handleBlur,
+            })
+            }
+           
+           
+              
 
               <Slide
                 direction="up"

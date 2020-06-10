@@ -28,7 +28,7 @@ const cutomeTheme = createMuiTheme({
             borderWidth: 0,
             
               // backgroundColor: 'red',
-             
+             color:"#043673",
               
             '&:hover $notchedOutline': {
                 
@@ -44,21 +44,23 @@ const cutomeTheme = createMuiTheme({
               
           },
           notchedOutline:{
-            //borderColor:"#efefef",
-            // borderColor:"#e6e6e6",
-            borderColor:"#d9d9d9"
-            // border:0
+            // borderColor:"#efefef",
+            borderColor:"#e6e6e6",
+            // borderColor:"#d9d9d9",  
+            // borderColor:blue[200],
+            // border:0,
+            color:"#043673",
           }
       },
     MuiInputLabel: {
       root: {
        fontSize:14,
       //  color:"#054594",
-      color:blue[700],
+      // color:blue[700],
       
       },
       outlined:{
-        
+        color:"#043673",
         transform: "translate(14px, 12px) scale(0.75)",
         "&$shrink":{
             transform: "translate(14px, -6px) scale(0.90)"
@@ -92,6 +94,11 @@ const cutomeTheme = createMuiTheme({
     
       }
     },
+    MuiPaper:{
+      elevation1:{
+        boxShadow: "0 1px 4px 0 rgba(0, 0, 0, 0.14)",
+      }
+    }
   },
   palette: {
     primary: {

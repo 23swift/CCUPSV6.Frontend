@@ -8,10 +8,10 @@ import { blue, amber } from '@material-ui/core/colors';
 
 import CCUPSForm from '../../../components/CCUPSForm';
 import { ApplicationFormValidation,formConfig, formConfigWithValues } from './ApplicationFormModel';
-import { createField,Type } from '../../../components/CCUPSFormHelper';
+
 import * as Yup from 'yup';
 import InstitutionSelection from '../../../components/InstitutionSelection';
-import { GetSelectedInstitution } from '../../../components/CCUPSHelper';
+import { GetSelectedInstitution, GetAppFromLocalStorage } from '../../../components/CCUPSHelper';
 const useStyles = makeStyles((theme)=>({
   
       closeBUtton:{
@@ -22,9 +22,18 @@ const useStyles = makeStyles((theme)=>({
 }));
 
 
+
+
 const ApplicationForm = () => {
     const classes = useStyles();
- 
+    const selectedApp=GetAppFromLocalStorage('selectedApp');
+   
+    console.log(selectedApp);
+    
+    const [hasSelectedApp, setHasSelectedApp] = useState(()=>{return selectedApp ? true :false});
+      
+   
+        
     return (
         <div>
             <PageHeader title="Application Data Entry" 
@@ -60,7 +69,9 @@ const ApplicationForm = () => {
            
              {/* <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" legend={GetSelectedInstitution().name}/> */}
            
-             <CCUPSForm formConfig={formConfigWithValues()} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" legend={GetSelectedInstitution().name}/>
+             <CCUPSForm formConfig={formConfigWithValues(selectedApp)} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" 
+             update={hasSelectedApp} 
+            />
              
               </Box>
 

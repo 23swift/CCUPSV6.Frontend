@@ -27,7 +27,7 @@ import CCUPSConfirmationDialog from "./CCUPSConfirmationDialog";
 import Backdrop from "@material-ui/core/Backdrop";
 import CCUPSProgress from "./CCUPSProgress";
 import { useHistory } from "react-router-dom";
-import { postData } from "./CCUPSApiService";
+import { postData, callApi } from "./CCUPSApiService";
 import { createFormConfig, ccupsFormModel } from "./CCUPSFormHelper";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import CCUPSDropDownNumber from "./CCUPSDropDownNumber";
@@ -68,6 +68,7 @@ const touchedAll = (errors, touched) => {
 
 const generateFormElements = (props) => {
   const {
+    values,
     errors,
     touched,
     formElements,
@@ -75,6 +76,7 @@ const generateFormElements = (props) => {
     handleBlur,
     submitAction,
   } = props;
+
 
   return (
     <Grid container spacing={2}>
@@ -88,6 +90,7 @@ const generateFormElements = (props) => {
               label={item.label}
               handleChange={handleChange}
               handleBlur={handleBlur}
+              value={values[item.name]}
             />
           )}
           {item.formControl === "select" && (
@@ -97,7 +100,11 @@ const generateFormElements = (props) => {
               control={item}
               errors={errors}
               touched={touched}
+              value={values[item.name]}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
             />
+           
           )}
            {item.formControl === "selectNumber" && (
             <CCUPSDropDownNumber
@@ -106,6 +113,7 @@ const generateFormElements = (props) => {
               control={item}
               errors={errors}
               touched={touched}
+              value={values[item.name]}
             />
           )}
           {item.formControl === "checkBox" && (
@@ -115,6 +123,7 @@ const generateFormElements = (props) => {
               label={item.label}
               errors={errors}
               touched={touched}
+              value={values[item.name]}
             />
           )}
           {item.formControl === "date" && (
@@ -135,14 +144,15 @@ const generateFormElements = (props) => {
 
 
 function CCUPSForm(props) {
-  const { formConfig, submitUrl, validationScheme,legend } = props;
+  const { formConfig, submitUrl, validationScheme,legend,update } = props;
   let formConfiguration = createFormConfig(formConfig);
-
+  
   const classes = useStyles();
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [errorAlarmOPen, setErrorAlarmOPen] = useState(false);
+  const [apiAction, setApiAction] = useState(update?"PUT":"POST");
   let history = useHistory();
-console.log('default');
+// console.log('default');
 
  console.log(ccupsFormModel);
  
@@ -214,21 +224,26 @@ console.log('default');
           // validate={validateValues}
           validationSchema={validationScheme}
           //  validateOnMount={true}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting,resetForm }) => {
             setTimeout(() => {
-              // alert(JSON.stringify(values, null, 2));
-              // console.log(JSON.stringify(values, null, 2));
-              postData(submitUrl,values).then(data => {
-                // console.log(data); // JSON data parsed by `response.json()` call
-                setSubmitting(false);
-                showSuccessMessage("Entry Saved!");
-              },
-              (error) => {
-                // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');
-                showSubmitErrorMessage(JSON.stringify(error, null, 2));
-                setSubmitting(false);
-              })
-            }, 5000);
+                alert(JSON.stringify(values, null, 2));
+              
+              
+              // callApi(submitUrl,values,apiAction).then(data => {
+              //   // console.log(data); // JSON data parsed by `response.json()` call
+              //   setSubmitting(false);
+              //   showSuccessMessage("Entry Saved!");
+              //   resetForm();
+              // },
+              // (error) => {
+              //   // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');
+              //   showSubmitErrorMessage(JSON.stringify(error, null, 2));
+              //   setSubmitting(false);
+                
+              // })
+
+              
+            }, 2000);
           }}
         >
           {({
@@ -249,6 +264,7 @@ console.log('default');
             
            {
             generateFormElements({
+              values,
               errors,
               touched,
               formElements: formConfiguration,
@@ -257,8 +273,7 @@ console.log('default');
             })
             }
            
-           
-              
+          
 
               <Slide
                 direction="up"
@@ -287,7 +302,7 @@ console.log('default');
                     }
                     
 
-                    <Box style={{ marginRight: 3 }}>
+                    {/* <Box style={{ marginRight: 3 }}>
                       <Button
                         variant="outlined"
                         color="primary"
@@ -296,13 +311,43 @@ console.log('default');
                       >
                         Cancel
                       </Button>
-                    </Box>
+                    </Box> */}
+                    {update && 
+                        <Box style={{ marginRight: 3 }}>
+                            <Button
+                            variant="outlined"
+                            color="secondary"
+                            size="small"
+                            className={classes.actionButton}
+
+                            onClick={() =>
+                          
+                              validateForm().then((err) => {
+                                if (isEmpty(err)) {
+                                  setApiAction('DELETE');
+                                  setConfirmationOpen(true);
+                                  setErrorAlarmOPen(false);
+                                } else {
+                                  errors = err;
+                                  setErrorAlarmOPen(true);
+                                  setTouched(touchedAll(errors, touched));
+                                }
+                                errors = {};
+                              })
+                            }
+                            disabled={isSubmitting || hasError(errors)}
+                          >
+                            Delete
+                          </Button>
+                        </Box>
+                    }
                     <Box>
                       <Button
                         variant="contained"
                         color="primary"
                         size="small"
                         onClick={() =>
+                          
                           validateForm().then((err) => {
                             if (isEmpty(err)) {
                              
@@ -319,7 +364,7 @@ console.log('default');
                         disabled={isSubmitting || hasError(errors)}
                         className={classes.actionButton}
                       >
-                        Save
+                         Save
                       </Button>
                     </Box>
                   </Box>

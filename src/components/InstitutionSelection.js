@@ -79,6 +79,7 @@ let history = useHistory();
 
   const handleListItemClick = (value) => {
     onClose(value);
+    localStorage.clear();
     localStorage.setItem('selectedInst', JSON.stringify(value));
     history.push('/applicationForm');
   };

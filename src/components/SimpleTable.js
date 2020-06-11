@@ -13,6 +13,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import {applicatiionList} from "../testData/ApplicationTestData";
 import ProductTableDisplay from './ProductTableDisplay';
+import { SetSelectedInstitution, SaveAppToLocalStorage } from './CCUPSHelper';
 
 const StyledTableCell = withStyles((theme) => ({
   root: {
@@ -66,8 +67,9 @@ export default function SimpleTable() {
   let history = useHistory();
 const [dataRows, setDataRows] = useState(null);
 const handleClick = (event, item) => {
-  console.log(item);
-  localStorage.setItem('selectedApp',JSON.stringify(item))
+ 
+  SaveAppToLocalStorage(item);
+  SetSelectedInstitution(item.institution);
   history.push('/applicationForm');
 
 }

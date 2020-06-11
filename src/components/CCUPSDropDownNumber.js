@@ -5,9 +5,11 @@ import InfoIcon from '@material-ui/icons/Info';
 import { MenuItem, FormControl, InputLabel, InputAdornment, IconButton } from '@material-ui/core';
 import {  Field, ErrorMessage, useFormik } from 'formik';
 const CCUPSDropDownNumber = (props) => {
-    const { errors, touched,fieldName,label,handleBlur,handleChange} = props;
+    const { value,errors, touched,fieldName,label,handleBlur,handleChange} = props;
     const [data, setData] = useState([]);
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+    
     
     
     const getMenuItems= async (url)=>{
@@ -44,6 +46,7 @@ const CCUPSDropDownNumber = (props) => {
       
     }
     
+    
     return (
         <div>
             <FormControl variant="outlined" fullWidth size="small" 
@@ -57,7 +60,7 @@ const CCUPSDropDownNumber = (props) => {
       <Field 
         component={Select}
         name={fieldName}
-      
+        
         label={label}
 
       >

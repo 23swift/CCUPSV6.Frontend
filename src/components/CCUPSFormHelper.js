@@ -59,6 +59,8 @@ export const ccupsFormModel={}
 // //   
 // ]
 const createElement=(fieldName,label,type,itemsUrl,menuItems,defaultValue)=>{
+  // console.log(defaultValue);
+ let  ccupsFormMode={};
   switch(type) {
     case 'text':
       ccupsFormModel[fieldName]=defaultValue?defaultValue:"";
@@ -66,16 +68,17 @@ const createElement=(fieldName,label,type,itemsUrl,menuItems,defaultValue)=>{
       break;
     case 'bool':
       ccupsFormModel[fieldName]=defaultValue?defaultValue:false;
+    
       return  createCheckBox(fieldName,label)
       break;
     case 'object':
       // ccupsFormModel[fieldName]=0
-      ccupsFormModel[fieldName]= defaultValue? defaultValue:'0';
+      ccupsFormModel[fieldName]= defaultValue? defaultValue:{id:0};
 
         return  createDropDown(fieldName,label,itemsUrl,menuItems)
         break;
     case 'number':
-      ccupsFormModel[fieldName]=0
+      ccupsFormModel[fieldName]=defaultValue? defaultValue:'0';
       
       // ccupsFormModel[fieldName]='0';
       if(itemsUrl || menuItems){
@@ -84,8 +87,8 @@ const createElement=(fieldName,label,type,itemsUrl,menuItems,defaultValue)=>{
        
         break;
       case 'hidden':
-        ccupsFormModel[fieldName]= defaultValue? defaultValue:'0';
-            return  createHidden(fieldName,label,itemsUrl,menuItems)
+         ccupsFormModel[fieldName]= defaultValue? defaultValue:'0';
+            return  createHidden(fieldName,label,null,null)
             break;
     default:
       ccupsFormModel[fieldName]="";

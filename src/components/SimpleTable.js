@@ -18,6 +18,7 @@ import { SetSelectedInstitution, SaveAppToLocalStorage } from './CCUPSHelper';
 const StyledTableCell = withStyles((theme) => ({
   root: {
     width: '100%',
+    // marginRight:20
   },
     head: {
     //   backgroundColor: theme.palette.common.black,
@@ -32,8 +33,9 @@ const StyledTableCell = withStyles((theme) => ({
 const useStyles = makeStyles((theme)=>({
   table: {
     minWidth: 300,
+   
     color:"#054594",
-    
+   marginRight:20
   },
   appBar: {
     top: 'auto',
@@ -53,6 +55,9 @@ const useStyles = makeStyles((theme)=>({
     padding:10,
     paddingTop:15,
     paddingBottom:20,
+   
+    // maxWidth:800
+    
   },
 }));
 

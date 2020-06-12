@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/styles';
 import { blue, amber } from '@material-ui/core/colors';
 
 import CCUPSForm from '../../../components/CCUPSForm';
-import { ApplicationFormValidation,formConfig, formConfigWithValues } from './ApplicationFormModel';
+import { ApplicationFormValidation,formConfig, Model } from './ApplicationFormModel';
 
 import * as Yup from 'yup';
 import InstitutionSelection from '../../../components/InstitutionSelection';
@@ -27,9 +27,13 @@ const useStyles = makeStyles((theme)=>({
 const ApplicationForm = () => {
     const classes = useStyles();
     const selectedApp=GetAppFromLocalStorage('selectedApp');
+    Model.institution=GetSelectedInstitution();
    
-    console.log(selectedApp);
     
+    const [formModel, setFormModel] = useState(selectedApp?selectedApp:Model);
+
+    //  if(selectedApp){setFormModel(selectedApp)}else{setFormModel(Model)}
+   
     const [hasSelectedApp, setHasSelectedApp] = useState(()=>{return selectedApp ? true :false});
       
    
@@ -61,7 +65,7 @@ const ApplicationForm = () => {
             }
             />
           
-              <Box mr={2} ml={2} component={Paper} p={2} pt={1} variant="outlined" >
+              <Box mr={2} ml={2} component={Paper} p={2} pt={1}  >
              
                       <Typography variant="h6" color="primary"  style={{marginBottom:35,marginTop:5}} >{GetSelectedInstitution().name}</Typography>
              
@@ -69,9 +73,10 @@ const ApplicationForm = () => {
            
              {/* <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" legend={GetSelectedInstitution().name}/> */}
            
-             <CCUPSForm formConfig={formConfigWithValues(selectedApp)} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" 
-             update={hasSelectedApp} 
-            />
+            {formModel &&  <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" 
+              model={formModel} returnUrl="/applicationDataEntry"
+              update={hasSelectedApp}
+            />}
              
               </Box>
 

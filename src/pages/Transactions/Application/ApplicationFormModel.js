@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import * as Yup from 'yup';
-import { createTextBox, createCheckBox, createDropDown } from '../../../components/CCUPSFormElement'
-import { createField, Type } from '../../../components/CCUPSFormHelper';
-import { GetObjectFromLocalStorage, GetAppFromLocalStorage } from '../../../components/CCUPSHelper';
+import { createTextBox, createCheckBox, createDropDown, createDropDownNumber, createHidden } from '../../../components/CCUPSFormElement'
+import { createField, FormElementType,createFormElement } from '../../../components/CCUPSFormHelper';
+import { GetObjectFromLocalStorage, GetAppFromLocalStorage, GetSelectedInstitution } from '../../../components/CCUPSHelper';
 
 
 //Validaton
@@ -58,58 +58,32 @@ export const ApplicationFormValidation = Yup.object().shape({
 
 export const formConfig=[
   
-  createField("card_number","Card Number *",Type.text)
-  ,createField("card_product", "Card Product", Type.number,null,[{id:19,name:"PHP"},{id:20,name:"USD"}])
-  ,createField("reference_no","Reference Number *",  Type.text)
-  ,createField("first_name","First Name *",  Type.text)
-  ,createField("last_name","Last Name *",  Type.text)
-  ,createField("middle_name","Middle Name *",  Type.text)
-  ,createField("product", "Product", Type.object,"api/dd/products",null,null)
-  ,createField("merchant", "Merchant", Type.bool)
-  ,createField("institution","Institution *",  Type.hidden,"api/dd/institutions",null, JSON.parse(localStorage.getItem('selectedInst')))
+  // createField("card_number","Card Number *",FormElementType.text)
+  createTextBox("card_number","Card Number *")
+  ,createDropDownNumber("card_product", "Card Product",null,[{id:19,name:"PHP"},{id:20,name:"USD"}])
+  ,createTextBox("reference_no","Reference Number *")
+  ,createTextBox("first_name","First Name *")
+  ,createTextBox("last_name","Last Name *")
+  ,createTextBox("middle_name","Middle Name *")
+  ,createDropDown("product", "Product","api/dd/products",null)
+  ,createCheckBox("merchant", "Merchant")
+  ,createHidden("institution","Institution *")
   // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
 //   
 ]
-export const formConfigWithValues=(selectedApp)=>{ 
 
-
-
-      if(selectedApp){
-        console.log(selectedApp.id);
-        return [
-      
-      
-        createField("card_number","Card Number *",Type.text,null,null,selectedApp.card_number)
-        ,createField("card_product", "Card Product", Type.number,null,[{id:19,name:"PHP"},{id:20,name:"USD"}],selectedApp.card_product)
-        ,createField("reference_no","Reference Number *",  Type.text,null,null,selectedApp.reference_no)
-        ,createField("first_name","First Name *",  Type.text,null,null,selectedApp.first_name)
-        ,createField("last_name","Last Name *",  Type.text,null,null,selectedApp.last_name)
-        ,createField("middle_name","Middle Name *",  Type.text,null,null,selectedApp.middle_name)
-        ,createField("product", "Product", Type.object,"api/dd/products",null,selectedApp.product)
-        ,createField("merchant", "Merchant", Type.bool,null,null,selectedApp.merchant)
-        ,createField("institution","Institution *",  Type.hidden,"api/dd/institutions",null, JSON.parse(localStorage.getItem('selectedInst'))),
-        createField("id","",Type.hidden,null,null,selectedApp.id),
-        // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
-      //   
-      ]
-      }else{
-        return [
-  
-          createField("card_number","Card Number *",Type.text)
-          ,createField("card_product", "Card Product", Type.number,null,[{id:19,name:"PHP"},{id:20,name:"USD"}])
-          ,createField("reference_no","Reference Number *",  Type.text)
-          ,createField("first_name","First Name *",  Type.text)
-          ,createField("last_name","Last Name *",  Type.text)
-          ,createField("middle_name","Middle Name *",  Type.text)
-          ,createField("product", "Product", Type.object,"api/dd/products",null,null)
-          ,createField("merchant", "Merchant", Type.bool)
-          ,createField("institution","Institution *",  Type.hidden,"api/dd/institutions",null, JSON.parse(localStorage.getItem('selectedInst')))
-          // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
-        //   
-        ]
-      }
- 
+export const Model={
+  card_number:""
+  ,card_product:0
+  ,reference_no:""
+  ,first_name:""
+  ,last_name:""
+  ,middle_name:""
+  ,product:{id:0}
+  ,merchant:false
+  ,institution:{}
+  ,id:0
 }
 
-    
+
     

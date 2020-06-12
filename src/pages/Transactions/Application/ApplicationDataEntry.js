@@ -162,7 +162,7 @@ const ApplicationDataEntry = () => {
           }
         />
 
-        <Box mr={2} ml={1}>
+        <Box mr={4} ml={1}>
           <SimpleTable />
         </Box>
         <InstitutionSelection selectedValue={selectedValue} open={open} onClose={handleClose} institutions={institutions} />

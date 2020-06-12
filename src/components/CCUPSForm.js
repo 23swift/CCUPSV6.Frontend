@@ -31,6 +31,8 @@ import { postData, callApi } from "./CCUPSApiService";
 import { createFormConfig, ccupsFormModel } from "./CCUPSFormHelper";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import CCUPSDropDownNumber from "./CCUPSDropDownNumber";
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import SaveIcon from '@material-ui/icons/Save';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -38,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     top: "auto",
     bottom: 0,
-    color: blue[500],
-    minHeight: 30,
+    // color: blue[500],
+    minHeight: 60,
     // zIndex: theme.zIndex.drawer + 1,
     //  background:theme.palette.background.paper
     // background: "#f2f2f2",
@@ -48,6 +50,13 @@ const useStyles = makeStyles((theme) => ({
   actionButton: {
     minWidth: 110,
   },
+  deleteButton:{
+    color:theme.palette.error.main,
+    minWidth: 110,
+  },
+  buttonIcon:{
+    marginRight:3
+  }
 }));
 
 const isEmpty = (obj) => {
@@ -76,7 +85,7 @@ const generateFormElements = (props) => {
     handleBlur,
     submitAction,
   } = props;
-
+  
 
   return (
     <Grid container spacing={2}>
@@ -93,7 +102,7 @@ const generateFormElements = (props) => {
               value={values[item.name]}
             />
           )}
-          {item.formControl === "select" && (
+          {item.formControl === "selectObject" && (
             <CCUPSDropDown
               label={item.label}
               fieldName={item.name}
@@ -106,7 +115,7 @@ const generateFormElements = (props) => {
             />
            
           )}
-           {item.formControl === "selectNumber" && (
+           {item.formControl === "select" && (
             <CCUPSDropDownNumber
               label={item.label}
               fieldName={item.name}
@@ -144,17 +153,16 @@ const generateFormElements = (props) => {
 
 
 function CCUPSForm(props) {
-  const { formConfig, submitUrl, validationScheme,legend,update } = props;
-  let formConfiguration = createFormConfig(formConfig);
+  const { formConfig, submitUrl, validationScheme,legend,update,model,returnUrl } = props;
+  // let formConfiguration = createFormConfig(formConfig);
+
   
   const classes = useStyles();
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [errorAlarmOPen, setErrorAlarmOPen] = useState(false);
   const [apiAction, setApiAction] = useState(update?"PUT":"POST");
   let history = useHistory();
-// console.log('default');
 
- console.log(ccupsFormModel);
  
   
   const handleConfirmationClose = () => {
@@ -163,7 +171,7 @@ function CCUPSForm(props) {
   const handleSnackExit = () => {
     setConfirmationOpen(false);
 
-    history.push("/applicationDataEntry");
+     history.push(returnUrl);
   };
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -220,27 +228,27 @@ function CCUPSForm(props) {
     <div>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Formik
-          initialValues={ccupsFormModel}
+          initialValues={model}
           // validate={validateValues}
           validationSchema={validationScheme}
           //  validateOnMount={true}
           onSubmit={(values, { setSubmitting,resetForm }) => {
             setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
+                //  alert(JSON.stringify(values, null, 2));
               
               
-              // callApi(submitUrl,values,apiAction).then(data => {
-              //   // console.log(data); // JSON data parsed by `response.json()` call
-              //   setSubmitting(false);
-              //   showSuccessMessage("Entry Saved!");
-              //   resetForm();
-              // },
-              // (error) => {
-              //   // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');
-              //   showSubmitErrorMessage(JSON.stringify(error, null, 2));
-              //   setSubmitting(false);
+              callApi(submitUrl,values,apiAction).then(data => {
+                // console.log(data); // JSON data parsed by `response.json()` call
+                setSubmitting(false);
+                showSuccessMessage("Entry Saved!");
+                resetForm();
+              },
+              (error) => {
+                // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');
+                showSubmitErrorMessage(JSON.stringify(error, null, 2));
+                setSubmitting(false);
                 
-              // })
+              })
 
               
             }, 2000);
@@ -267,7 +275,7 @@ function CCUPSForm(props) {
               values,
               errors,
               touched,
-              formElements: formConfiguration,
+              formElements: formConfig,
               handleChange,
               handleBlur,
             })
@@ -313,12 +321,16 @@ function CCUPSForm(props) {
                       </Button>
                     </Box> */}
                     {update && 
-                        <Box style={{ marginRight: 3 }}>
+                        <Box style={{ marginRight: 3 }} color="text.">
                             <Button
                             variant="outlined"
-                            color="secondary"
+                            color="inherit"
                             size="small"
-                            className={classes.actionButton}
+                            startIcon={<DeleteOutlineIcon className={classes.buttonIcon}/>}
+                            classes={{
+                              outlined:classes.deleteButton
+                              
+                            }}
 
                             onClick={() =>
                           
@@ -346,6 +358,7 @@ function CCUPSForm(props) {
                         variant="contained"
                         color="primary"
                         size="small"
+                        startIcon={<SaveIcon className={classes.buttonIcon}/>}
                         onClick={() =>
                           
                           validateForm().then((err) => {

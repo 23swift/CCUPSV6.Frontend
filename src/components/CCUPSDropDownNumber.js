@@ -21,6 +21,8 @@ const CCUPSDropDownNumber = (props) => {
     }
     
     useEffect(() => {
+     
+      
       if(props.control.menuItems){
        
         setData( props.control.menuItems );

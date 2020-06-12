@@ -11,11 +11,11 @@ export const createTextBox=(name,label)=> {
 
   export const createDropDown=(name,label,itemsUrl,menuItems)=>{
 
-    return {label, formControl:"select",name, itemsUrl,menuItems}
+    return {label, formControl:"selectObject",name, itemsUrl,menuItems}
   }
   export const createDropDownNumber=(name,label,itemsUrl,menuItems)=>{
 
-    return {label, formControl:"selectNumber",name, itemsUrl,menuItems}
+    return {label, formControl:"select",name, itemsUrl,menuItems}
   }
   export const createHidden=(name,label,itemsUrl,menuItems)=>{
 

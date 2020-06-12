@@ -6,10 +6,11 @@ import { createHidden } from './CCUPSFormElement';
 
 
 
-export const Type={
+export const FormElementType={
   text:"text",
   bool:"bool",
-  object:"object",
+  select:"select",
+  selectObject:'selectObject',
   number:"number",
   hidden:"hidden"
   
@@ -42,9 +43,9 @@ export const ccupsFormModel={}
 
  }
 
- export const createField=(fieldName,label,type,itemsUrl,menuItems,defaultValue)=>{
+ export const createField=(fieldName,label,type,itemsUrl,menuItems)=>{
   
-  return {fieldName,label,type,itemsUrl,menuItems,defaultValue};
+  return {fieldName,label,type,itemsUrl,menuItems};
 }
 // const config=[
 //   createField("card_number","Card Nnumber",Type.text)
@@ -58,40 +59,39 @@ export const ccupsFormModel={}
 //   // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
 // //   
 // ]
-const createElement=(fieldName,label,type,itemsUrl,menuItems,defaultValue)=>{
+ const createFormElement=(fieldName,label,type,itemsUrl,menuItems)=>{
   // console.log(defaultValue);
- let  ccupsFormMode={};
+
   switch(type) {
-    case 'text':
-      ccupsFormModel[fieldName]=defaultValue?defaultValue:"";
-    return  createTextBox(fieldName,label)
-      break;
+    // case 'text':
+     
+    // return  createTextBox(fieldName,label)
+    // break;
     case 'bool':
-      ccupsFormModel[fieldName]=defaultValue?defaultValue:false;
+     
     
       return  createCheckBox(fieldName,label)
       break;
-    case 'object':
+    case 'selectObject':
       // ccupsFormModel[fieldName]=0
-      ccupsFormModel[fieldName]= defaultValue? defaultValue:{id:0};
+     
 
         return  createDropDown(fieldName,label,itemsUrl,menuItems)
         break;
-    case 'number':
-      ccupsFormModel[fieldName]=defaultValue? defaultValue:'0';
-      
+    case 'select':
+    
       // ccupsFormModel[fieldName]='0';
-      if(itemsUrl || menuItems){
+      
         return  createDropDownNumber(fieldName,label,itemsUrl,menuItems)
-      }
+      
        
         break;
       case 'hidden':
-         ccupsFormModel[fieldName]= defaultValue? defaultValue:'0';
+        
             return  createHidden(fieldName,label,null,null)
             break;
     default:
-      ccupsFormModel[fieldName]="";
+     
       return  createTextBox(fieldName,label)
   }
 
@@ -101,8 +101,8 @@ export const createFormConfig=(pconfig)=>{
     for(var item in pconfig) {
       
     //  displayFields(pconfig[item]);
-      formElements.push(createElement(pconfig[item].fieldName,pconfig[item].label,
-      pconfig[item].type,pconfig[item].itemsUrl,pconfig[item].menuItems,pconfig[item].defaultValue));
+      formElements.push(createFormElement(pconfig[item].fieldName,pconfig[item].label,
+      pconfig[item].type,pconfig[item].itemsUrl,pconfig[item].menuItems));
 
       // console.log(createElement(config[item].fieldName,config[item].label,
       // config[item].type,config[item].itemsUrl,config[item].menuItems));

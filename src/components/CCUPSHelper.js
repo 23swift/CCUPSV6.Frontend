@@ -1,7 +1,7 @@
 export const GetSelectedInstitution=()=>{
 
 
-    return(JSON.parse(localStorage.getItem('selectedInst')))
+    return(JSON.parse(localStorage.getItem('selectedInst')?localStorage.getItem('selectedInst'):{}))
 }
 export const SetSelectedInstitution=(inst)=>{
 

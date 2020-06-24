@@ -4,12 +4,12 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { Typography, Paper, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
       zIndex: theme.zIndex.drawer + 1,
-      color: '#fff',
+      // color: '#fff',
     },
   }));
 const CCUPSProgress = (props) => {
@@ -26,8 +26,19 @@ const{open,displayText}=props;
         <Backdrop className={classes.backdrop} open={open} 
         // onClick={handleClose}
         >
-        <CircularProgress color="inherit" style={{marginRight:10}} />
-    <Typography color="inherit">{  displayText}</Typography>
+          <Paper style={{padding:15}}>
+            <Box display="flex" flexDirection="row">
+
+              <Box color="text.error"><CircularProgress color="secondary" style={{marginRight:10}} /></Box>
+              <Box pt={2} > <Typography  color="inherit" >{  displayText}</Typography></Box>
+
+            </Box>
+           
+                 
+                 
+          </Paper>
+        
+    
       </Backdrop>
     )
 }

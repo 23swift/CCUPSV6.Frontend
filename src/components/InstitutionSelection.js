@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
 
-import { Drawer,    List,    ListItem,    ListItemIcon,    ListItemText,    makeStyles, Box, Typography, Divider, FormControl, InputLabel, Input, } from "@material-ui/core";
+import { Drawer,    List,    ListItem,    ListItemIcon,    ListItemText,    makeStyles, Box, Typography, Divider, FormControl, InputLabel, Input, Backdrop, Card, CardHeader, CardContent, Dialog, DialogTitle, DialogContent, RadioGroup, FormControlLabel, Radio, DialogActions, Button, } from "@material-ui/core";
 import DrawerHeader from './DrawerHeader';
 import { Link, useHistory } from 'react-router-dom';
 import { blue } from '@material-ui/core/colors';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+// import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 const useStyles = makeStyles((theme)=>({
   list: {
     width: 'auto',
@@ -20,16 +23,7 @@ const useStyles = makeStyles((theme)=>({
     color: blue[700],
     padding:10,
     maxHeight:40,
-    '&:hover, &:focus': {
-    background: blue[500],
-    borderRadius: 3,
-    color: '#fff',
-    
-    '&:before': {
-      background: '#8a4baf',
-      // transform: 'scale(1)',
-    },
-},
+
 
   },
   label: {
@@ -47,22 +41,22 @@ const useStyles = makeStyles((theme)=>({
   },
   drawerpaper:{
     top:1
-  }
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    // color: '#fff',
+  },
 }));
-
-
-// const institutions=[{id:1,displayText:"SMART"},{id:2,displayText:"MERALCO"},{id:3,displayText:"PLDT"}
-
-// ]
-
-
-
 
 const InstitutionSelection = (props) => {
     const classes = useStyles();
-  const { onClose, selectedValue, open } = props;
-const [selectedIcon, setSelectedIcon] = useState(false);
+
 const [institutions, setInstitutions] = useState();
+const { onClose,
+  //  value: valueProp, 
+  open, ...other } = props;
+  const [value, setValue] = useState(3);
+
 let history = useHistory();
     useEffect(() => {
       fetch('api/institutions').then(respose=>respose.json())
@@ -73,43 +67,62 @@ let history = useHistory();
       }
     }, [])
 
-  const handleClose = () => {
-    onClose(selectedValue);
-  };
+  // const handleClose = () => {
+  //   onClose(selectedValue);
+  // };
 
   const handleListItemClick = (value) => {
+    setValue(value);
+    // onClose(value);
+    // localStorage.clear();
+    // localStorage.setItem('selectedInst', JSON.stringify(value));
+    // history.push('/applicationForm');
+  };
+  
+  const radioGroupRef = React.useRef(null);
+  const handleEntering = () => {
+    if (radioGroupRef.current != null) {
+      radioGroupRef.current.focus();
+    }
+  };
+
+  const handleCancel = () => {
+     onClose();
+    // onClose(value);
+  };
+
+  const handleOk = () => {
     onClose(value);
-    localStorage.clear();
-    localStorage.setItem('selectedInst', JSON.stringify(value));
-    history.push('/applicationForm');
+  };
+
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    
+    setValue(event.target.value);
   };
 
  
     return (
       
-           <div onClick={handleClose}>
- <Drawer
-        anchor="right"
-        open={open}
-        onClose={handleClose}
-        classes={{
-          // paperAnchorTop:classes.drawerTop,
-          paperAnchorRight:classes.drawerTop,
-          paper:classes.drawerpaper
-        }}
-        variant="persistent"
-      >
-        <Divider/>
-        <DrawerHeader title="Please Select Institution" 
-        // icon={props.mainMenu.icon}
-        />
-        <Divider/>
-        <Box display="flex"   mt={1} mb={3} ml={1}  minWidth={250} flexDirection="column" flexWrap="wrap"
+           <div >
+ 
+      <Dialog
+      disableBackdropClick
+      disableEscapeKeyDown
+      maxWidth="xs"
+      onEntering={handleEntering}
+      aria-labelledby="confirmation-dialog-title"
+      open={open}
+      {...other}
+    >
+      <DialogTitle id="confirmation-dialog-title">Please Select Institution</DialogTitle>
+      <DialogContent dividers>
+      <Box display="flex"     minWidth={250} flexDirection="column" flexWrap="wrap"
         >
           
                 {institutions &&
                   institutions.map((item, index) => (
-                    <Box key={index}   mr={1}  > 
+                    <Box key={index}   > 
                       <ListItem button    onClick={()=>handleListItemClick(item)}
                       //  style={{maxWidth:300}}
                       classes={{
@@ -123,7 +136,7 @@ let history = useHistory();
                            
                           }}
                         >
-                          <RadioButtonCheckedIcon color="inherit"/>
+                        { value.id===item.id ? <CheckCircleOutlineIcon color="inherit"/>:<RadioButtonUncheckedIcon/>}
                           
                         </ListItemIcon>
                         <ListItemText
@@ -141,13 +154,22 @@ let history = useHistory();
                       
                      
                       </Box>
-                    
+                   
                   ))}
               <ListItem  >
                            
             </ListItem>
-        </Box>
-      </Drawer>
+        </Box> 
+      </DialogContent>
+      <DialogActions>
+        <Button autoFocus onClick={handleCancel} color="secondary" variant="outlined">
+          Cancel
+        </Button>
+        <Button onClick={handleOk} color="secondary" variant="contained" disableElevation style={{minWidth:100}}>
+          Ok
+        </Button>
+      </DialogActions>
+    </Dialog>
       </div>
     )
 }
@@ -155,7 +177,7 @@ let history = useHistory();
 export default InstitutionSelection
 
 InstitutionSelection.propTypes = {
-    onClose: PropTypes.func.isRequired,
-    open: PropTypes.bool.isRequired,
-    selectedValue: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  //  value: PropTypes.number.isRequired,
   };

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { blue } from '@material-ui/core/colors';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import MenuBar from './MenuBar';
 const useStyles = makeStyles((theme) => ({
     list: {
         width: 'auto',
@@ -41,20 +42,22 @@ const useStyles = makeStyles((theme) => ({
         color:'inherit'
       },
       drawerTop:{
-        top:71,
-        left:102
+        top:65,
+        // left:102
       }
+     
 }));
 
 const AppDrawer = (props) => {
     const classes = useStyles();
     return (
       <div onClick={() => props.setOpenDrawer(false, [])}>
- <Drawer
+      
+ <Drawer className={classes.drawer}
         anchor="top"
         open={props.openDrawer}
         onClose={() => props.setOpenDrawer(false, [])}
-        classes={{
+        classes={ {
           paperAnchorTop:classes.drawerTop
         }}
         variant="persistent"
@@ -68,7 +71,10 @@ const AppDrawer = (props) => {
                 {props.mainMenu.subMenu &&
                   props.mainMenu.subMenu.map((item, index) => (
                     <Box key={index}   mr={1}  > 
-                      <ListItem button component={Link} to={item.url} dense
+                      <ListItem button 
+                      component={Link} 
+                      to={item.url} 
+                      dense
                       //  style={{maxWidth:300}}
                       classes={{
                         root: classes.buttonRoot, // class name, e.g. `classes-nesting-root-x`

@@ -1,9 +1,15 @@
 import React from 'react'
-import { createMuiTheme } from '@material-ui/core';
+import { createMuiTheme, Button } from '@material-ui/core';
 import { blue, amber, grey, yellow, indigo } from '@material-ui/core/colors';
+import { withStyles } from '@material-ui/styles';
 
-const cutomeTheme = createMuiTheme({
+ const customTheme = createMuiTheme({
   overrides: {
+    // MuiDialogTitle: {
+    //   root: {
+    //     color:"#043673"
+    //   }
+    // },
     MuiInputBase:{
       
       underline:{
@@ -82,13 +88,14 @@ const cutomeTheme = createMuiTheme({
       head: {
         // backgroundColor: blue[500],
         backgroundColor:"#054594",
-        color: "#054594",
+        // color: "#054594",
       },
       stickyHeader:{
         // backgroundColor: amber[400],
         // backgroundColor:"#0072ce",
         backgroundColor:"#fff",
-        color:blue[600],
+        // color:blue[600],
+        color:"#043673",
         fontWeight:400,
    
     
@@ -114,6 +121,7 @@ const cutomeTheme = createMuiTheme({
     },
     secondary: {
       main: blue[700],
+      // main:amber[500],
       // main: "#efefef",
       // main:"#0072ce",
       contrastText: "#fff",
@@ -125,4 +133,23 @@ const cutomeTheme = createMuiTheme({
   },
 });
 
-  export default cutomeTheme;
+
+ export default customTheme;
+export const ConfirmationButton = withStyles(theme => ({
+  root: {
+    label:{
+      color: blue[900],
+    },
+     color: theme.palette.primary.main,
+     boxShadow:" 0 2px 2px 0 rgba(255, 152, 0, 0.14), 0 3px 1px -2px rgba(255, 152, 0, 0.2), 0 1px 5px 0 rgba(255, 152, 0, 0.12)",
+    backgroundColor: amber[500],
+    '&:hover': {
+      backgroundColor: amber[600],
+      color: blue[900],
+    },
+    
+    
+  },
+  
+}))(Button);
+

@@ -88,7 +88,7 @@ const generateFormElements = (props) => {
   
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={1}>
       {formElements.map((item, index) => (
         <Grid item xs={12} md={6} key={index}>
           {item.formControl === "text" && (
@@ -356,8 +356,9 @@ function CCUPSForm(props) {
                     <Box>
                       <Button
                         variant="contained"
-                        color="primary"
-                        size="small"
+                        disableElevation
+                        color="secondary"
+                        // size="small"
                         startIcon={<SaveIcon className={classes.buttonIcon}/>}
                         onClick={() =>
                           
@@ -391,8 +392,9 @@ function CCUPSForm(props) {
                 message="Saving your entry, Please Confirm..."
               />
               <CCUPSProgress
-                open={isSubmitting}
-                displayText="Saving Auto Debit Application Please wait..."
+                 open={isSubmitting}
+               
+                displayText="Saving Please wait..."
               />
               
             

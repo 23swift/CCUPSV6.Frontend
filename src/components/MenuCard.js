@@ -13,11 +13,11 @@ const useStyles = makeStyles((theme) => ({
         width: 110,
         height: 110,
         // color:"#043673",
-        // background: "linear-gradient(90deg, #054594 30%, #043673 90%)",
+        background: "linear-gradient(90deg, #054594 30%, #043673 90%)",
         // background:"linear-gradient(135deg, rgba(246,230,180,1) 0%,rgba(237,144,23,1) 100%)",
-        background: "-moz-linear-gradient(-45deg, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)", /* FF3.6-15 */
-        background: "-webkit-linear-gradient(-45deg, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)", /* Chrome10-25,Safari5.1-6 */
-        background:"linear-gradient(135deg, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+        // background: "-moz-linear-gradient(-45deg, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)", /* FF3.6-15 */
+        // background: "-webkit-linear-gradient(-45deg, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)", /* Chrome10-25,Safari5.1-6 */
+        // background:"linear-gradient(135deg, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
         margin: 20,
         // marginTop:-50,
         boxShadow:

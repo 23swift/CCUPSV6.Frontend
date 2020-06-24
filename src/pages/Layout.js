@@ -14,8 +14,8 @@ const useStyles = makeStyles(theme => ({
       flexGrow: 1
     },
     main:{
-        marginTop:75,
-        marginLeft:102
+        marginTop:85,
+        // marginLeft:102
     },
     drawer:{
        
@@ -36,8 +36,8 @@ const Layout = (props) => {
         <div style={{minWidth:800}}>
             
             <Router>
-               
-            <Drawer
+            {/* <NavBar /> */}
+            {/* <Drawer
         className={classes.drawer}
         variant="permanent"
         classes={{
@@ -49,7 +49,7 @@ const Layout = (props) => {
         <div >
          <MenuBar/>
         </div>
-      </Drawer>
+      </Drawer> */}
                 <main className={classes.main}>
                 
                     {props.children}

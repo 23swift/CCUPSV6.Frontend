@@ -1,8 +1,9 @@
 import React from 'react'
-import { List, ListItem, ListItemIcon, Grid, ListItemText } from '@material-ui/core';
+import { List, ListItem, ListItemIcon, Grid, ListItemText, Divider } from '@material-ui/core';
 import AdjustIcon from '@material-ui/icons/Adjust';
 const ProductDetails = (props) => {
     const{items}=props;
+
     return (
         <div>
              <List dense style={{padding:0,marginBottom:3}} >
@@ -10,11 +11,13 @@ const ProductDetails = (props) => {
                                           {items.map((item,index)=>(
 
                                         <Grid item md={2} p={0} key={index}>
-                                            <ListItem button style={{padding:2}}>
+                                            <ListItem button style={{padding:2,borderRadius:4}}>
                                                 <ListItemIcon style={{marginRight:0}}>
                                                     <AdjustIcon fontSize="small" color="secondary"/>
                                                 </ListItemIcon>
-                                                <ListItemText style={{marginLeft:0}} primary={item.name}/></ListItem>
+                                                <ListItemText style={{marginLeft:0}} primary={item.name}/>
+                                            </ListItem>
+                                           
                                           </Grid>
                                           ))}
                                           
@@ -25,6 +28,7 @@ const ProductDetails = (props) => {
                                             
                                             
                                         </List>
+                
         </div>
     )
 }

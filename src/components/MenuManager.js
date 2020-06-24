@@ -25,8 +25,8 @@ export const menuList=[
         },
         
         {mainMenu:"utilities",displayText:"Utilities",icon:faTools,
-                subMenu:[{displayText:'Institution Reference',url:'/institutionIndex'}, 
-                                            {displayText:'Institution Product Reference',url:'/instProdRef'},
+                subMenu:[{displayText:'Institution Reference',url:'/instProdRef'}, 
+                                            {displayText:'Institution Product Reference',url:''},
                                             {displayText:'Dis/Enrollment Reason Code',url:''},
                                             {displayText:'Cadencie Decline Reason Code',url:''},
                                             {displayText:'Card ProductType',url:''},

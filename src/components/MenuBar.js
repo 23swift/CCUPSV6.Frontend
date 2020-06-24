@@ -6,29 +6,42 @@ import AppDrawer from './AppDrawer';
 const useStyles = makeStyles(theme => ({
 
     buttonMenu:{
-        paddingTop:7,
+        paddingTop:5,
         paddingLeft:3,
         paddingRight:3,
         margin:1,
-        minWidth:80
-      }
+        minWidth:70
+      },
+      appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+      },
+      drawer: {
+        // width: drawerWidth,
+        flexShrink: 0,
+      },
 }));
-const MenuBar = () => {
+const MenuBar = (props) => {
+  const{toggleDrawer}=props;
     const classes = useStyles();
-    const [openDrawer, setOpenDrawer] = useState({open:false,menu:[]});
-    const toggleDrawer = (isOpen,mainMenuText)  => {
+   
     
-        const menuList=MenuManager(mainMenuText);
-        setOpenDrawer({open:isOpen,menu:menuList});
-        // setState({ ...state, [anchor]: open });
+    // const [openDrawer, setOpenDrawer] = useState({open:false,menu:[]});
+    // const toggleDrawer = (isOpen,mainMenuText)  => {
+    
+    //     const menuList=MenuManager(mainMenuText);
+    //     setOpenDrawer({open:isOpen,menu:menuList});
+    //     // setState({ ...state, [anchor]: open });
         
         
-      };
+    //   };
     return (
       <>
-        <Box display="flex" flexDirection="column" maxWidth={85} m={1} >
+        <Box display="flex" flexDirection="row"
+        //  maxWidth={85} 
+          // className={classes.appBar}
+         m={1} >
           <Box
-            // justifyContent="flex-end"
+            justifyContent="flex-end"
             // mr={1}
             // bgcolor="#f2f2f2"
             pr={0}
@@ -36,7 +49,7 @@ const MenuBar = () => {
           >
             {mainMenuList.map((item, index) => (
               <Button
-                color="inherit"
+                
                 size="small"
                 className={classes.buttonMenu}
                 // variant="outlined"
@@ -48,11 +61,14 @@ const MenuBar = () => {
                   flexDirection="column"
                   justifyContent="center"
                 >
-                  <Box>
+                  <Box color="primary.light" >
                     <FontAwesomeIcon icon={item.icon} size="2x" />
                   </Box>
-                  <Typography variant="caption">
-                      {item.displayText}
+                  <Typography  variant="caption">
+                    <Box color="text.secondary">
+                       {item.displayText}
+                    </Box>
+                     
                   </Typography>
                   
                 </Box>
@@ -61,11 +77,11 @@ const MenuBar = () => {
           </Box>
         </Box>
 
-        <AppDrawer
+        {/* <AppDrawer
           openDrawer={openDrawer.open}
           setOpenDrawer={toggleDrawer}
           mainMenu={openDrawer.menu}
-        />
+        /> */}
       </>
     );
 }

@@ -3,7 +3,7 @@ import React from 'react'
 import { faParagraph, faFileAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { IconButton, Button, Box, Fab, TextField, Paper, Avatar, makeStyles, Divider, fade, InputBase } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
@@ -85,13 +85,9 @@ const useStyles = makeStyles((theme) => ({
 const ApplicationDataEntry = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const institutions = [{avatar:  <img src={smartLogo} style={{height:80, borderRadius:4}}/>,name:'SMART'},
-   {avatar: <img src={meralcoLogo} style={{height:80, borderRadius:4}}/>,name:'MERALCO'},
-   {avatar: <img src={manilaWaterLogo} style={{height:80,borderRadius:4}}/>,name:'MANILA WATER'},
-   {avatar: <img src={globeLogo} style={{height:80,borderRadius:4}} />,name:'GLOBE'},
-   {avatar: <img src={pldtLogo} style={{height:80,borderRadius:4}} />,name:'PLDT'}];
+  let history = useHistory();
    
-  const [selectedValue, setSelectedValue] = React.useState(institutions[1].name);
+  const [selectedValue, setSelectedValue] = React.useState({});
 
 
   const handleClickOpen = () => {
@@ -100,7 +96,14 @@ const ApplicationDataEntry = () => {
 
   const handleClose = (value) => {
     setOpen(false);
-    setSelectedValue(value);
+    if(value){
+      setSelectedValue(value);
+    localStorage.clear();
+    localStorage.setItem('selectedInst', JSON.stringify(value));
+    history.push('/applicationForm');
+    }
+    
+    
   };
     return (
       <div>
@@ -135,7 +138,7 @@ const ApplicationDataEntry = () => {
               </Box>
 
               <Box ml={1} ml={1}>
-                <Button color="secondary" startIcon={<AddIcon />} variant="contained"
+                <Button color="secondary" startIcon={<AddIcon />} disableElevation variant="contained"
                   // size="small" component={Link} to="/applicationForm" 
                   onClick={handleClickOpen} size="small"
                   >
@@ -165,7 +168,9 @@ const ApplicationDataEntry = () => {
         <Box mr={4} ml={1}>
           <SimpleTable />
         </Box>
-        <InstitutionSelection selectedValue={selectedValue} open={open} onClose={handleClose} institutions={institutions} />
+        <InstitutionSelection  keepMounted value={selectedValue} open={open} onClose={handleClose} 
+        
+         />
       </div>
     );
 }

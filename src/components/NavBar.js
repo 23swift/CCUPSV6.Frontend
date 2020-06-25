@@ -104,7 +104,7 @@ const NavBar = (props) => {
       <div>
         <AppBar
           position="fixed"
-          // elevation={0}
+          elevation={0}
           className={classes.appBar}
         >
           <Toolbar className={classes.toolbar}>
@@ -171,7 +171,7 @@ const NavBar = (props) => {
             </Box>
           </Toolbar>
           <Box mt={0}>
-            {/* <Divider variant="fullWidth" /> */}
+            <Divider variant="fullWidth" />
           </Box>
         </AppBar>
 

@@ -115,7 +115,7 @@ let history = useHistory();
       open={open}
       {...other}
     >
-      <DialogTitle id="confirmation-dialog-title">Please Select Institution</DialogTitle>
+      <DialogTitle id="confirmation-dialog-title" color="secondary">Please Select Institution</DialogTitle>
       <DialogContent dividers>
       <Box display="flex"     minWidth={250} flexDirection="column" flexWrap="wrap"
         >
@@ -162,10 +162,10 @@ let history = useHistory();
         </Box> 
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={handleCancel} color="secondary" variant="outlined">
+        <Button autoFocus onClick={handleCancel} color="secondary" variant="contained" disableElevation>
           Cancel
         </Button>
-        <Button onClick={handleOk} color="secondary" variant="contained" disableElevation style={{minWidth:100}}>
+        <Button onClick={handleOk} color="primary" variant="contained"  style={{minWidth:100}}>
           Ok
         </Button>
       </DialogActions>

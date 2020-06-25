@@ -61,7 +61,7 @@ const MenuBar = (props) => {
                   flexDirection="column"
                   justifyContent="center"
                 >
-                  <Box color="primary.light" >
+                  <Box color="primary.main" >
                     <FontAwesomeIcon icon={item.icon} size="2x" />
                   </Box>
                   <Typography  variant="caption">

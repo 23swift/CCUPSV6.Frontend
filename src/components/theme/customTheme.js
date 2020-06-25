@@ -114,18 +114,21 @@ import { withStyles } from '@material-ui/styles';
   },
   palette: {
     primary: {
-      // main: "#054594",
+      main: "#054594",
       // dark:"#f7af19",
-      main:"#043673",
+      // main:"#043673",
+      // main:"#0067B8",
+      // main:blue[700],
       contrastText:"#fff"
     },
     secondary: {
-      main: blue[700],
+      // main: blue[600],
       // main:amber[500],
       // main: "#efefef",
-      // main:"#0072ce",
+      main:"#0067B8",
       contrastText: "#fff",
     },
+   
     error: {
       main: "#f44336",
       contrastText: "#fff",

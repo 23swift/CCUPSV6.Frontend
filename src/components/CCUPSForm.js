@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 110,
   },
   deleteButton:{
-    color:theme.palette.error.main,
+    color:theme.palette.secondary.main,
     minWidth: 110,
   },
   buttonIcon:{
@@ -169,9 +169,13 @@ function CCUPSForm(props) {
     setConfirmationOpen(false);
   };
   const handleSnackExit = () => {
-    setConfirmationOpen(false);
+    //setConfirmationOpen(false);
 
-     history.push(returnUrl);
+   
+    setTimeout(() => {
+       history.push(returnUrl);
+    }, 2000);
+    
   };
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -293,7 +297,7 @@ function CCUPSForm(props) {
                 <AppBar
                   position="fixed"
                   className={classes.appBar}
-                  elevation={1}
+                  elevation={0}
                 >
                   <Divider />
 
@@ -321,16 +325,17 @@ function CCUPSForm(props) {
                       </Button>
                     </Box> */}
                     {update && 
-                        <Box style={{ marginRight: 3 }} color="text.">
+                        <Box style={{ marginRight: 3 }}>
                             <Button
-                            variant="outlined"
-                            color="inherit"
-                            size="small"
+                            variant="contained"
+                            color="secondary"
+                            disableElevation
+                            // size="small"
                             startIcon={<DeleteOutlineIcon className={classes.buttonIcon}/>}
-                            classes={{
-                              outlined:classes.deleteButton
+                            // classes={{
+                            //   outlined:classes.deleteButton
                               
-                            }}
+                            // }}
 
                             onClick={() =>
                           
@@ -356,8 +361,8 @@ function CCUPSForm(props) {
                     <Box>
                       <Button
                         variant="contained"
-                        disableElevation
-                        color="secondary"
+                        
+                        color="primary"
                         // size="small"
                         startIcon={<SaveIcon className={classes.buttonIcon}/>}
                         onClick={() =>

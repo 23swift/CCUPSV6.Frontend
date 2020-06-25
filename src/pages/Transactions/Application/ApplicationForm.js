@@ -67,7 +67,7 @@ const ApplicationForm = () => {
           
               <Box mr={2} ml={2} component={Paper} p={2} pt={1}  >
              
-                      <Typography variant="h6" color="primary"  style={{marginBottom:35,marginTop:5}} >{GetSelectedInstitution().name}</Typography>
+                      <Typography variant="h6" color="primary"  style={{marginBottom:15,marginTop:5}} >{GetSelectedInstitution().name}</Typography>
              
              
            

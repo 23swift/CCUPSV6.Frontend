@@ -106,7 +106,7 @@ const NavBar = (props) => {
       <div>
         <AppBar
           position="fixed"
-          elevation={2}
+          elevation={0}
           className={classes.appBar}
         >
           <Toolbar className={classes.toolbar}>

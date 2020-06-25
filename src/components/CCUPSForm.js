@@ -90,7 +90,7 @@ const generateFormElements = (props) => {
 
 
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={2}>
       {formElements.map((item, index) => (
         <Grid item xs={12} md={6} key={index}>
           {item.formControl === "text" && (
@@ -329,11 +329,11 @@ function CCUPSForm(props) {
                       </Button>
                     </Box> */}
                     {update && 
-                        <Box style={{ marginRight: 3 }}>
+                        <Box style={{ marginRight: 3 }} color="info.main">
                             <Button
-                            variant="contained"
-                            color="secondary"
-                            disableElevation
+                            variant="outlined"
+                            color="inherit"
+                            // disableElevation
                             // size="small"
                             startIcon={<DeleteOutlineIcon className={classes.buttonIcon}/>}
                             // classes={{
@@ -362,7 +362,7 @@ function CCUPSForm(props) {
                           </Button>
                         </Box>
                     }
-                    <Box>
+                    <Box >
                       <Button
                         variant="contained"
                         

@@ -4,7 +4,7 @@ import { Box, Divider, Button, IconButton, Slide, AppBar, Grid, FormControl, Inp
 import { Link } from 'react-router-dom'
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/styles';
-import { blue, amber } from '@material-ui/core/colors';
+import { blue, amber, grey } from '@material-ui/core/colors';
 
 import CCUPSForm from '../../../components/CCUPSForm';
 import { ApplicationFormValidation,formConfig, Model } from './ApplicationFormModel';
@@ -15,8 +15,8 @@ import { GetSelectedInstitution, GetAppFromLocalStorage } from '../../../compone
 const useStyles = makeStyles((theme)=>({
   
       closeBUtton:{
-        color:theme.palette.common.black,
-        opacity:.4
+        color:grey[400],
+        // opacity:.4
       }
       
 }));
@@ -55,6 +55,7 @@ const ApplicationForm = () => {
                   to="/applicationDataEntry"
                   size="small"
                   style={{ minWidth: 30,minHeight:30,padding:2 }}
+                  color="inherit"
                 >
                   <CloseIcon  />
                 </Button>
@@ -67,10 +68,11 @@ const ApplicationForm = () => {
           
               <Box mr={1} ml={1} 
               component={Paper}
-               p={1}
+               p={2}
                 pt={1} 
-               elevation={2}
-              //  variant="outlined"
+              //  elevation={2}
+               variant="outlined"
+               
                  >
              
                       <Typography variant="h6" color="primary"  style={{marginBottom:5,marginTop:5}} >{GetSelectedInstitution().name}</Typography>             

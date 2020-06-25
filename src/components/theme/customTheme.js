@@ -93,8 +93,8 @@ import { withStyles } from '@material-ui/styles';
       stickyHeader:{
         // backgroundColor: amber[400],
         // backgroundColor:"#0072ce",
-        backgroundColor:"#fff",
-        // color:blue[600],
+         // backgroundColor:"#fff",
+        // color:"#fff",
         color:"#043673",
         fontWeight:400,
    
@@ -114,9 +114,9 @@ import { withStyles } from '@material-ui/styles';
   },
   palette: {
     primary: {
-      main: "#054594",
+      // main: "#054594",
       // dark:"#f7af19",
-      // main:"#043673",
+      main:"#043673",
       // main:"#0067B8",
       // main:blue[700],
       contrastText:"#fff"

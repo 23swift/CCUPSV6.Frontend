@@ -116,7 +116,7 @@ const ApplicationDataEntry = () => {
               <Box mr={1}>
                 <Button
                   color="inherit"
-                  variant="outlined"
+                  // variant="outlined"
                   startIcon={<SearchIcon />}
                   size="small"
                 >
@@ -126,7 +126,7 @@ const ApplicationDataEntry = () => {
               </Box>
 
               <Box ml={1} mr={1}>
-                <Button color="secondary" startIcon={<AddIcon />} disableElevation variant="contained"
+                <Button color="primary" startIcon={<AddIcon />} disableElevation variant="contained"
                   // size="small" component={Link} to="/applicationForm" 
                   onClick={handleClickOpen} size="small"
                   >

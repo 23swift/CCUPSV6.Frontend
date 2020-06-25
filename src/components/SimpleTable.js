@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme)=>({
     padding:10,
     paddingTop:15,
     paddingBottom:20,
-   
+  //  borderRadius:20
     // maxWidth:800
     
   },
@@ -103,11 +103,11 @@ const handleClick = (event, item) => {
   return (
    
 <>
- <TableContainer component={Paper} elevation={2}  className={classes.container} >
+ <TableContainer component={Paper} variant="outlined"  className={classes.container} >
       <Table className={classes.table} aria-label="simple table" 
       stickyHeader>
-        <TableHead >
-          <TableRow>
+        <TableHead  >
+          <TableRow style={{backgroundColor:blue[500]}}>
             <TableCell>Card Number</TableCell>
             <TableCell align="left">Name</TableCell>
             <TableCell align="left">Institution</TableCell>

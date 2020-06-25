@@ -6,11 +6,11 @@ import AppDrawer from './AppDrawer';
 const useStyles = makeStyles(theme => ({
 
     buttonMenu:{
-        paddingTop:5,
-        paddingLeft:3,
-        paddingRight:3,
+        paddingTop:2,
+        paddingLeft:5,
+        paddingRight:5,
         margin:1,
-        minWidth:70
+        // minWidth:70
       },
       appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -42,9 +42,9 @@ const MenuBar = (props) => {
          m={1} >
           <Box
             justifyContent="flex-end"
-            // mr={1}
+            mr={1}
             // bgcolor="#f2f2f2"
-            pr={0}
+            pr={2}
             borderRadius={4}
           >
             {mainMenuList.map((item, index) => (
@@ -55,8 +55,19 @@ const MenuBar = (props) => {
                 // variant="outlined"
                 onClick={() => toggleDrawer(true, item.mainMenu)}
                 key={index}
-              >
-                <Box
+                startIcon={  
+                  <Box color="secondary.main">
+                    <FontAwesomeIcon icon={item.icon} />
+                  </Box>
+                  
+              }
+              >   <Typography  variant="caption">
+              <Box color="text.primary">
+                 {item.displayText}
+              </Box>
+               
+            </Typography>
+                {/* <Box
                   display="flex"
                   flexDirection="column"
                   justifyContent="center"
@@ -71,7 +82,7 @@ const MenuBar = (props) => {
                      
                   </Typography>
                   
-                </Box>
+                </Box> */}
               </Button>
             ))}
           </Box>

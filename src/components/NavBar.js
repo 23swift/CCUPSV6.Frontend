@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
         color:theme.palette.secondary.main
       },
       drawer:{
-        top:200,
+        top:100,
       },
       appBar: {
         paddingTop: 0,
@@ -61,7 +61,8 @@ const useStyles = makeStyles(theme => ({
       },
       buttonRoot: {
         // fontSize: 11,
-        color: blue[700],
+        // color: blue[700],
+        color:theme.palette.primary.main,
         padding:10,
         maxHeight:30,
         '&:hover, &:focus': {
@@ -83,9 +84,10 @@ const useStyles = makeStyles(theme => ({
       ListItemIconRoot:{
         minWidth:28,
         color:'inherit'
+        // color: blue[700]
       },
       drawerTop:{
-        top:15,
+        top:5,
         // left:102
       }
 }));
@@ -104,7 +106,7 @@ const NavBar = (props) => {
       <div>
         <AppBar
           position="fixed"
-          elevation={0}
+          elevation={2}
           className={classes.appBar}
         >
           <Toolbar className={classes.toolbar}>
@@ -187,7 +189,7 @@ const NavBar = (props) => {
       >
         <Toolbar />
         <div className={classes.drawerContainer} onClick={()=>setOpenDrawer({...openDrawer,open:false})} >
-        <Divider/>
+        {/* <Divider/> */}
         <DrawerHeader title={openDrawer.menu.displayText} icon={openDrawer.menu.icon}/>
         <Divider/>
         <Box display="flex"   mt={1} mb={3} ml={1} maxHeight={300} maxWidth={350} flexDirection="column" flexWrap="wrap"
@@ -216,8 +218,10 @@ const NavBar = (props) => {
                         </ListItemIcon>
                         <ListItemText
                           primary={
-                           
-                              item.displayText
+                           <Typography variant="subtitle2">
+                             { item.displayText}
+                           </Typography>
+                             
                            
                           }
                         />

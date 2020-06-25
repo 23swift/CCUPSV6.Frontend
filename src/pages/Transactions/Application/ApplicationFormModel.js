@@ -33,13 +33,12 @@ export const ApplicationFormValidation = Yup.object().shape({
   reference_no:Yup.string()
     .max(50, 'Reference Number Too Long!')
     .required('Reference Number Required'),
-    // product:Yup.number()
-    // .min(1, 'Product Required!')
 
-    product:Yup.object().shape({
 
-      id:Yup.number().min(1,'Product Required')
-    }),
+    product:Yup.object({
+
+      id: Yup.number().default(0).min(1,'Product Required'),
+    })
     // product:Yup.lazy(value => {
     //   switch (typeof value) {
     //     case 'object':
@@ -65,7 +64,7 @@ export const formConfig=[
   ,createTextBox("first_name","First Name *")
   ,createTextBox("last_name","Last Name *")
   ,createTextBox("middle_name","Middle Name *")
-  ,createDropDown("product", "Product","api/dd/products",null)
+  ,createDropDown("product", "Product","api/products?projection=dropDown",null)
   ,createCheckBox("merchant", "Merchant")
   ,createHidden("institution","Institution *")
   // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])

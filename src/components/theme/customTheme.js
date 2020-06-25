@@ -51,8 +51,8 @@ import { withStyles } from '@material-ui/styles';
           },
           notchedOutline:{
             // borderColor:"#efefef",
-            borderColor:"#e6e6e6",
-            // borderColor:"#d9d9d9",  
+            // borderColor:"#e6e6e6",
+            borderColor:"#d9d9d9",  
             // borderColor:blue[200],
             // border:0,
             color:"#043673",
@@ -80,9 +80,9 @@ import { withStyles } from '@material-ui/styles';
       label: {
         textTransform: "none",
       },
-      startIcon: {
-        marginRight: 1,
-      },
+      // startIcon: {
+      //   marginRight: 10,
+      // },
     },
     MuiTableCell: {
       head: {
@@ -122,13 +122,16 @@ import { withStyles } from '@material-ui/styles';
       contrastText:"#fff"
     },
     secondary: {
-      // main: blue[600],
+      main: blue[700],
+      // main:"#FDB913",
       // main:amber[500],
       // main: "#efefef",
       main:"#0067B8",
       contrastText: "#fff",
     },
-   
+    warning:{
+      main:"#FDB913"
+    },
     error: {
       main: "#f44336",
       contrastText: "#fff",

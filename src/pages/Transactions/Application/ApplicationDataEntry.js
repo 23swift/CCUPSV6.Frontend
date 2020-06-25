@@ -122,23 +122,11 @@ const ApplicationDataEntry = () => {
                 >
                   Search
                 </Button>
-                {/* <div className={classes.search}>
-                  <div  className={classes.searchIcon}>
-                    <SearchIcon />
-                  </div>
-                  <InputBase
-                    placeholder="Card Number here..." 
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput,
-                    }}
-                    inputProps={{ "aria-label": "Card Number" }}
-                  />
-                </div> */}
+               
               </Box>
 
               <Box ml={1} mr={1}>
-                <Button color="primary" startIcon={<AddIcon />} disableElevation variant="contained"
+                <Button color="secondary" startIcon={<AddIcon />} disableElevation variant="contained"
                   // size="small" component={Link} to="/applicationForm" 
                   onClick={handleClickOpen} size="small"
                   >

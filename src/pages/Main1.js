@@ -81,8 +81,8 @@ const useStyles = makeStyles((theme) => ({
     height: 140,
   },
   title: {
-    color: "#054594",
-    // background: 'linear-gradient(90deg, #054594  10%, #0072ce 80%)',
+    color: "#fff",
+    background: 'linear-gradient(90deg, #054594  10%, #0072ce 80%)',
     top:125,
     padding:25,
     minWidth:600

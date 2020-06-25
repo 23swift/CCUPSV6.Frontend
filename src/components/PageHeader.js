@@ -22,16 +22,16 @@ const useStyles = makeStyles(theme => ({
       },
     toolbar:{
        
-      //  backgroundColor: "inherit",
+       backgroundColor: "#fff",
        
       // backgroundColor:"#fff",
       //  background:amber[500],
         // paddingLeft:12,
         paddingLeft:10,
         paddingRight:10,
-      background:theme.palette.secondary.main,
-      
-      color:"#fff"
+      //background:"inherit",
+      color:theme.palette.primary.main,
+      // color:"#054594"
       // color:grey[300]
     },
     root: {
@@ -61,7 +61,7 @@ const PageHeader = (props) => {
       <div>
         <AppBar position="sticky" elevation={1} style={{ padding: 0 }}>
           <Toolbar className={classes.toolbar} variant="dense" >
-            <Box display="flex" flexGrow={1}>
+            <Box display="flex" flexGrow={1} >
               <Box className={classes.title}>
                 <Typography component="h2" variant="h6" color="inherit">
                   {props.title}
@@ -70,6 +70,7 @@ const PageHeader = (props) => {
 
               <Typography
                 // component="h3"
+                color="inherit"
                 variant="subtitle2"
                 // color="textSecondary"
                 className={classes.subTitle}
@@ -78,13 +79,15 @@ const PageHeader = (props) => {
                 {props.subTitle}
               </Typography>
             </Box>
-
-            {props.tools}
+        <Box color="info.main">
+          {props.tools}
+        </Box>
+            
 
             {/* </Box> */}
           </Toolbar>
         </AppBar>
-        <Box pl={1} pr={1} mb={2} mt={2} >
+        <Box mb={2}  >
           {/* <Divider /> */}
         </Box>
         {/* <Divider/> */}

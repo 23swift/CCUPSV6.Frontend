@@ -103,7 +103,7 @@ const handleClick = (event, item) => {
   return (
    
 <>
- <TableContainer component={Paper} elevation={1} className={classes.container} >
+ <TableContainer component={Paper} elevation={2}  className={classes.container} >
       <Table className={classes.table} aria-label="simple table" 
       stickyHeader>
         <TableHead >

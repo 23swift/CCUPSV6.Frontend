@@ -18,7 +18,7 @@ const getMenuItems= async (url)=>{
   const response = await fetch(url);
   const json = await response.json();
 
-   setData(json);
+   setData(json.content);
    setDropDownVal(value);
    
 }

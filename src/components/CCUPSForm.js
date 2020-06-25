@@ -33,6 +33,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import CCUPSDropDownNumber from "./CCUPSDropDownNumber";
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import SaveIcon from '@material-ui/icons/Save';
+import ClearIcon from '@material-ui/icons/Clear';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -86,6 +87,7 @@ const generateFormElements = (props) => {
     submitAction,
   } = props;
   
+
 
   return (
     <Grid container spacing={1}>
@@ -156,6 +158,7 @@ function CCUPSForm(props) {
   const { formConfig, submitUrl, validationScheme,legend,update,model,returnUrl } = props;
   // let formConfiguration = createFormConfig(formConfig);
 
+
   
   const classes = useStyles();
   const [confirmationOpen, setConfirmationOpen] = useState(false);
@@ -171,7 +174,10 @@ function CCUPSForm(props) {
   const handleSnackExit = () => {
     setConfirmationOpen(false);
 
-     history.push(returnUrl);
+    setTimeout(() => {
+       history.push(returnUrl);
+    }, 2000);
+    
   };
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -182,12 +188,14 @@ function CCUPSForm(props) {
     });
   };
   const showErrorMessage = (pErrors) => {
+  
+    
         Object.values(pErrors).map(error => (
          
           Object.values(error).length==1 ?
           // console.log(Object.values(error).length)
           
-                  enqueueSnackbar(error.name, {
+                  enqueueSnackbar(error.id, {
                   variant: "error",
                   // onExited: handleSnackExit(),
                 })
@@ -301,7 +309,7 @@ function CCUPSForm(props) {
                     <Box flexGrow={1}></Box>
                     {errors && hasError(errors) &&
                       <Box mr={2}>
-                        <IconButton color="inherit" size="small" onClick={()=>showErrorMessage(errors)}>
+                        <IconButton  size="small" onClick={()=>showErrorMessage(errors)}>
                           <Badge badgeContent={Object.values(errors).length}  color="error">
                             <NotificationsIcon />
                           </Badge>
@@ -321,12 +329,12 @@ function CCUPSForm(props) {
                       </Button>
                     </Box> */}
                     {update && 
-                        <Box style={{ marginRight: 3 }} color="text.">
+                        <Box style={{ marginRight: 3 }} >
                             <Button
                             variant="outlined"
                             color="inherit"
-                            size="small"
-                            startIcon={<DeleteOutlineIcon className={classes.buttonIcon}/>}
+                          
+                            startIcon={<ClearIcon />}
                             classes={{
                               outlined:classes.deleteButton
                               

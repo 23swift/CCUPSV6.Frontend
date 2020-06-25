@@ -65,11 +65,16 @@ const ApplicationForm = () => {
             }
             />
           
-              <Box mr={2} ml={2} component={Paper} p={2} pt={1}  >
+              <Box mr={1} ml={1} 
+              component={Paper}
+               p={1}
+                pt={1} 
+               elevation={2}
+              //  variant="outlined"
+                 >
              
-                      <Typography variant="h6" color="primary"  style={{marginBottom:35,marginTop:5}} >{GetSelectedInstitution().name}</Typography>
-             
-             
+                      <Typography variant="h6" color="primary"  style={{marginBottom:5,marginTop:5}} >{GetSelectedInstitution().name}</Typography>             
+             <Divider style={{marginBottom:20}}/>
            
              {/* <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" legend={GetSelectedInstitution().name}/> */}
            

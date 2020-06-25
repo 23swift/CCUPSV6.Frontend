@@ -91,12 +91,12 @@ const InstitutionReference = () => {
                    }/>    
             
 
-            <CCUPSPaper>
+            {/* <CCUPSPaper> */}
           
-                <div  style={{ width: '100%' }}>
+                <div  style={{marginLeft:10, marginRight:10,marginTop:25 }}>
 
 
-                <Grid container spacing={1}>
+                <Grid container spacing={1} >
                 {dataRows && dataRows.map((item,index)=>(
                         <Grid item xs={12} md={12} key={index}>
                                 <InstitutionMaster name={item.name} code={item.code} institution={item}>
@@ -114,7 +114,7 @@ const InstitutionReference = () => {
                       
                 </div>
                 
-            </CCUPSPaper>
+            {/* </CCUPSPaper> */}
            
            {/* <InstitutionDialog open={dialogOpen} handleClose={()=>setDialogOpen(false)} setCreatedEntity={setCreatedEntity}/> */}
 

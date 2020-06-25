@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme)=>({
   },
   buttonRoot: {
     // fontSize: 11,
-    color: blue[700],
+    // color: blue[700],
     padding:10,
     maxHeight:40,
 
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme)=>({
   },
   ListItemIconRoot:{
     minWidth:28,
-    color:'inherit'
+    color: theme.palette.secondary.main
   },
   drawerTop:{
     // top:300,
@@ -46,6 +46,10 @@ const useStyles = makeStyles((theme)=>({
     zIndex: theme.zIndex.drawer + 1,
     // color: '#fff',
   },
+  title: {
+    background: theme.palette.info.main,
+    color: '#fff',
+  }
 }));
 
 const InstitutionSelection = (props) => {
@@ -115,9 +119,9 @@ let history = useHistory();
       open={open}
       {...other}
     >
-      <DialogTitle id="confirmation-dialog-title">Please Select Institution</DialogTitle>
+      <DialogTitle id="confirmation-dialog-title" classes={{root:classes.title}} >Please Select Institution</DialogTitle>
       <DialogContent dividers>
-      <Box display="flex"     minWidth={250} flexDirection="column" flexWrap="wrap"
+      <Box display="flex"     minWidth={250} flexDirection="column" flexWrap="wrap" 
         >
           
                 {institutions &&
@@ -136,7 +140,7 @@ let history = useHistory();
                            
                           }}
                         >
-                        { value.id===item.id ? <CheckCircleOutlineIcon color="inherit"/>:<RadioButtonUncheckedIcon/>}
+                        { value.id===item.id ? <CheckCircleOutlineIcon color="inherit" fontSize="small"/>:<RadioButtonUncheckedIcon fontSize="small"/>}
                           
                         </ListItemIcon>
                         <ListItemText
@@ -162,9 +166,12 @@ let history = useHistory();
         </Box> 
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={handleCancel} color="secondary" variant="outlined">
+        <Box color="info.main">
+           <Button autoFocus onClick={handleCancel} color="inherit" variant="outlined">
           Cancel
         </Button>
+        </Box>
+       
         <Button onClick={handleOk} color="secondary" variant="contained" disableElevation style={{minWidth:100}}>
           Ok
         </Button>

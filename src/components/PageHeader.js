@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
       },
     toolbar:{
        
-      //  backgroundColor: "inherit",
+       backgroundColor: "#fff",
        
       // backgroundColor:"#fff",
       //  background:amber[500],
@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
         paddingLeft:10,
         paddingRight:10,
       //background:"inherit",
-      
+      color:theme.palette.primary.main,
       // color:"#054594"
       // color:grey[300]
     },
@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     },
   subTitle:{
     marginTop: 10,
-    color:theme.palette.secondary.main
+    // color:theme.palette.secondary.main
   }
 }));
 const PageHeader = (props) => {
@@ -61,15 +61,16 @@ const PageHeader = (props) => {
       <div>
         {/* <AppBar position="sticky" elevation={0} style={{ padding: 0 }}> */}
           <Toolbar className={classes.toolbar} variant="dense" >
-            <Box display="flex" flexGrow={1}>
+            <Box display="flex" flexGrow={1} >
               <Box className={classes.title}>
-                <Typography component="h2" variant="h6" color="primary">
+                <Typography component="h2" variant="h6" color="inherit">
                   {props.title}
                 </Typography>
               </Box>
 
               <Typography
                 // component="h3"
+                color="inherit"
                 variant="subtitle2"
                 className={classes.subTitle}
                
@@ -77,13 +78,15 @@ const PageHeader = (props) => {
                 {props.subTitle}
               </Typography>
             </Box>
-
-            {props.tools}
+        <Box color="info.main">
+          {props.tools}
+        </Box>
+            
 
             {/* </Box> */}
           </Toolbar>
         {/* </AppBar> */}
-        <Box pl={1} pr={1} mb={3} >
+        <Box  mb={1} >
           <Divider />
         </Box>
         {/* <Divider/> */}

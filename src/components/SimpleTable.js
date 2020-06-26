@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { blue } from '@material-ui/core/colors';
-import { Slide, AppBar, Toolbar, Box, Button, TablePagination, Divider, IconButton, Checkbox } from '@material-ui/core';
+import { Slide, AppBar, Toolbar, Box, Button, TablePagination, Divider, IconButton, Checkbox, FormControlLabel } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 
 import {applicatiionList} from "../testData/ApplicationTestData";
@@ -69,6 +69,7 @@ function createData(name, calories, fat, carbs, protein) {
 
 export default function SimpleTable() {
   const classes = useStyles();
+  const [selectAll, setSelectAll] = useState(false)
   let history = useHistory();
 const [dataRows, setDataRows] = useState(null);
 const handleClick = (event, item) => {
@@ -77,6 +78,10 @@ const handleClick = (event, item) => {
   SetSelectedInstitution(item.institution);
   history.push('/applicationForm');
 
+}
+
+const handleSelectAll=()=>{
+  setSelectAll(!selectAll);
 }
 
   useEffect(() => {
@@ -109,9 +114,14 @@ const handleClick = (event, item) => {
         <TableHead  >
           <TableRow style={{backgroundColor:blue[500]}}>
           <TableCell>
-            <Button color="secondary">
-              Select All
-            </Button>
+          <FormControlLabel
+              control={<Checkbox  
+                color="secondary"
+                checked={selectAll} 
+                onChange={handleSelectAll} 
+                name="selectAll" />}
+              label="Select All"
+            />
           </TableCell>
             <TableCell>Card Number</TableCell>
             <TableCell align="left">Name</TableCell>
@@ -132,7 +142,7 @@ const handleClick = (event, item) => {
                 {row.name}
               </TableCell> */}
                <TableCell align="left">
-                 <Checkbox/>
+                 <Checkbox checked={selectAll}/>
                </TableCell>
               <TableCell align="left">{row['card_number']}</TableCell>
               <TableCell align="left">{row.first_name + ' ' +row.last_name}</TableCell>

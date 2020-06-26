@@ -311,20 +311,20 @@ pErrors=null
                       }
                 <Box mr={1}>
 
-                   <Button onClick={handleClose} color="secondary" size="small" variant={"outlined"} >
+                   <Button onClick={handleClose} color="secondary"  variant={"outlined"} >
                     Cancel
                   </Button>
                   </Box>
                   {confirmationOpen ?  
                   <Box mr={1}>
-                     <ConfirmationButton startIcon={<CheckIcon/>} size="small" onClick={handleSubmit}>
+                     <ConfirmationButton startIcon={<CheckIcon/>}  onClick={handleSubmit}>
                               Saving your entry, Please Confirm
                       </ConfirmationButton>
                       </Box>
                     :
                   
                   <Box>
-                     <Button onClick={()=>setConfirmationOpen(true)} color="primary" size="small" variant="contained">
+                     <Button onClick={()=>setConfirmationOpen(true)} color="secondary" disableElevation  variant="contained">
                       Save Entry
                     </Button>
                   </Box>

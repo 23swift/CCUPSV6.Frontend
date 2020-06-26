@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { faParagraph, faFileAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faParagraph, faFileAlt, faPlus, faDatabase } from '@fortawesome/free-solid-svg-icons'
 import { IconButton, Button, Box, Fab, TextField, Paper, Avatar, makeStyles, Divider, fade, InputBase } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close';
 import { Link, useHistory } from 'react-router-dom';
@@ -19,7 +19,7 @@ import manilaWaterLogo from '../../../img/manilaWater.jpeg'
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import customTheme from '../../../components/theme/customTheme';
+import customTheme, { ConfirmationButton } from '../../../components/theme/customTheme';
 import HomeIcon from '@material-ui/icons/Home';
 import PageHeader from '../../../components/PageHeader';
 import InstitutionSelection from '../../../components/InstitutionSelection';
@@ -107,7 +107,7 @@ const ApplicationDataEntry = () => {
   };
     return (
       <div>
-        <PageHeader
+        <PageHeader icon={faDatabase}
           title="Application Data Entry"
           //   icon={faFileAlt}
           tools={
@@ -126,7 +126,7 @@ const ApplicationDataEntry = () => {
               </Box>
 
               <Box ml={1} mr={1}>
-                <Button color="primary" startIcon={<AddIcon />} disableElevation variant="contained"
+                <Button color="secondary" startIcon={<AddIcon />} disableElevation variant="contained"
                   // size="small" component={Link} to="/applicationForm" 
                   onClick={handleClickOpen} size="small"
                   >
@@ -153,7 +153,7 @@ const ApplicationDataEntry = () => {
           }
         />
 
-        <Box mr={4} ml={1}>
+        <Box mr={2} ml={2}>
           <SimpleTable />
         </Box>
         <InstitutionSelection  keepMounted value={selectedValue} open={open} onClose={handleClose} 

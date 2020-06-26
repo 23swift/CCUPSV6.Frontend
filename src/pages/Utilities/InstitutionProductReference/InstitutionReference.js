@@ -83,7 +83,7 @@ const InstitutionReference = () => {
                     
             </Box>
             <Box>
-                <Button variant="contained" size="small" color="secondary" startIcon={<AddIcon/>}
+                <Button variant="contained" size="small" color="secondary" disableElevation startIcon={<AddIcon/>}
                 onClick={()=>setDialogOpen(true)}>Create Institution</Button>
 
               
@@ -91,7 +91,7 @@ const InstitutionReference = () => {
                    }/>    
             
 
-            {/* <CCUPSPaper> */}
+            <CCUPSPaper>
           
                 <div  style={{marginLeft:10, marginRight:10,marginTop:25 }}>
 
@@ -114,7 +114,7 @@ const InstitutionReference = () => {
                       
                 </div>
                 
-            {/* </CCUPSPaper> */}
+            </CCUPSPaper>
            
            {/* <InstitutionDialog open={dialogOpen} handleClose={()=>setDialogOpen(false)} setCreatedEntity={setCreatedEntity}/> */}
 

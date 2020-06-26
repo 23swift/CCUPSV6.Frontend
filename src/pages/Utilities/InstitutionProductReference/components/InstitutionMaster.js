@@ -55,7 +55,7 @@ const handleOnSubmit=(values)=>{
              {/* <fieldset style={{borderRadius:4,borderColor:blue[500],borderWidth:1}}>
                 <legend > </legend> */}
                 <Box display="flex"  >
-                    <Box style={{padding:4,minWidth:150}}  borderRadius={4} flexGrow={1}><Typography color="primary">{name}</Typography> </Box>  
+                    <Box style={{padding:4,minWidth:150}}  borderRadius={4} flexGrow={1}><Typography >{name}</Typography> </Box>  
 
                     <Box>
                     <div style={{width:'100%'}}>
@@ -81,8 +81,8 @@ const handleOnSubmit=(values)=>{
                                             </div>
                     </Box>
                 </Box>
-                                 <Box ml={1} >
-                                                        <Typography color="secondary">Code: {code}</Typography>
+                                 <Box ml={1} color="text.secondary" >
+                                                        <Typography variant="subtitle2">Code: {code}</Typography>
                                                         
                                                     </Box>
                

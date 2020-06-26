@@ -47,8 +47,8 @@ const useStyles = makeStyles((theme)=>({
     // color: '#fff',
   },
   title: {
-    background: theme.palette.info.main,
-    color: '#fff',
+    // background: theme.palette.info.main,
+    color: theme.palette.primary.main,
   }
 }));
 
@@ -121,7 +121,7 @@ let history = useHistory();
     >
       <DialogTitle id="confirmation-dialog-title" classes={{root:classes.title}} >Please Select Institution</DialogTitle>
       <DialogContent dividers>
-      <Box display="flex"     minWidth={250} flexDirection="column" flexWrap="wrap" 
+      <Box display="flex"     minWidth={400} flexDirection="column" flexWrap="wrap" 
         >
           
                 {institutions &&

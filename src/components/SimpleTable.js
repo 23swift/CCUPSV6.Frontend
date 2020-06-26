@@ -8,13 +8,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { blue } from '@material-ui/core/colors';
-import { Slide, AppBar, Toolbar, Box, Button, TablePagination, Divider } from '@material-ui/core';
+import { Slide, AppBar, Toolbar, Box, Button, TablePagination, Divider, IconButton, Checkbox } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 
 import {applicatiionList} from "../testData/ApplicationTestData";
 import ProductTableDisplay from './ProductTableDisplay';
 import { SetSelectedInstitution, SaveAppToLocalStorage } from './CCUPSHelper';
-
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 const StyledTableCell = withStyles((theme) => ({
   root: {
     width: '100%',
@@ -52,9 +52,9 @@ const useStyles = makeStyles((theme)=>({
   },
   container: {
     maxHeight: 480,
-    padding:10,
-    paddingTop:15,
-    paddingBottom:20,
+    // padding:10,
+    // paddingTop:15,
+    // paddingBottom:20,
   //  borderRadius:20
     // maxWidth:800
     
@@ -103,25 +103,37 @@ const handleClick = (event, item) => {
   return (
    
 <>
- <TableContainer component={Paper} variant="outlined"  className={classes.container} >
+ <TableContainer component={Paper} elevation={1}  className={classes.container} >
       <Table className={classes.table} aria-label="simple table" 
       stickyHeader>
         <TableHead  >
           <TableRow style={{backgroundColor:blue[500]}}>
+          <TableCell>
+            <Button color="secondary">
+              Select All
+            </Button>
+          </TableCell>
             <TableCell>Card Number</TableCell>
             <TableCell align="left">Name</TableCell>
             <TableCell align="left">Institution</TableCell>
             <TableCell align="left">Product</TableCell>
             <TableCell align="left">Reference</TableCell>
+            <TableCell align="left"></TableCell>
             {/* <TableCell align="left">Merchant</TableCell> */}
+           
           </TableRow>
         </TableHead>
         <TableBody>
           {dataRows && dataRows.map((row,index) => (
-            <TableRow key={index} hover  onClick={(event) => handleClick(event, row)}> 
+            <TableRow key={index} 
+            // hover  onClick={(event) => handleClick(event, row)}
+            > 
               {/* <TableCell component="th" scope="row">
                 {row.name}
               </TableCell> */}
+               <TableCell align="left">
+                 <Checkbox/>
+               </TableCell>
               <TableCell align="left">{row['card_number']}</TableCell>
               <TableCell align="left">{row.first_name + ' ' +row.last_name}</TableCell>
               <TableCell align="left">{row.institution.name}</TableCell>
@@ -129,7 +141,14 @@ const handleClick = (event, item) => {
                {row.product.name}
                 </TableCell>
               <TableCell align="left">{row.reference_no}</TableCell>
+              <TableCell align="left">
+                <IconButton color="primary" size="small" >
+                   <MoreHorizIcon />
+                </IconButton>
+                   
+                </TableCell>
               {/* <TableCell align="left">{row.merchant}</TableCell> */}
+              
             </TableRow>
           ))}
         </TableBody>

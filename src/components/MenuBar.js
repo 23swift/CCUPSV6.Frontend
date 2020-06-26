@@ -36,7 +36,7 @@ const MenuBar = (props) => {
     //   };
     return (
       <>
-        <Box display="flex" flexDirection="row"
+        <Box display="flex" flexDirection="row" 
         //  maxWidth={85} 
           // className={classes.appBar}
          m={1} >

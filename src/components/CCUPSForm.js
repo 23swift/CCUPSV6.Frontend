@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 110,
   },
   deleteButton:{
-    color:theme.palette.secondary.main,
+    // color:theme.palette.secondary.main,
     minWidth: 110,
   },
   buttonIcon:{
@@ -329,17 +329,17 @@ function CCUPSForm(props) {
                       </Button>
                     </Box> */}
                     {update && 
-                        <Box style={{ marginRight: 3 }} color="info.main">
+                        <Box style={{ marginRight: 3 }} color="error.main">
                             <Button
                             variant="outlined"
                             color="inherit"
                             // disableElevation
                             // size="small"
-                            startIcon={<DeleteOutlineIcon className={classes.buttonIcon}/>}
-                            // classes={{
-                            //   outlined:classes.deleteButton
+                            // startIcon={<DeleteOutlineIcon className={classes.buttonIcon}/>}
+                            classes={{
+                              outlined:classes.deleteButton
                               
-                            // }}
+                            }}
 
                             onClick={() =>
                           
@@ -365,10 +365,10 @@ function CCUPSForm(props) {
                     <Box >
                       <Button
                         variant="contained"
-                        
-                        color="primary"
+                        disableElevation
+                        color="secondary"
                         // size="small"
-                        startIcon={<SaveIcon className={classes.buttonIcon}/>}
+                        // startIcon={<SaveIcon className={classes.buttonIcon}/>}
                         onClick={() =>
                           
                           validateForm().then((err) => {

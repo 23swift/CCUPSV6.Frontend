@@ -8,7 +8,7 @@ import { blue, amber, grey } from '@material-ui/core/colors';
 
 import CCUPSForm from '../../../components/CCUPSForm';
 import { ApplicationFormValidation,formConfig, Model } from './ApplicationFormModel';
-
+import {   faDatabase} from "@fortawesome/free-solid-svg-icons";
 import * as Yup from 'yup';
 import InstitutionSelection from '../../../components/InstitutionSelection';
 import { GetSelectedInstitution, GetAppFromLocalStorage } from '../../../components/CCUPSHelper';
@@ -40,30 +40,30 @@ const ApplicationForm = () => {
         
     return (
         <div>
-            <PageHeader title="Application Data Entry" 
+            <PageHeader title="Application Data Entry" icon={faDatabase} returnUrl="/applicationDataEntry"
             subTitle="Create an entry"
-            tools={
-                <Box display="flex" flexWrap="nowrap" mt={1} pb={1}>
-             <Box mr={1}>
-                <Divider orientation="vertical" />
-              </Box>
+            // tools={
+            //     <Box display="flex" flexWrap="nowrap" mt={1} pb={1}>
+            //  <Box mr={1}>
+            //     <Divider orientation="vertical" />
+            //   </Box>
               
-              <Box >
+            //   <Box >
                
-                <Button variant="outlined" className={classes.closeBUtton}
-                  component={Link}
-                  to="/applicationDataEntry"
-                  size="small"
-                  style={{ minWidth: 30,minHeight:30,padding:2 }}
-                  color="inherit"
-                >
-                  <CloseIcon  />
-                </Button>
+            //     <Button variant="outlined" className={classes.closeBUtton}
+            //       component={Link}
+            //       to="/applicationDataEntry"
+            //       size="small"
+            //       style={{ minWidth: 30,minHeight:30,padding:2 }}
+            //       color="inherit"
+            //     >
+            //       <CloseIcon  />
+            //     </Button>
                 
-              </Box>
+            //   </Box>
              
-            </Box>
-            }
+            // </Box>
+            // }
             />
           
               <Box mr={1} ml={1} 

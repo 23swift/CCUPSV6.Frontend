@@ -10,6 +10,16 @@ import { withStyles } from '@material-ui/styles';
     //     color:"#043673"
     //   }
     // },
+    MuiTypography:{
+      h5:{
+        fontSize: "1.5rem",
+        fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+        fontWeight: 100,
+        lineHeight: 1.334,
+        letterSpacing: 0.1,
+        // transform:" scale(0.7, 1.1)"
+      }
+    },
     MuiInputBase:{
       
       underline:{
@@ -91,11 +101,11 @@ import { withStyles } from '@material-ui/styles';
         // color: "#054594",
       },
       stickyHeader:{
-        // backgroundColor: amber[400],
+        backgroundColor: "#043673",
         // backgroundColor:"#0072ce",
          // backgroundColor:"#fff",
-        // color:"#fff",
-        color:"#043673",
+        color:"#fff",
+        // color:"#043673",
         fontWeight:400,
    
     
@@ -116,8 +126,8 @@ import { withStyles } from '@material-ui/styles';
     primary: {
       // main: "#054594",
       // dark:"#f7af19",
-      main:"#043673",
-      // main:"#0067B8",
+      // main:"#043673",
+      main:"#043a7b",
       // main:blue[700],
       contrastText:"#fff"
     },
@@ -126,7 +136,7 @@ import { withStyles } from '@material-ui/styles';
       // main:"#FDB913",
       // main:amber[500],
       // main: "#efefef",
-      main:"#0067B8",
+      // main:"#0067B8",
       contrastText: "#fff",
     },
     warning:{
@@ -147,7 +157,7 @@ export const ConfirmationButton = withStyles(theme => ({
       color: blue[900],
     },
      color: theme.palette.primary.main,
-     boxShadow:" 0 2px 2px 0 rgba(255, 152, 0, 0.14), 0 3px 1px -2px rgba(255, 152, 0, 0.2), 0 1px 5px 0 rgba(255, 152, 0, 0.12)",
+    //  boxShadow:" 0 2px 2px 0 rgba(255, 152, 0, 0.14), 0 3px 1px -2px rgba(255, 152, 0, 0.2), 0 1px 5px 0 rgba(255, 152, 0, 0.12)",
     backgroundColor: amber[500],
     '&:hover': {
       backgroundColor: amber[600],

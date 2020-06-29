@@ -99,6 +99,7 @@ import { withStyles } from '@material-ui/styles';
         // backgroundColor: blue[500],
         backgroundColor:"#054594",
         // color: "#054594",
+        color:"#fff",
       },
       stickyHeader:{
         backgroundColor: "#043673",

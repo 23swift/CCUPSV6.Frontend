@@ -61,20 +61,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 const PageHeader = (props) => {
+  const{returnUrl,icon,title,subTitle}=props;
     const classes = useStyles();
     return (
       <div>
         <AppBar position="sticky" elevation={0} style={{ padding: 0 }}>
           <Toolbar className={classes.toolbar} variant="dense" >
           <Box color="warning.main">
-                    {props.returnUrl ?   <IconButton size="small" color="inherit" component={Link} to={props.returnUrl}>
+                    {returnUrl ?   <IconButton size="small" color="inherit" component={Link} to={returnUrl}>
                        <ArrowBackIosIcon fontSize="small"/>
                     </IconButton>:
 
                                 
-                        props.icon && (
+                        icon && (
                           <Avatar className={classes.MuiAvatarRoot}>
-                            <FontAwesomeIcon icon={props.icon} />
+                            <FontAwesomeIcon icon={icon} />
                           </Avatar>
                         )
                     }
@@ -84,7 +85,7 @@ const PageHeader = (props) => {
             <Box display="flex" flexGrow={1} >
               <Box className={classes.title}>
                 <Typography  variant="h5" color="inherit">
-                  {props.title}
+                  {title}
                 </Typography>
               </Box>
 

@@ -12,6 +12,7 @@ import NavBar from './NavBar';
 import MobileMenu from '../pages/MobileMenu';
 
 import InstitutionReference from '../pages/Utilities/InstitutionProductReference/InstitutionReference';
+import InstitutionEnrollment from '../pages/Transactions/Institution/InstitutionEnrollment';
 function usePageViews() {
   let location = useLocation();
   React.useEffect(() => {
@@ -46,7 +47,7 @@ const Routes = () => {
           <Route exact path="/mobileMenu" component={MobileMenu} />
           <Route exact path="/instProdRef" component={InstitutionReference} />
           
-          {/* <Route path="/institutionSelection" component={InstitutionSelection} /> */}
+          <Route path="/institutionEnrollment" component={InstitutionEnrollment} />
           
           <Route path="*" component={NotFoundPage} />
         </Switch>

@@ -109,7 +109,7 @@ const handleSelectAll=()=>{
    
 <>
  <TableContainer component={Paper} elevation={1}  className={classes.container} >
-      <Table className={classes.table} aria-label="simple table" 
+      <Table className={classes.table} aria-label="simple table" size="small"
       stickyHeader>
         <TableHead  >
           <TableRow style={{backgroundColor:blue[500]}}>
@@ -152,7 +152,7 @@ const handleSelectAll=()=>{
                 </TableCell>
               <TableCell align="left">{row.reference_no}</TableCell>
               <TableCell align="left">
-                <IconButton color="primary" size="small" >
+                <IconButton color="primary" size="small" onClick={(event)=>handleClick(event,row)}>
                    <MoreHorizIcon />
                 </IconButton>
                    

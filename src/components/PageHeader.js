@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   
     // background:theme.palette.secondary.main,
     // background: "linear-gradient(60deg, #ffa726, #fb8c00)",
-    background:amber[600],
+    background:"#FBC02D",
     marginTop: 5,
     marginBottom:5,
     

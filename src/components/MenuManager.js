@@ -5,7 +5,7 @@ export const menuList=[
         {mainMenu:"transaction",displayText:"Transactions",icon:faDatabase,
             subMenu:[{displayText:'End of day',url:''},
                     {displayText:'Application Data Entry',url:'/applicationDataEntry'},
-                    {displayText:'Application Validation',url:''},
+                    {displayText:'Application Approval',url:''},
                     {displayText:'List of Enrolled Cardholders',url:''},
                     {displayText:'List of Unenrolled Cardholders',url:''},
                     {displayText:'Batch Updating of Enrollment',url:''},

@@ -4,12 +4,14 @@ import { List, ListItem, ListItemText, Paper, Typography, FormGroup, Box, Grid, 
 import { CCUPSPaper } from '../../../components/CCUPSPaper';
 import SearchIcon from '@material-ui/icons/Search';
 import InstitutionMaster from './components/InstitutionMaster';
-import ProductDetails from './components/ProductDetails';
+
 import AddIcon from '@material-ui/icons/Add';
 
 import CCUPSFormDialog from '../../../components/CCUPSFormDialog';
 import * as Yup from 'yup';
 import { createTextBox } from '../../../components/CCUPSFormElement';
+import { faTools } from '@fortawesome/free-solid-svg-icons';
+import ProductList from './components/ProductList';
 
 const formModel={
     id:0,
@@ -68,7 +70,7 @@ const InstitutionReference = () => {
     }, [createdEntity])
     return (
         <div>
-            <PageHeader title="Institution Products" tools={
+            <PageHeader title="Institution Products"  icon={faTools} tools={
             <Box display="flex" flexDirection="row">
                 <Box flexGrow={1}></Box>
                 <Box mr={1}>
@@ -100,7 +102,7 @@ const InstitutionReference = () => {
                 {dataRows && dataRows.map((item,index)=>(
                         <Grid item xs={12} md={12} key={index}>
                                 <InstitutionMaster name={item.name} code={item.code} institution={item}>
-                                    {item.products && <ProductDetails items={item.products} />}
+                                    {item.products && <ProductList masterId={item.id} />}
                                 </InstitutionMaster>
 
                                 

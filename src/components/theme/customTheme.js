@@ -132,7 +132,7 @@ import { withStyles } from '@material-ui/styles';
       contrastText:"#fff"
     },
     secondary: {
-      main: blue[700],
+      main: "#065fd4",
       // main:"#FDB913",
       // main:amber[500],
       // main: "#efefef",
@@ -140,7 +140,7 @@ import { withStyles } from '@material-ui/styles';
       contrastText: "#fff",
     },
     warning:{
-      main:"#FDB913"
+      main:"#FBC02D"
     },
     error: {
       main: "#f44336",

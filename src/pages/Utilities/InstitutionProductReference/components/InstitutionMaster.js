@@ -16,22 +16,7 @@ const formModel={
     
 }
 
-export const formConfig=[
-  
-    createTextBox("code","Code *"),
-    createTextBox("name","Name *"),
-    // createTextBox("merchant_Id","Merchant Id"),
 
-  ]
-  export const ApplicationFormValidation = Yup.object().shape({
-    code: Yup.string()
-    .trim()
-    .required('Code Required!'),
-
-    name: Yup.string()
-    .trim()
-    .required('Name Required!'),
-  });
 
 const InstitutionMaster = (props) => {
     const {name,id,children,code,institution}=props;
@@ -41,14 +26,6 @@ const InstitutionMaster = (props) => {
     
     // formModel.institution=institution;
 
-    const handleOnClose=(value)=>{
-      setCreatedEntity(value);
-      setDialogOpen(false);
-    }
-const handleOnSubmit=(values)=>{
-    
-    return callApi('/api/products?id='+institution.id,values,'POST')
-}
 
     return (
         <div>
@@ -66,11 +43,7 @@ const handleOnSubmit=(values)=>{
                                                         Edit
                                                     </Button>
                                                 </Box>
-                                                <Box p={0} mr={1}>
-                                                    <Button color="primary" size="small" startIcon={<AddIcon />} onClick={()=>setDialogOpen(true)}>
-                                                        Add Product
-                                                    </Button>
-                                                </Box>
+                                                
                                                 
                                                     <Box p={0}>
                                                 <Button color="primary" size="small" startIcon={<DescriptionIcon />}>
@@ -83,7 +56,7 @@ const handleOnSubmit=(values)=>{
                 </Box>
                                  <Box ml={1} color="text.secondary" >
                                                         <Typography variant="subtitle2">Code: {code}</Typography>
-                                                        
+                                                       
                                                     </Box>
                
                               {children}         
@@ -91,7 +64,7 @@ const handleOnSubmit=(values)=>{
 
             {/* </fieldset> */}
             <Divider style={{marginTop:5}}/>
-            <CCUPSFormDialog open={dialogOpen} submitUrl="/api/products" validationScheme={ApplicationFormValidation} formConfig={formConfig} model={formModel} handleClose={handleOnClose} handleOnSubmit={handleOnSubmit} />
+           
         </div>
     )
 }

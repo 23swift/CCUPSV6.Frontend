@@ -59,7 +59,7 @@ const ApplicationForm = () => {
            
              {/* <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" legend={GetSelectedInstitution().name}/> */}
            
-            {formModel &&  <CCUPSForm formConfig={formConfig(Model.institution.id)} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" 
+            {formModel &&  <CCUPSForm formConfig={formConfig(Model.institution.id)} validationScheme={ApplicationFormValidation} submitUrl="/api/data/applications" 
               model={formModel} returnUrl="/applicationDataEntry"
               update={hasSelectedApp}
             />}

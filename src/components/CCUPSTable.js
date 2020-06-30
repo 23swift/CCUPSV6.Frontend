@@ -24,12 +24,15 @@ const useStyles = makeStyles({
 const CCUPSTable = (props) => {
     const{tableSchema, rows}=props;
     const classes = useStyles();
+const handleSelect=(event,id)=>{
+console.log(id);
 
+}
 
 
     return (
         <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
+        <Table className={classes.table} aria-label="simple table" >
           <TableHead>
             <TableRow>
                 {tableSchema.map((header,index)=>
@@ -41,7 +44,7 @@ const CCUPSTable = (props) => {
           </TableHead>
           <TableBody>
             {rows && rows.map((row,index) => (
-              <TableRow key={index}>
+              <TableRow key={index} hover onClick={(event) => handleSelect(event, row.id)}>
                    {tableSchema.map((item,index)=>
                         <TableCell key={index}> {row[item.fieldName]}</TableCell>
                      )}

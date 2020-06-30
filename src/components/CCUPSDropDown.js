@@ -40,7 +40,9 @@ useEffect(() => {
 
 
   const handleLocalChange = (event) => {
-    event.target.value=data[event.target.value-1];
+    // console.log(data.filter(prod => prod.id === event.target.value)[0]);
+    
+    event.target.value=data.filter(prod => prod.id === event.target.value)[0];
     handleChange(event)
     setDropDownVal(event.target.value);
 

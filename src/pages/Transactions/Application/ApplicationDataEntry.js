@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { faParagraph, faFileAlt, faPlus, faDatabase } from '@fortawesome/free-solid-svg-icons'
 import { IconButton, Button, Box, Fab, TextField, Paper, Avatar, makeStyles, Divider, fade, InputBase } from '@material-ui/core'
@@ -23,7 +23,21 @@ import customTheme, { ConfirmationButton } from '../../../components/theme/custo
 import HomeIcon from '@material-ui/icons/Home';
 import PageHeader from '../../../components/PageHeader';
 import InstitutionSelection from '../../../components/InstitutionSelection';
+import CCUPSTable from '../../../components/CCUPSTable';
 
+
+
+// <TableCell>Card Number</TableCell>
+// <TableCell align="left">Name</TableCell>
+// <TableCell align="left">Institution</TableCell>
+// <TableCell align="left">Product</TableCell>
+// <TableCell align="left">Reference</TableCell>
+const   tableSchema=[{displayText:'Card Number',fieldName:'card_number'},
+{displayText:'Name',fieldName:'first_name'},
+{displayText:'Institution',fieldName:'institution'},
+{displayText:'Product',fieldName:'product'},
+{displayText:'Reference',fieldName:'reference_no'}
+]
 const useStyles = makeStyles((theme) => ({
 
   MuiAvatarRoot: {
@@ -85,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
 const ApplicationDataEntry = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [rows, setRows] = useState([]);
   let history = useHistory();
    
   const [selectedValue, setSelectedValue] = React.useState({});
@@ -105,6 +120,28 @@ const ApplicationDataEntry = () => {
     
     
   };
+
+  useEffect(() => {
+    fetch("/api/data/applications?projection=applicationWithInstitution")
+      .then(res => res.json())
+      .then(
+        (result) => {
+         
+          // console.log(result._embedded.applications);
+          setRows(result.content);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          // setIsLoaded(true);
+          // setError(error);
+          console.log(error);
+          
+        }
+      )
+  }, [])
+
     return (
       <div>
         <PageHeader icon={faDatabase}
@@ -154,7 +191,8 @@ const ApplicationDataEntry = () => {
         />
 
         <Box mr={2} ml={2}>
-          <SimpleTable />
+          {/* <SimpleTable /> */}
+          <CCUPSTable tableSchema={tableSchema} rows={rows} />
         </Box>
         <InstitutionSelection  keepMounted value={selectedValue} open={open} onClose={handleClose} 
         

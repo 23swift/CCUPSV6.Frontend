@@ -56,8 +56,8 @@ const useStyles = makeStyles(theme => ({
      // background: "-moz-linear-gradient(left, #1e5799 0%, #2989d8 50%, #7db9e8 100%)", /* FF3.6-15 */
         // background: "-webkit-linear-gradient(left, #1e5799 0%,#2989d8 50%,#7db9e8 100%)" ,/* Chrome10-25,Safari5.1-6 */
         // background: "linear-gradient(135deg, rgba(246,230,180,1) 0%,rgba(237,144,23,1) 100%)", /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */  
-    boxShadow:
-      "0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
+    // boxShadow:
+    //   "0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
   },
 }));
 const PageHeader = (props) => {
@@ -84,7 +84,7 @@ const PageHeader = (props) => {
                   </Box>
             <Box display="flex" flexGrow={1} >
               <Box className={classes.title}>
-                <Typography  variant="h5" color="inherit">
+                <Typography  variant="h6" color="inherit">
                   {title}
                 </Typography>
               </Box>

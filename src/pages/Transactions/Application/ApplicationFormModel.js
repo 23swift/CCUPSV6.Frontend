@@ -55,7 +55,10 @@ export const ApplicationFormValidation = Yup.object().shape({
   //   .required('Required'),
 });
 
-export const formConfig=[
+export const formConfig=(institutionId)=>{
+  
+  
+  return [
   
   // createField("card_number","Card Number *",FormElementType.text)
   createTextBox("card_number","Card Number *")
@@ -64,12 +67,13 @@ export const formConfig=[
   ,createTextBox("first_name","First Name *")
   ,createTextBox("last_name","Last Name *")
   ,createTextBox("middle_name","Middle Name *")
-  ,createDropDown("product", "Product","/api/dd/products",null)
+  ,createDropDown("product", "Product","/api/dd/findProductByIstitutionId?Id="+institutionId,null)
   ,createCheckBox("merchant", "Merchant")
   ,createHidden("institution","Institution *")
   // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
 //   
 ]
+}
 
 export const Model={
   card_number:""

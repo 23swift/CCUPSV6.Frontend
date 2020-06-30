@@ -45,7 +45,7 @@ const ProductList = (props) => {
   const handleOnSubmit=(values)=>{
       
       return callApi('/api/products?id='+masterId,values,'POST').then(data=>{
-          console.log(data);
+     
           setCreatedEntity(data);
           
       });
@@ -86,7 +86,7 @@ const ProductList = (props) => {
                                                 <ListItemIcon style={{marginRight:0}}>
                                                     <AdjustIcon fontSize="small" color="secondary"/>
                                                 </ListItemIcon>
-                                                <ListItemText style={{marginLeft:0}} primary={item.name}/>
+                                                <ListItemText style={{marginLeft:0,fontSize:13}} primary={item.name}/>
                                             </ListItem>
                                            
                                           </Grid>

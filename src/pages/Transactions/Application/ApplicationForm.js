@@ -41,51 +41,34 @@ const ApplicationForm = () => {
     return (
         <div>
             <PageHeader title="Application Data Entry" icon={faDatabase} returnUrl="/applicationDataEntry"
-            subTitle="Create an entry"
-            // tools={
-            //     <Box display="flex" flexWrap="nowrap" mt={1} pb={1}>
-            //  <Box mr={1}>
-            //     <Divider orientation="vertical" />
-            //   </Box>
-              
-            //   <Box >
-               
-            //     <Button variant="outlined" className={classes.closeBUtton}
-            //       component={Link}
-            //       to="/applicationDataEntry"
-            //       size="small"
-            //       style={{ minWidth: 30,minHeight:30,padding:2 }}
-            //       color="inherit"
-            //     >
-            //       <CloseIcon  />
-            //     </Button>
-                
-            //   </Box>
-             
-            // </Box>
-            // }
-            />
-          
-              <Box mr={1} ml={1} 
+            subTitle="Create an entry"/>
+
+{/* <Grid container spacing={3}>
+        <Grid item xs={12} md={6} sm={12}> */}
+          <Box mr={1} ml={1} 
               component={Paper}
                p={2}
                 pt={1} 
-              //  elevation={2}
-               variant="outlined"
+               elevation={1}
+              //  variant="outlined"
                
                  >
              
-                      <Typography variant="h6" color="primary"  style={{marginBottom:5,marginTop:5}} >{GetSelectedInstitution().name}</Typography>             
+                      <Typography variant="body1" color="primary"  style={{marginBottom:5,marginTop:5}} >{GetSelectedInstitution().name}</Typography>             
              <Divider style={{marginBottom:20}}/>
            
              {/* <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" legend={GetSelectedInstitution().name}/> */}
            
-            {formModel &&  <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" 
+            {formModel &&  <CCUPSForm formConfig={formConfig(Model.institution.id)} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" 
               model={formModel} returnUrl="/applicationDataEntry"
               update={hasSelectedApp}
             />}
              
               </Box>
+        {/* </Grid>
+        </Grid> */}
+          
+            
 
                
         </div>

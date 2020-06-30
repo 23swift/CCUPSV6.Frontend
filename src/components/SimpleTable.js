@@ -10,7 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import { blue } from '@material-ui/core/colors';
 import { Slide, AppBar, Toolbar, Box, Button, TablePagination, Divider, IconButton, Checkbox, FormControlLabel } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
-
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import {applicatiionList} from "../testData/ApplicationTestData";
 import ProductTableDisplay from './ProductTableDisplay';
 import { SetSelectedInstitution, SaveAppToLocalStorage } from './CCUPSHelper';
@@ -72,6 +73,7 @@ export default function SimpleTable() {
   const [selectAll, setSelectAll] = useState(false)
   let history = useHistory();
 const [dataRows, setDataRows] = useState(null);
+const [selected, setSelected] = React.useState([]);
 const handleClick = (event, item) => {
  
   SaveAppToLocalStorage(item);
@@ -83,7 +85,45 @@ const handleClick = (event, item) => {
 const handleSelectAll=()=>{
   setSelectAll(!selectAll);
 }
+const handleSelectAllClick = (event) => {
+  setSelectAll(!selectAll);
+  if (!selectAll) {
+    const newSelecteds = dataRows.map((n) => n.id);
+    setSelected(newSelecteds);
+    return;
+  }
+  setSelected([]);
+};
+const handleCheck = (event, id) => {
+  const selectedIndex = selected.indexOf(id);
+  let newSelected = [];
+// setSelectAll(true);
 
+
+
+
+
+  if (selectedIndex === -1) {
+    
+    newSelected = newSelected.concat(selected, id);
+  } else if (selectedIndex === 0) {
+    newSelected = newSelected.concat(selected.slice(1));
+  } else if (selectedIndex === selected.length - 1) {
+    
+    newSelected = newSelected.concat(selected.slice(0, -1));
+  } else if (selectedIndex > 0) {
+    newSelected = newSelected.concat(
+      selected.slice(0, selectedIndex),
+      selected.slice(selectedIndex + 1),
+    );
+  }
+  console.log(selected.length);
+console.log(dataRows.length);
+  if(dataRows.length === selected.length){setSelectAll(true) }else{setSelectAll(false)}
+  setSelected(newSelected);
+  
+};
+const isSelected = (id) => selected.indexOf(id) !== -1;
   useEffect(() => {
     fetch("/api/applications")
       .then(res => res.json())
@@ -114,14 +154,20 @@ const handleSelectAll=()=>{
         <TableHead  >
           <TableRow style={{backgroundColor:blue[500]}}>
           <TableCell>
-          <FormControlLabel
+          {/* <FormControlLabel  classes={{
+            label:{fontSize:10}
+          }}
               control={<Checkbox  
                 color="secondary"
                 checked={selectAll} 
-                onChange={handleSelectAll} 
+                onChange={  } 
                 name="selectAll" />}
               label="Select All"
-            />
+            /> */}
+
+            <IconButton color="inherit" onClick={handleSelectAllClick}>
+                {selectAll ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon/>}
+            </IconButton>
           </TableCell>
             <TableCell>Card Number</TableCell>
             <TableCell align="left">Name</TableCell>
@@ -134,15 +180,19 @@ const handleSelectAll=()=>{
           </TableRow>
         </TableHead>
         <TableBody>
-          {dataRows && dataRows.map((row,index) => (
+          {dataRows && dataRows.map((row,index) => 
+          
+          {  const isItemSelected = isSelected(row.id);
+            return (
+             
             <TableRow key={index} 
-            // hover  onClick={(event) => handleClick(event, row)}
+            hover  onClick={(event) => handleCheck(event, row.id)}
             > 
               {/* <TableCell component="th" scope="row">
                 {row.name}
               </TableCell> */}
                <TableCell align="left">
-                 <Checkbox checked={selectAll}/>
+                 <Checkbox checked={isItemSelected}/>
                </TableCell>
               <TableCell align="left">{row['card_number']}</TableCell>
               <TableCell align="left">{row.first_name + ' ' +row.last_name}</TableCell>
@@ -160,7 +210,8 @@ const handleSelectAll=()=>{
               {/* <TableCell align="left">{row.merchant}</TableCell> */}
               
             </TableRow>
-          ))}
+          )}
+          )}
         </TableBody>
       </Table>
      

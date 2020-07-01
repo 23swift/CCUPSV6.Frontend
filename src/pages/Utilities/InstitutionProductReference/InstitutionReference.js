@@ -12,6 +12,7 @@ import * as Yup from 'yup';
 import { createTextBox } from '../../../components/CCUPSFormElement';
 import { faTools } from '@fortawesome/free-solid-svg-icons';
 import ProductList from './components/ProductList';
+import { getSelfLink } from '../../../components/CCUPSHelper';
 
 const formModel={
     id:0,
@@ -48,13 +49,13 @@ const InstitutionReference = () => {
     }
 
     useEffect(() => {
-        fetch("/api/institutions")
+        fetch("/api/data/institutions?projection=withProducts")
       .then(res => res.json())
       .then(
         (result) => {
          
           // console.log(result._embedded.applications);
-          setDataRows(result);
+          setDataRows(result.content);
         },
        
         (error) => {
@@ -102,7 +103,7 @@ const InstitutionReference = () => {
                 {dataRows && dataRows.map((item,index)=>(
                         <Grid item xs={12} md={12} key={index}>
                                 <InstitutionMaster name={item.name} code={item.code} institution={item}>
-                                    {item.products && <ProductList masterId={item.id} />}
+                                    <ProductList master={item} />
                                 </InstitutionMaster>
 
                                 

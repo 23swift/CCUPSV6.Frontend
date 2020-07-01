@@ -63,8 +63,8 @@ const { onClose,
 
 let history = useHistory();
     useEffect(() => {
-      fetch('api/institutions').then(respose=>respose.json())
-      .then(data=>{  setInstitutions(data);   });
+      fetch('api/data/institutions?projection=withLinks').then(respose=>respose.json())
+      .then(data=>{  setInstitutions(data.content);   });
 
       return () => {
         // cleanup

@@ -33,7 +33,7 @@ import CCUPSTable from '../../../components/CCUPSTable';
 // <TableCell align="left">Product</TableCell>
 // <TableCell align="left">Reference</TableCell>
 const   tableSchema=[{displayText:'Card Number',fieldName:'card_number'},
-{displayText:'Name',fieldName:'first_name'},
+{displayText:'Name',fieldName:'name'},
 {displayText:'Institution',fieldName:'institution'},
 {displayText:'Product',fieldName:'product'},
 {displayText:'Reference',fieldName:'reference_no'}

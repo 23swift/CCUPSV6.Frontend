@@ -4,6 +4,7 @@ import { useSnackbar } from 'notistack';
 import InfoIcon from '@material-ui/icons/Info';
 import { MenuItem, FormControl, InputLabel, InputAdornment, IconButton,Select, TextField } from '@material-ui/core';
 import {  Field, ErrorMessage, useFormik } from 'formik';
+import { getSelfLink } from './CCUPSHelper';
 
 
 
@@ -18,7 +19,7 @@ const getMenuItems= async (url)=>{
   const response = await fetch(url);
   const json = await response.json();
 
-   setData(json);
+   setData(json.content);
    setDropDownVal(value);
    
 }
@@ -41,10 +42,14 @@ useEffect(() => {
 
   const handleLocalChange = (event) => {
     // console.log(data.filter(prod => prod.id === event.target.value)[0]);
+    // const selectedItem=data.filter(prod => prod.id === event.target.value)[0];
+    // event.target.value=selectedItem.links.find(getSelfLink).href;
+    // event.target.value=data.filter(prod => prod.id === event.target.value)[0];
+    console.log(event.target.value);
     
-    event.target.value=data.filter(prod => prod.id === event.target.value)[0];
+    // getSelfLink
     handleChange(event)
-    setDropDownVal(event.target.value);
+    // setDropDownVal(event.target.value);
 
       
   };
@@ -64,7 +69,7 @@ useEffect(() => {
         //  component={Select}
         labelId={fieldName}
          name={fieldName}
-        value={value.id}
+        value={value}
          label={label}
          onChange={handleLocalChange} 
          onBlur={handleBlur} 
@@ -74,7 +79,7 @@ useEffect(() => {
           </MenuItem>
           
           {data && data.map((item,index)=>(
-                <MenuItem  value={item.id} key={index}>{item.name}</MenuItem>
+              item.links &&  <MenuItem  value={item.links.find(getSelfLink).href} key={index}>{item.name}</MenuItem>
 
           ))}
           

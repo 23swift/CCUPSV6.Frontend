@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import * as Yup from 'yup';
 import { createTextBox, createCheckBox, createDropDown, createDropDownNumber, createHidden } from '../../../components/CCUPSFormElement'
 import { createField, FormElementType,createFormElement } from '../../../components/CCUPSFormHelper';
-import { GetObjectFromLocalStorage, GetAppFromLocalStorage, GetSelectedInstitution } from '../../../components/CCUPSHelper';
+import { GetObjectFromLocalStorage, GetAppFromLocalStorage, GetSelectedInstitution, getSelfLink } from '../../../components/CCUPSHelper';
 
 
 //Validaton
@@ -33,12 +33,12 @@ export const ApplicationFormValidation = Yup.object().shape({
   reference_no:Yup.string()
     .max(50, 'Reference Number Too Long!')
     .required('Reference Number Required'),
+    product:Yup.string().required("Product Required")
 
+    // product:Yup.object({
 
-    product:Yup.object({
-
-      id: Yup.number().default(0).min(1,'Product Required'),
-    })
+    //   id: Yup.number().default(0).min(1,'Product Required'),
+    // })
     // product:Yup.lazy(value => {
     //   switch (typeof value) {
     //     case 'object':
@@ -55,8 +55,9 @@ export const ApplicationFormValidation = Yup.object().shape({
   //   .required('Required'),
 });
 
-export const formConfig=(institutionId)=>{
+export const formConfig=(institution)=>{
   
+  // institution.links.find(getSelfLink)
   
   return [
   
@@ -67,9 +68,9 @@ export const formConfig=(institutionId)=>{
   ,createTextBox("first_name","First Name *")
   ,createTextBox("last_name","Last Name *")
   ,createTextBox("middle_name","Middle Name *")
-  ,createDropDown("product", "Product","/api/dd/findProductByIstitutionId?Id="+institutionId,null)
+  ,createDropDown("product", "Product","/api/data/products/search/findByInstitutionId?id="+institution.id,null)
   ,createCheckBox("merchant", "Merchant")
-  ,createHidden("institution","Institution *")
+  ,createHidden("institution","Institution *",)
   // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
 //   
 ]
@@ -82,9 +83,10 @@ export const Model={
   ,first_name:""
   ,last_name:""
   ,middle_name:""
-  ,product:{id:0}
+  // ,product:{id:0}
+  ,product:""
   ,merchant:false
-  ,institution:{}
+  ,institution:""
   ,id:0
 }
 

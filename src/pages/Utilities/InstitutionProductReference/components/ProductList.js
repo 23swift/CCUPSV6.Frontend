@@ -7,11 +7,13 @@ import { createTextBox } from '../../../../components/CCUPSFormElement';
 import * as Yup from 'yup';
 import { callApi } from '../../../../components/CCUPSApiService';
 import CCUPSFormDialog from '../../../../components/CCUPSFormDialog';
+import { getSelfLink } from '../../../../components/CCUPSHelper';
 
 const formModel={
     // id:0,
     code:'',
-    name:''
+    name:'',
+    institution:''
     
 }
 export const formConfig=[
@@ -32,11 +34,12 @@ export const formConfig=[
   });
   
 const ProductList = (props) => {
-    const{masterId}=props;
+    const{master}=props;
     const [dataRows, setDataRows] = useState();
     const [createdEntity, setCreatedEntity] = useState();
     const [dialogOpen, setDialogOpen] = useState(false);
    
+    formModel.institution=master.links.find(getSelfLink).href;
 
     const handleOnClose=(value)=>{
         setCreatedEntity(value);
@@ -44,20 +47,21 @@ const ProductList = (props) => {
       }
   const handleOnSubmit=(values)=>{
       
-      return callApi('/api/products?id='+masterId,values,'POST').then(data=>{
+      return callApi('/api/data/products',values,'POST').then(data=>{
      
           setCreatedEntity(data);
           
       });
   }
     useEffect(() => {
-        fetch("/api/productsByInstitutionId?Id="+ masterId)
+        fetch("/api/data/products/search/findByInstitutionId?id="+ master.id)
       .then(res => res.json())
       .then(
         (result) => {
          
           // console.log(result._embedded.applications);
-          setDataRows(result);
+          
+          setDataRows(result.content);
         },
        
         (error) => {
@@ -99,7 +103,7 @@ const ProductList = (props) => {
                                             
                                             
                                         </List>
-                                        <CCUPSFormDialog open={dialogOpen} submitUrl="/api/products" validationScheme={ApplicationFormValidation} formConfig={formConfig} model={formModel} handleClose={handleOnClose} handleOnSubmit={handleOnSubmit} />
+                                        <CCUPSFormDialog open={dialogOpen} submitUrl="/api/data/products" validationScheme={ApplicationFormValidation} formConfig={formConfig} model={formModel} handleClose={handleOnClose} handleOnSubmit={handleOnSubmit} />
                 
         </div>
     )

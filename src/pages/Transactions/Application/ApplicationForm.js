@@ -11,7 +11,7 @@ import { ApplicationFormValidation,formConfig, Model } from './ApplicationFormMo
 import {   faDatabase} from "@fortawesome/free-solid-svg-icons";
 import * as Yup from 'yup';
 import InstitutionSelection from '../../../components/InstitutionSelection';
-import { GetSelectedInstitution, GetAppFromLocalStorage } from '../../../components/CCUPSHelper';
+import { GetSelectedInstitution, GetAppFromLocalStorage, getSelfLink } from '../../../components/CCUPSHelper';
 const useStyles = makeStyles((theme)=>({
   
       closeBUtton:{
@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme)=>({
 const ApplicationForm = () => {
     const classes = useStyles();
     const selectedApp=GetAppFromLocalStorage('selectedApp');
-    Model.institution=GetSelectedInstitution();
+    const selectedInstitution=GetSelectedInstitution();
+    Model.institution=selectedInstitution.links.find(getSelfLink).href;
    
     
     const [formModel, setFormModel] = useState(selectedApp?selectedApp:Model);
@@ -59,7 +60,7 @@ const ApplicationForm = () => {
            
              {/* <CCUPSForm formConfig={formConfig} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" legend={GetSelectedInstitution().name}/> */}
            
-            {formModel &&  <CCUPSForm formConfig={formConfig(Model.institution.id)} validationScheme={ApplicationFormValidation} submitUrl="/api/applications" 
+            {formModel &&  <CCUPSForm formConfig={formConfig(selectedInstitution)} validationScheme={ApplicationFormValidation} submitUrl="/api/data/applications" 
               model={formModel} returnUrl="/applicationDataEntry"
               update={hasSelectedApp}
             />}

@@ -26,3 +26,9 @@ export const GetAppFromLocalStorage=(app)=>{
 
     return(JSON.parse(localStorage.getItem('selectedApp')))
 }
+
+
+export const getSelfLink=(entity)=>{
+
+    return entity.rel==="self"
+}

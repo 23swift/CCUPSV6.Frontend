@@ -15,7 +15,8 @@ const formModel={
     id:0,
     code:'',
     name:'',
-    merchant_Id:''
+    merchant_Id:'',
+    institution:''
 }
 
 export const formConfig=[

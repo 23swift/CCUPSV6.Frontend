@@ -133,9 +133,9 @@ import { withStyles } from '@material-ui/styles';
       contrastText:"#fff"
     },
     secondary: {
-      main: "#065fd4",
+      // main: "#065fd4",
       // main:"#FDB913",
-      // main:"#0095ff",
+      main:"#0095ff",
       // main: "#efefef",
       // main:"#0067B8",
       contrastText: "#fff",

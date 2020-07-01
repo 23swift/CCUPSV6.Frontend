@@ -25,13 +25,6 @@ import PageHeader from '../../../components/PageHeader';
 import InstitutionSelection from '../../../components/InstitutionSelection';
 import CCUPSTable from '../../../components/CCUPSTable';
 
-
-
-// <TableCell>Card Number</TableCell>
-// <TableCell align="left">Name</TableCell>
-// <TableCell align="left">Institution</TableCell>
-// <TableCell align="left">Product</TableCell>
-// <TableCell align="left">Reference</TableCell>
 const   tableSchema=[{displayText:'Card Number',fieldName:'card_number'},
 {displayText:'Name',fieldName:'name'},
 {displayText:'Institution',fieldName:'institution'},

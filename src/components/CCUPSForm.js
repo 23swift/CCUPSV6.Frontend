@@ -39,14 +39,15 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    top: "auto",
+    // top: "auto",
     bottom: 0,
     // color: blue[500],
-    minHeight: 60,
+    minHeight: 20,
     // zIndex: theme.zIndex.drawer + 1,
     //  background:theme.palette.background.paper
     // background: "#f2f2f2",
-    background:"#fff"
+    background:"inherit",
+    padding:0
   },
   actionButton: {
     minWidth: 110,
@@ -291,108 +292,102 @@ function CCUPSForm(props) {
            
           
 
-              <Slide
+              {/* <Slide
                 direction="up"
                 in={true}
                 mountOnEnter
                 unmountOnExit
                 timeout={700}
               >
-                <AppBar
-                  position="fixed"
+               
+              </Slide> */}
+               {/* <AppBar
+                  position="sticky"
                   className={classes.appBar}
                   elevation={0}
                 >
-                  <Divider />
+                
+                </AppBar> */}
 
-                  <Box display="flex" padding={1}>
-                    <Box flexGrow={1}></Box>
-                    {errors && hasError(errors) &&
-                      <Box mr={2}>
-                        <IconButton  size="small" onClick={()=>showErrorMessage(errors)}>
-                          <Badge badgeContent={Object.values(errors).length}  color="error">
-                            <NotificationsIcon />
-                          </Badge>
-                        </IconButton>
-                      </Box>
-                    }
-                    
+<Divider />
 
-                    {/* <Box style={{ marginRight: 3 }}>
-                      <Button
-                        variant="outlined"
-                        color="primary"
-                        size="small"
-                        className={classes.actionButton}
-                      >
-                        Cancel
-                      </Button>
-                    </Box> */}
-                    {update && 
-                        <Box style={{ marginRight: 3 }} color="error.main">
-                            <Button
-                            variant="outlined"
-                            color="inherit"
-                            // disableElevation
-                            // size="small"
-                            // startIcon={<DeleteOutlineIcon className={classes.buttonIcon}/>}
-                            classes={{
-                              outlined:classes.deleteButton
-                              
-                            }}
+<Box display="flex" padding={1}>
+  <Box flexGrow={1}></Box>
+  {errors && hasError(errors) &&
+    <Box mr={1}>
+      <IconButton  size="small" onClick={()=>showErrorMessage(errors)}>
+        <Badge badgeContent={Object.values(errors).length}  color="error">
+          <NotificationsIcon />
+        </Badge>
+      </IconButton>
+    </Box>
+  }
+  
 
-                            onClick={() =>
-                          
-                              validateForm().then((err) => {
-                                if (isEmpty(err)) {
-                                  setApiAction('DELETE');
-                                  setConfirmationOpen(true);
-                                  setErrorAlarmOPen(false);
-                                } else {
-                                  errors = err;
-                                  setErrorAlarmOPen(true);
-                                  setTouched(touchedAll(errors, touched));
-                                }
-                                errors = {};
-                              })
-                            }
-                            disabled={isSubmitting || hasError(errors)}
-                          >
-                            Delete
-                          </Button>
-                        </Box>
-                    }
-                    <Box >
-                      <Button
-                        variant="contained"
-                        disableElevation
-                        color="secondary"
-                        // size="small"
-                        // startIcon={<SaveIcon className={classes.buttonIcon}/>}
-                        onClick={() =>
-                          
-                          validateForm().then((err) => {
-                            if (isEmpty(err)) {
-                             
-                              setConfirmationOpen(true);
-                              setErrorAlarmOPen(false);
-                            } else {
-                              errors = err;
-                              setErrorAlarmOPen(true);
-                              setTouched(touchedAll(errors, touched));
-                            }
-                            errors = {};
-                          })
-                        }
-                        disabled={isSubmitting || hasError(errors)}
-                        className={classes.actionButton}
-                      >
-                         Save
-                      </Button>
-                    </Box>
-                  </Box>
-                </AppBar>
-              </Slide>
+
+  {update && 
+      <Box  color="error.main">
+          <Button
+          variant="outlined"
+          color="inherit"
+          // disableElevation
+          // size="small"
+          // startIcon={<DeleteOutlineIcon className={classes.buttonIcon}/>}
+          classes={{
+            outlined:classes.deleteButton
+            
+          }}
+
+          onClick={() =>
+        
+            validateForm().then((err) => {
+              if (isEmpty(err)) {
+                setApiAction('DELETE');
+                setConfirmationOpen(true);
+                setErrorAlarmOPen(false);
+              } else {
+                errors = err;
+                setErrorAlarmOPen(true);
+                setTouched(touchedAll(errors, touched));
+              }
+              errors = {};
+            })
+          }
+          disabled={isSubmitting || hasError(errors)}
+        >
+          Delete
+        </Button>
+      </Box>
+  }
+  <Box >
+    <Button
+      variant="contained"
+      disableElevation
+      color="secondary"
+      // size="small"
+      // startIcon={<SaveIcon className={classes.buttonIcon}/>}
+      onClick={() =>
+        
+        validateForm().then((err) => {
+          if (isEmpty(err)) {
+           
+            setConfirmationOpen(true);
+            setErrorAlarmOPen(false);
+          } else {
+            errors = err;
+            setErrorAlarmOPen(true);
+            setTouched(touchedAll(errors, touched));
+          }
+          errors = {};
+        })
+      }
+      disabled={isSubmitting || hasError(errors)}
+      className={classes.actionButton}
+    >
+       Save
+    </Button>
+  </Box>
+</Box>
               <CCUPSConfirmationDialog
                 open={confirmationOpen}
                 handleClose={handleConfirmationClose}

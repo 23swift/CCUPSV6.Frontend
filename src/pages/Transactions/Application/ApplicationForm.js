@@ -48,8 +48,10 @@ const ApplicationForm = () => {
         <Grid item xs={12} md={6} sm={12}> */}
           <Box mr={1} ml={1} 
               component={Paper}
-               p={2}
-                pt={1} 
+               pb={1}
+                pt={2}
+                pr={2}
+                pl={2} 
                elevation={1}
               //  variant="outlined"
                

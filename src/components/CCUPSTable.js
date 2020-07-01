@@ -8,25 +8,25 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
+import { SaveAppToLocalStorage, SetSelectedInstitution } from './CCUPSHelper';
 const useStyles = makeStyles({
     table: {
       minWidth: 650,
     },
   });
 
-  
-//   const   tableSchema=[{displayText:'Dessert (100g serving)',fieldName:'name'},{displayText:'Calories',fieldName:'calories'},
-//                     ,{displayText:'Fat',fieldName:'fat'},{displayText:'Carbs',fieldName:'carbs'},{displayText:'Protein',fieldName:'protein'}];
-//   const   tableContent=[];
-  
-
-  
+ 
 const CCUPSTable = (props) => {
+  let history = useHistory();
     const{tableSchema, rows}=props;
     const classes = useStyles();
-const handleSelect=(event,id)=>{
-console.log(id);
-
+const handleSelect=(event,item)=>{
+ 
+console.log(item);
+SaveAppToLocalStorage(item);
+SetSelectedInstitution(item.institution);
+history.push('/applicationForm');
 }
 
 
@@ -44,7 +44,7 @@ console.log(id);
           </TableHead>
           <TableBody>
             {rows && rows.map((row,index) => (
-              <TableRow key={index} hover onClick={(event) => handleSelect(event, row.id)}>
+              <TableRow key={index} hover onClick={(event) => handleSelect(event, row)}>
                    {tableSchema.map((item,index)=>
                         <TableCell key={index}> {row[item.fieldName]}</TableCell>
                      )}

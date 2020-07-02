@@ -24,10 +24,11 @@ import HomeIcon from '@material-ui/icons/Home';
 import PageHeader from '../../../components/PageHeader';
 import InstitutionSelection from '../../../components/InstitutionSelection';
 import CCUPSTable from '../../../components/CCUPSTable';
+import { getResource, SetSelectedInstitution } from '../../../components/CCUPSHelper';
 
 const   tableSchema=[{displayText:'Card Number',fieldName:'card_number'},
 {displayText:'Name',fieldName:'name'},
-{displayText:'Institution',fieldName:'institution'},
+{displayText:'Institution',fieldName:'institutionName'},
 {displayText:'Product',fieldName:'product'},
 {displayText:'Reference',fieldName:'reference_no'}
 ]
@@ -90,6 +91,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 const ApplicationDataEntry = () => {
+  
+  
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [rows, setRows] = useState([]);
@@ -106,8 +109,8 @@ const ApplicationDataEntry = () => {
     setOpen(false);
     if(value){
       setSelectedValue(value);
-    localStorage.clear();
-    localStorage.setItem('selectedInst', JSON.stringify(value));
+      SetSelectedInstitution(value);
+    // localStorage.setItem('selectedInst', JSON.stringify(value));
     history.push('/applicationForm');
     }
     
@@ -115,7 +118,8 @@ const ApplicationDataEntry = () => {
   };
 
   useEffect(() => {
-    fetch("/api/data/applications?projection=applicationWithInstitution")
+    // fetch('/api/data/profile');
+    fetch(getResource('applications')+"?projection=applicationWithInstitution")
       .then(res => res.json())
       .then(
         (result) => {
@@ -129,7 +133,7 @@ const ApplicationDataEntry = () => {
         (error) => {
           // setIsLoaded(true);
           // setError(error);
-          console.log(error);
+          console.log(JSON.stringify( error));
           
         }
       )
@@ -185,7 +189,7 @@ const ApplicationDataEntry = () => {
 
         <Box mr={2} ml={2}>
           {/* <SimpleTable /> */}
-          <CCUPSTable tableSchema={tableSchema} rows={rows} />
+          <CCUPSTable tableSchema={tableSchema} rows={rows} detailsUrl="/applicationForm" />
         </Box>
         <InstitutionSelection  keepMounted value={selectedValue} open={open} onClose={handleClose} 
         

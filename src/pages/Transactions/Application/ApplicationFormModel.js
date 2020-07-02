@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import * as Yup from 'yup';
 import { createTextBox, createCheckBox, createDropDown, createDropDownNumber, createHidden } from '../../../components/CCUPSFormElement'
 import { createField, FormElementType,createFormElement } from '../../../components/CCUPSFormHelper';
-import { GetObjectFromLocalStorage, GetAppFromLocalStorage, GetSelectedInstitution, getSelfLink } from '../../../components/CCUPSHelper';
+import { GetObjectFromLocalStorage, GetAppFromLocalStorage, GetSelectedInstitution, getSelfLink, getResource } from '../../../components/CCUPSHelper';
 
 
 //Validaton
@@ -68,7 +68,7 @@ export const formConfig=(institution)=>{
   ,createTextBox("first_name","First Name *")
   ,createTextBox("last_name","Last Name *")
   ,createTextBox("middle_name","Middle Name *")
-  ,createDropDown("product", "Product","/api/data/products/search/findByInstitutionId?id="+institution.id,null)
+  ,createDropDown("product", "Product",getResource('products')+"/search/findByInstitutionId?id="+institution.id,null)
   ,createCheckBox("merchant", "Merchant")
   ,createHidden("institution","Institution *",)
   // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])

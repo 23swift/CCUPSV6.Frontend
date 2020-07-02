@@ -13,7 +13,7 @@ export const GetObjectFromLocalStorage=(key)=>{
 
     return(JSON.parse(localStorage.getItem(key)))
 }
-export const SaveObjectFromLocalStorage=(key,object)=>{
+export const SaveObjectToLocalStorage=(key,object)=>{
     localStorage.removeItem(key);
     return(localStorage.setItem(key,JSON.stringify(object)))
 }
@@ -31,4 +31,14 @@ export const GetAppFromLocalStorage=(app)=>{
 export const getSelfLink=(entity)=>{
 
     return entity.rel==="self"
+}
+
+export const getResource=(resourceName)=>{
+
+    const profile= GetObjectFromLocalStorage('rest_profile');
+    
+    
+    return profile.links.find(entity=>{
+        return entity.rel===resourceName
+    }).href.replace('{?projection}','').replace('{?page,size,sort,projection}','');
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, BrowserRouter as Router, useLocation } from "react-router-dom";
 import NavBar from '../components/NavBar';
 import { makeStyles, Drawer, Toolbar, List, Divider } from '@material-ui/core';
@@ -32,7 +32,19 @@ const useStyles = makeStyles(theme => ({
 const drawerWidth = 240;
 const Layout = (props) => {
     const classes = useStyles();
-   
+    // console.log(process.env.REACT_APP_REST_PROFILE);
+    // // SaveObjectToLocalStorage
+    // useEffect(() => {
+    //   fetch('http://localhost:8080/api/data/profile');
+    //   // .then(res => res.json());
+    //   // .then((data)=>{
+    //   //     // SaveObjectToLocalStorage('rest_profile',data);
+    //   // });
+      
+    //   return () => {
+    //     // cleanup
+    //   }
+    // }, [])
     return (
         <div style={{minWidth:800}}>
             

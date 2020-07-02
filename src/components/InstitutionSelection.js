@@ -10,6 +10,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 // import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { getResource } from './CCUPSHelper';
 const useStyles = makeStyles((theme)=>({
   list: {
     width: 'auto',
@@ -63,7 +64,9 @@ const { onClose,
 
 let history = useHistory();
     useEffect(() => {
-      fetch('api/data/institutions?projection=withLinks').then(respose=>respose.json())
+      // console.log(getResource('applications'));
+      
+      fetch(getResource('institutions')+'?projection=withLinks').then(respose=>respose.json())
       .then(data=>{  setInstitutions(data.content);   });
 
       return () => {

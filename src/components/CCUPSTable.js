@@ -19,14 +19,14 @@ const useStyles = makeStyles({
  
 const CCUPSTable = (props) => {
   let history = useHistory();
-    const{tableSchema, rows}=props;
+    const{tableSchema, rows,detailsUrl}=props;
     const classes = useStyles();
 const handleSelect=(event,item)=>{
  
 console.log(item);
 SaveAppToLocalStorage(item);
 SetSelectedInstitution(item.institution);
-history.push('/applicationForm');
+history.push(detailsUrl);
 }
 
 

@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme)=>({
 
 
 const ApplicationForm = () => {
+  
     const classes = useStyles();
     const selectedApp=GetAppFromLocalStorage('selectedApp');
     const selectedInstitution=GetSelectedInstitution();

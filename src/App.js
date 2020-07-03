@@ -12,11 +12,13 @@ function App() {
   // console.log(process.env.REACT_APP_REST_PROFILE);
   // SaveObjectToLocalStorage
   useEffect(() => { 
-    fetch(process.env.REACT_APP_REST_PROFILE)
+    fetch(process.env.REACT_APP_REST_DATA)
     .then(res => res.json())
     .then((data)=>{
-        SaveObjectToLocalStorage('rest_profile',data);
+        SaveObjectToLocalStorage('rest_data',data);
     });
+
+   
     
     return () => {
       // cleanup

@@ -10,12 +10,18 @@ import { SaveObjectToLocalStorage } from './components/CCUPSHelper';
 function App() {
   
   useEffect(() => { 
-    fetch(process.env.REACT_APP_REST_PROFILE)
+    fetch(process.env.REACT_APP_REST_DATA)
     .then(res => res.json())
     .then((data)=>{
+<<<<<<< HEAD
     
         SaveObjectToLocalStorage('rest_profile',data);
+=======
+        SaveObjectToLocalStorage('rest_data',data);
+>>>>>>> 738272803ba08b4a6fba61591c339e1cac10003f
     });
+
+   
     
     return () => {
       // cleanup

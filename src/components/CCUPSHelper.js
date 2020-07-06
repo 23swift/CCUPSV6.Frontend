@@ -35,10 +35,17 @@ export const getSelfLink=(entity)=>{
 
 export const getResource=(resourceName)=>{
 
-    const profile= GetObjectFromLocalStorage('rest_profile');
+    const profile= GetObjectFromLocalStorage('rest_data');
     
     
     return profile.links.find(entity=>{
         return entity.rel===resourceName
     }).href.replace('{?projection}','').replace('{?page,size,sort,projection}','');
+}
+
+export const getProfile=(resourceName)=>{
+
+    return fetch(process.env.REACT_APP_REST_PROFILE+'/'+resourceName,{ headers: {'Accept': 'application/schema+json'}})
+    .then(res=>res.json());
+    
 }

@@ -13,6 +13,7 @@ import * as Yup from 'yup';
 import InstitutionSelection from '../../../components/InstitutionSelection';
 import { GetSelectedInstitution, GetAppFromLocalStorage, getSelfLink } from '../../../components/CCUPSHelper';
 import { CCUPSPaper } from '../../../components/CCUPSPaper';
+import CCUPSRestForm from '../../../components/CCUPSRestForm';
 const useStyles = makeStyles((theme)=>({
   
       closeBUtton:{
@@ -45,22 +46,22 @@ const ApplicationForm = () => {
         <div>
             <PageHeader title="Application Data Entry" icon={faDatabase} returnUrl="/applicationDataEntry"
             subTitle="Create an entry"/>
-
-            {/* <Grid container spacing={3}>
-            <Grid item xs={12} md={6} sm={12}> */}
-        <CCUPSPaper>
-               
-                <Typography variant="body1" color="primary"  style={{marginBottom:5,marginTop:5}} >{GetSelectedInstitution().name}</Typography>             
-                    <Divider style={{marginBottom:20}}/>
-            {formModel &&  <CCUPSForm formConfig={formConfig(selectedInstitution)} validationScheme={ApplicationFormValidation} submitUrl="/api/data/applications" 
+          <Box mr={1} ml={1} component={Paper}  pb={1} pt={2} pr={2} pl={2}  elevation={1}>
+             
+                      <Typography variant="body1" color="primary"  style={{marginBottom:5,marginTop:5}} >{GetSelectedInstitution().name}</Typography>             
+             <Divider style={{marginBottom:20}}/>
+           
+           
+           
+            {/* {formModel &&  <CCUPSForm formConfig={formConfig(selectedInstitution)} validationScheme={ApplicationFormValidation} submitUrl="/api/data/applications" 
               model={formModel} returnUrl="/applicationDataEntry"
               update={hasSelectedApp}
-            />}
-        </CCUPSPaper>
-       
-        {/* </Grid>
-        </Grid> */}
-          
+            />} */}
+
+                    <CCUPSRestForm model={formModel} resourceName="applications"  />
+             
+              </Box>
+        
             
 
                

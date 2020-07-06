@@ -19,18 +19,20 @@ const CCUPSFormElements = (props) => {
                 {
 
                         <Grid container spacing={2}>
+                           
+                           
                 {model && formSchema && Object.keys(model).map((item,index)=>(
                     
                 
                 <Grid item xs={12} md={6} key={index} >
                
-                            {/* {formSchema[item].format==undefined && (formSchema[item].type == "string" ||  formSchema[item].type == "integer") &&  (
+                            {formSchema && formSchema[item].format===undefined && (formSchema[item].type == "string" ||  formSchema[item].type == "integer") &&  (
 
                             <CCUPSTextBox  fieldName={item} errors={errors}  touched={touched} label={formSchema[item].title} handleChange={handleChange}
                             handleBlur={handleBlur} value={values[item]} />
                             
                             )}
-                            {formSchema[item].format==='uri' && formSchema[item].type === "string" && (
+                            {formSchema && formSchema[item].format==='uri' && formSchema[item].type === "string" && (
                            
                             <CCUPSDropDown label={formSchema[item].title}  fieldName={item}  control={item} errors={errors} touched={touched}
                             value={values[item]} handleChange={handleChange}  handleBlur={handleBlur}/>
@@ -55,9 +57,12 @@ const CCUPSFormElements = (props) => {
                                                         }
                                                         />
 
-                                )} */}
-                                <p>{formSchema[item]}</p>
-                    </Grid>
+                                )}
+                                {/* <p>{JSON.stringify (formSchema)}</p>
+                            <p>{formSchema && formSchema['cardNumber'].type}</p>
+                                <p>{JSON.stringify (item)}</p>
+                                <p>{JSON.stringify (model)}</p> */}
+                    </Grid> 
                 ))}
                         
                 </Grid>

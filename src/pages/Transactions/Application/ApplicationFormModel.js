@@ -77,8 +77,8 @@ export const formConfig=(institution)=>{
 }
 
 export const Model={
-  cardNumber:""
-  ,cardProduct:0
+  "cardNumber":""
+  ,"cardProduct":0
   ,referenceNo:""
   ,firstName:""
   ,lastName:""

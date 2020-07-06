@@ -13,12 +13,7 @@ function App() {
     fetch(process.env.REACT_APP_REST_DATA)
     .then(res => res.json())
     .then((data)=>{
-<<<<<<< HEAD
-    
-        SaveObjectToLocalStorage('rest_profile',data);
-=======
         SaveObjectToLocalStorage('rest_data',data);
->>>>>>> 738272803ba08b4a6fba61591c339e1cac10003f
     });
 
    

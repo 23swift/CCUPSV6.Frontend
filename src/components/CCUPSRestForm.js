@@ -35,14 +35,14 @@ import CCUPSFormElements from './CCUPSFormElements';
 const CCUPSRestForm = (props) => {
   const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName } = props;
   const [apiAction, setApiAction] = useState(update?"PUT":"POST");
-  const [formSchema, setFormSchema] = useState({});
+  const [formSchema, setFormSchema] = useState();
 
   useEffect(() => {
     
     
     getProfile(resourceName)
     .then(data=>{  
-         console.log(data.properties);
+        //  console.log(data.properties);
         setFormSchema(data.properties);
         
      });

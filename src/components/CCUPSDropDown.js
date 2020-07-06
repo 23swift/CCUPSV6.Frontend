@@ -4,7 +4,7 @@ import { useSnackbar } from 'notistack';
 import InfoIcon from '@material-ui/icons/Info';
 import { MenuItem, FormControl, InputLabel, InputAdornment, IconButton,Select, TextField } from '@material-ui/core';
 import {  Field, ErrorMessage, useFormik } from 'formik';
-import { getSelfLink } from './CCUPSHelper';
+import { getSelfLink, getResource } from './CCUPSHelper';
 
 
 
@@ -16,7 +16,9 @@ const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 const [dropDownVal, setDropDownVal] = useState('');
 
 const getMenuItems= async (url)=>{
-  const response = await fetch(url);
+  let resource='';
+  if(url){resource=url}else{resource=getResource(fieldName+'s')}
+  const response = await fetch(resource);
   const json = await response.json();
 
    setData(json.content);

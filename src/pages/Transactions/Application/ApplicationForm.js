@@ -57,7 +57,7 @@ const ApplicationForm = () => {
               update={hasSelectedApp}
             />} */}
 
-                    <CCUPSRestForm/>
+                    <CCUPSRestForm model={formModel} resourceName="applications"  />
              
               </Box>
         

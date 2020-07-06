@@ -77,17 +77,17 @@ export const formConfig=(institution)=>{
 }
 
 export const Model={
-  card_number:""
-  ,card_product:0
-  ,reference_no:""
-  ,first_name:""
-  ,last_name:""
-  ,middle_name:""
+  cardNumber:""
+  ,cardProduct:0
+  ,referenceNo:""
+  ,firstName:""
+  ,lastName:""
+  ,middleName:""
   // ,product:{id:0}
   ,product:""
   ,merchant:false
   ,institution:""
-  ,id:0
+  // ,id:0
 }
 
 

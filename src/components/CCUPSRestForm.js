@@ -25,83 +25,59 @@ import {    Box,    Divider,    Button,    IconButton,    Slide,    AppBar,    G
   import SaveIcon from '@material-ui/icons/Save';
   import ClearIcon from '@material-ui/icons/Clear';
 import { getResource, getProfile } from './CCUPSHelper';
+import CCUPSFormElements from './CCUPSFormElements';
 
-const CCUPSRestForm = () => {
-const [formSchema, setFormSchema] = useState({});
-    useEffect(() => {
-        getProfile('applications')
-        .then(data=>{  
-             console.log(data.properties);
-            Object.keys(data.properties).map(item=>{
 
-                console.log(data.properties[item].format);
-            });
-            setFormSchema(data.properties);
-            
-         });
-        return () => {
-            // cleanup
-        }
-    }, [])
 
+
+
+
+const CCUPSRestForm = (props) => {
+  const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName } = props;
+  const [apiAction, setApiAction] = useState(update?"PUT":"POST");
+  const [formSchema, setFormSchema] = useState({});
+
+  useEffect(() => {
+    
+    
+    getProfile(resourceName)
+    .then(data=>{  
+         console.log(data.properties);
+        setFormSchema(data.properties);
+        
+     });
+    return () => {
+        // cleanup
+    }
+}, [])
     return (
         <div>
-            <Grid container spacing={2}>
-            {formSchema && Object.keys(formSchema).map((item,index)=>(
-                
-               
-               <Grid item xs={12} md={6} key={index} >
-                         {formSchema[item].format==undefined && (formSchema[item].type == "string" ||  formSchema[item].type == "integer") &&  (
-
-                           <TextField id={item} label={formSchema[item].title} variant="outlined" fullWidth  size="small"  />
-                           
-                        )}
-                         {formSchema[item].format==='uri' && formSchema[item].type === "string" && (
-                           <FormControl variant="outlined" fullWidth size="small" 
-                        //    className={classes.margin}
-                           >
-                           <InputLabel id="demo-customized-select-label">{formSchema[item].title}</InputLabel>
-                           <Select
-                             labelId="demo-customized-select-label"
-                             id="demo-customized-select"
-                            //  value={age}
-                            //  onChange={handleChange}
-                            //  input={<BootstrapInput />}
-                           >
-                             <MenuItem value="">
-                               <em>None</em>
-                             </MenuItem>
-                             <MenuItem value={10}>Ten</MenuItem>
-                             <MenuItem value={20}>Twenty</MenuItem>
-                             <MenuItem value={30}>Thirty</MenuItem>
-                           </Select>
-                        </FormControl>
-                        )}
-                          {formSchema[item].type == "boolean" && (
-
-                                                    <FormControlLabel
-                                                    control={
-                                                    <Checkbox
-                                                        // onChange={handleChange}
-                                                        // checked={value}
-                                                        name={item}
-                                                        // color="secondary"
-                                                    />}
-                                                    label={
-                                                        <Typography
-                                                        variant="body2"
-                                                        color="primary"
-                                                        >
-                                                        {formSchema[item].title}
-                                                        </Typography>
-                                                    }
-                                                    />
-
-                            )}
-                </Grid>
-            ))}
+           <MuiPickersUtilsProvider utils={DateFnsUtils}>
+           <Formik  initialValues={model}   validationSchema={validationScheme}
+                onSubmit={(values, { setSubmitting,resetForm }) => {
+                    setTimeout(() => {
                     
-            </Grid>
+                    }, 2000);
+                  }}
+           >
+             {({ values, errors,  touched,   handleChange, handleBlur, handleSubmit, validateForm,setSubmitting,status,setTouched,isSubmitting}
+             ) => (
+                      
+                  //  <CCUPSFormElements formSchema={formSchema} model={model} values={values} errors={errors} touched={touched}/>
+                <>
+                  { <CCUPSFormElements formSchema={formSchema} model={model} values={values} errors={errors} touched={touched}/> }
+                  
+                  </>
+                
+              )}
+            
+           </Formik>
+             
+
+           </MuiPickersUtilsProvider>
+          
+          
+
         </div>
     )
 }

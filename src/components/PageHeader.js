@@ -108,7 +108,7 @@ const PageHeader = (props) => {
             {/* </Box> */}
           </Toolbar>
         </AppBar>
-        <Box mb={2}  >
+        <Box mb={1}  >
           <Divider />
         </Box>
         {/* <Divider/> */}

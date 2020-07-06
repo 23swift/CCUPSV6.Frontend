@@ -9,12 +9,11 @@ import  customTheme  from "./components/theme/customTheme";
 import { SaveObjectToLocalStorage } from './components/CCUPSHelper';
 function App() {
   
-  // console.log(process.env.REACT_APP_REST_PROFILE);
-  // SaveObjectToLocalStorage
   useEffect(() => { 
     fetch(process.env.REACT_APP_REST_PROFILE)
     .then(res => res.json())
     .then((data)=>{
+    
         SaveObjectToLocalStorage('rest_profile',data);
     });
     

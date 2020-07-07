@@ -7,7 +7,7 @@ import { createTextBox } from '../../../../components/CCUPSFormElement';
 import * as Yup from 'yup';
 import { callApi } from '../../../../components/CCUPSApiService';
 import CCUPSFormDialog from '../../../../components/CCUPSFormDialog';
-import { getSelfLink } from '../../../../components/CCUPSHelper';
+import { getSelfLink, getResource } from '../../../../components/CCUPSHelper';
 
 const formModel={
     // id:0,
@@ -47,14 +47,14 @@ const ProductList = (props) => {
       }
   const handleOnSubmit=(values)=>{
       
-      return callApi('/api/data/products',values,'POST').then(data=>{
+      return callApi(getResource('products'),values,'POST').then(data=>{
      
           setCreatedEntity(data);
           
       });
   }
     useEffect(() => {
-        fetch("/api/data/products/search/findByInstitutionId?id="+ master.id)
+        fetch(getResource("products")+"/search/findByInstitutionId?id="+ master.id)
       .then(res => res.json())
       .then(
         (result) => {

@@ -26,47 +26,34 @@ import {    Box,    Divider,    Button,    IconButton,    Slide,    AppBar,    G
   import ClearIcon from '@material-ui/icons/Clear';
 import { getResource, getProfile } from './CCUPSHelper';
 import CCUPSFormElements from './CCUPSFormElements';
-
-
-
-
+import CCCUPSErroNotification from './CCCUPSErroNotification';
 
 
 const CCUPSRestForm = (props) => {
-  const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName } = props;
+  const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName,formSchema,handleSubmit } = props;
   const [apiAction, setApiAction] = useState(update?"PUT":"POST");
-  const [formSchema, setFormSchema] = useState();
 
-  useEffect(() => {
-    
-    
-    getProfile(resourceName)
-    .then(data=>{  
-        //  console.log(data.properties);
-        setFormSchema(data.properties);
-        
-     });
-    return () => {
-        // cleanup
-    }
-}, [])
     return (
         <div>
            <MuiPickersUtilsProvider utils={DateFnsUtils}>
            <Formik  initialValues={model}   validationSchema={validationScheme}
                 onSubmit={(values, { setSubmitting,resetForm }) => {
                     setTimeout(() => {
-                    
-                    }, 2000);
+                      setSubmitting(false);
+                    }, 3000);
                   }}
            >
              {({ values, errors,  touched,   handleChange, handleBlur, handleSubmit, validateForm,setSubmitting,status,setTouched,isSubmitting}
              ) => (
                       
-                  //  <CCUPSFormElements formSchema={formSchema} model={model} values={values} errors={errors} touched={touched}/>
-                <>
-                  { <CCUPSFormElements formSchema={formSchema} model={model} values={values} errors={errors} touched={touched}/> }
                   
+                <>
+                
+               
+                <CCCUPSErroNotification errorList={errors} open={Object.keys(errors).length>0}/>
+                  {formSchema && <CCUPSFormElements formSchema={formSchema} model={model} values={values} errors={errors} touched={touched} handleChange={handleChange}
+                  isSubmitting={isSubmitting} handleBlur={handleBlur} handleSubmit={handleSubmit}/> }
+                 
                   </>
                 
               )}

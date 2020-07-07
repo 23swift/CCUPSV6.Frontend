@@ -7,52 +7,35 @@ import { GetObjectFromLocalStorage, GetAppFromLocalStorage, GetSelectedInstituti
 
 //Validaton
 export const ApplicationFormValidation = Yup.object().shape({
-  card_number: Yup.string()
+  cardNumber: Yup.string()
   .trim()
   .matches('^[0-9]+$' , 'Card Number is not in correct format')
   .min(16, 'Card Product must be 16 digit!')
   .required('Card Number Required!'),
    
-  card_product: Yup.number()
+  cardProduct: Yup.number()
   .min(1, 'Card Product Required!'),
     // .max(50, 'Card Number Too Long!')
     // .required('Card Number Required!'),
 
-  last_name: Yup.string()
+  lastName: Yup.string()
     .max(50, 'Last Name Too Long!')
     .required('Last Name Required'),
 
-  first_name:Yup.string()
+  firstName:Yup.string()
     .max(50, 'First Name Too Long!')
     .required('First Name Required'),
 
-  middle_name:Yup.string()
+  middleName:Yup.string()
     .max(50, 'Middle Name Too Long!')
     .required('Middle Name Required'),
 
-  reference_no:Yup.string()
+  referenceNo:Yup.string()
     .max(50, 'Reference Number Too Long!')
     .required('Reference Number Required'),
     product:Yup.string().required("Product Required")
 
-    // product:Yup.object({
-
-    //   id: Yup.number().default(0).min(1,'Product Required'),
-    // })
-    // product:Yup.lazy(value => {
-    //   switch (typeof value) {
-    //     case 'object':
-    //       return Yup.object().required('Product Required'); // schema for object
-    //     case 'number':
-    //       return Yup.number().min(1,'Product Required'); // schema for string
-    //     default:
-    //       return Yup.mixed(); // here you can decide what is the default
-    //   }
-    // })
-   
-  // email: Yup.string()
-  //   .email('Invalid email')
-  //   .required('Required'),
+    
 });
 
 export const formConfig=(institution)=>{

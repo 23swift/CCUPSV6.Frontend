@@ -12,7 +12,7 @@ import * as Yup from 'yup';
 import { createTextBox } from '../../../components/CCUPSFormElement';
 import { faTools } from '@fortawesome/free-solid-svg-icons';
 import ProductList from './components/ProductList';
-import { getSelfLink } from '../../../components/CCUPSHelper';
+import { getSelfLink, getResource } from '../../../components/CCUPSHelper';
 
 const formModel={
     id:0,
@@ -49,12 +49,12 @@ const InstitutionReference = () => {
     }
 
     useEffect(() => {
-        fetch("/api/data/institutions?projection=withProducts")
+        fetch(getResource("institutions")+"?projection=withProducts")
       .then(res => res.json())
       .then(
         (result) => {
          
-          // console.log(result._embedded.applications);
+          console.log(result.content.applications);
           setDataRows(result.content);
         },
        

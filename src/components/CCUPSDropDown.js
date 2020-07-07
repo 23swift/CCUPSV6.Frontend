@@ -17,7 +17,7 @@ const [dropDownVal, setDropDownVal] = useState('');
 
 const getMenuItems= async (url)=>{
   let resource='';
-  if(url){resource=url}else{resource=getResource(fieldName+'s')}
+  if(url){resource=url}else{resource=getResource(fieldName+'s').replace('{?projection}','?projection=forDropDown')}
   const response = await fetch(resource);
   const json = await response.json();
 

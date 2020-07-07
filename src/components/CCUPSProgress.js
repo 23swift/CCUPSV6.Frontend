@@ -26,11 +26,11 @@ const{open,displayText}=props;
         <Backdrop className={classes.backdrop} open={open} 
         // onClick={handleClose}
         >
-          <Paper style={{padding:15,background: "linear-gradient(60deg, #ffa726, #fb8c00)"}}>
+          <Paper style={{padding:15}}>
             <Box display="flex" flexDirection="row">
 
               <Box color="text.error"><CircularProgress color="secondary" style={{marginRight:10}} /></Box>
-              <Box pt={2}  color="#fff"> <Typography   >{  displayText}</Typography></Box>
+              <Box pt={2}  color="text.primary"> <Typography   >{  displayText}</Typography></Box>
 
             </Box>
            

@@ -38,9 +38,12 @@ export const getResource=(resourceName)=>{
     const profile= GetObjectFromLocalStorage('rest_data');
     
     
+    // return profile.links.find(entity=>{
+    //     return entity.rel===resourceName
+    // }).href.replace('{?projection}','').replace('{?page,size,sort,projection}','');
     return profile.links.find(entity=>{
         return entity.rel===resourceName
-    }).href.replace('{?projection}','').replace('{?page,size,sort,projection}','');
+    }).href;
 }
 
 export const getProfile=(resourceName)=>{

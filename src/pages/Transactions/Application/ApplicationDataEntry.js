@@ -26,38 +26,34 @@ import InstitutionSelection from '../../../components/InstitutionSelection';
 import CCUPSTable from '../../../components/CCUPSTable';
 import { getResource, SetSelectedInstitution } from '../../../components/CCUPSHelper';
 
-const   tableSchema=[{displayText:'Card Number',fieldName:'card_number'},
+const   tableSchema=[{displayText:'Card Number',fieldName:'cardNumber'},
 {displayText:'Name',fieldName:'name'},
 {displayText:'Institution',fieldName:'institutionName'},
 {displayText:'Product',fieldName:'product'},
-{displayText:'Reference',fieldName:'reference_no'}
+{displayText:'Reference',fieldName:'referenceNo'}
 ]
 const useStyles = makeStyles((theme) => ({
 
   MuiAvatarRoot: {
    
-    // opacity:0,
+    
     "&:hover":{
       opacity:.8,
-      // boxShadow:
-      // "0 13px 35px -9px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 5px 7px -2px rgba(0, 0, 0, 0.2)",
+      
   }
     },
     closeIcon:{
-      //  color:fade(theme.palette.common.black,0.1)
+    
       color:theme.palette.secondary.light
     },
     search: {
       position: 'relative',
       borderRadius: theme.shape.borderRadius,
-      
-      // backgroundColor: fade(theme.palette.common.black, 0.1),
-      // backgroundColor:"rgba(0, 0, 0, 0.04)",
+    
       backgroundColor: fade(theme.palette.secondary.main, 0.1),
       '&:hover': {
         backgroundColor: fade(theme.palette.secondary.main, 0.12),
-        // backgroundColor: fade("rgba(0, 0, 0, 0.04)", 0.1),
-        // backgroundColor:"rgba(0, 0, 0, 0.04)"
+    
       },
     },
     searchIcon: {
@@ -119,7 +115,7 @@ const ApplicationDataEntry = () => {
 
   useEffect(() => {
     // fetch('/api/data/profile');
-    fetch(getResource('applications')+"?projection=applicationWithInstitution")
+    fetch(getResource('applications').replace('{?projection}',"?projection=applicationWithInstitution"))
       .then(res => res.json())
       .then(
         (result) => {
@@ -161,8 +157,8 @@ const ApplicationDataEntry = () => {
 
               <Box ml={1} mr={1}>
                 <Button color="secondary" startIcon={<AddIcon />} disableElevation variant="contained"
-                  // size="small" component={Link} to="/applicationForm" 
-                  onClick={handleClickOpen} size="small"
+                  size="small" component={Link} to="/applicationForm" 
+                  // onClick={handleClickOpen} size="small"
                   >
                   Add New Application
                 </Button>
@@ -188,12 +184,10 @@ const ApplicationDataEntry = () => {
         />
 
         <Box mr={2} ml={2}>
-          {/* <SimpleTable /> */}
+         
           <CCUPSTable tableSchema={tableSchema} rows={rows} detailsUrl="/applicationForm" />
         </Box>
-        <InstitutionSelection  keepMounted value={selectedValue} open={open} onClose={handleClose} 
         
-         />
       </div>
     );
 }

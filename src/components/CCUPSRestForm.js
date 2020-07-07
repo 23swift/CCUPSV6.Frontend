@@ -32,14 +32,21 @@ import CCCUPSErroNotification from './CCCUPSErroNotification';
 const CCUPSRestForm = (props) => {
   const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName,formSchema,handleSubmit } = props;
   const [apiAction, setApiAction] = useState(update?"PUT":"POST");
-
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const showSuccessMessage = (message) => {
+    enqueueSnackbar(message, {
+      variant: "success",
+      // onExited: handleSnackExit(),
+    });
+  };
     return (
         <div>
            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-           <Formik  initialValues={model}   validationSchema={validationScheme}
+           <Formik  initialValues={model}    validationSchema={validationScheme}
                 onSubmit={(values, { setSubmitting,resetForm }) => {
                     setTimeout(() => {
                       setSubmitting(false);
+                      showSuccessMessage("Record Saved!");
                     }, 3000);
                   }}
            >

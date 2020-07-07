@@ -34,16 +34,16 @@ const useStyles = makeStyles((theme)=>({
 const ApplicationForm = () => {
   
     const classes = useStyles();
-    const selectedApp=GetAppFromLocalStorage('selectedApp');
-    const selectedInstitution=GetSelectedInstitution();
-    Model.institution=selectedInstitution.links.find(getSelfLink).href;
+    // const selectedApp=GetAppFromLocalStorage('selectedApp');
+    // const selectedInstitution=GetSelectedInstitution();
+    // Model.institution=selectedInstitution.links.find(getSelfLink).href;
     const [formSchema, setFormSchema] = useState();
     
-    const [formModel, setFormModel] = useState(selectedApp?selectedApp:Model);
+    const [formModel, setFormModel] = useState(Model);
 
     //  if(selectedApp){setFormModel(selectedApp)}else{setFormModel(Model)}
   
-    const [hasSelectedApp, setHasSelectedApp] = useState(()=>{return selectedApp ? true :false});
+    // const [hasSelectedApp, setHasSelectedApp] = useState(()=>{return selectedApp ? true :false});
     
     useEffect(() => {
     
@@ -85,7 +85,7 @@ const ApplicationForm = () => {
               </Box>
             }
             />
-          <Box mr={1} ml={1} component={Paper}  pb={1} pt={3} pr={2} pl={2}  elevation={1}
+          <Box mr={1} ml={1} component={Paper}  pb={1} pt={1} pr={2} pl={2}  elevation={1}
          
           >
              

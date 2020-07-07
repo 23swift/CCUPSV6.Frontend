@@ -15,7 +15,7 @@ import CCUPSCheckBox from './CCUPSCheckBox';
 
 const CCUPSFormElements = (props) => {
     const {values, errors,touched,formElements,handleChange,handleBlur,submitAction,resourceName,handleSubmit,formSchema,model,isSubmitting} = props;
-    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  
     const [confirmationOpen, setConfirmationOpen] = useState(false);
 
     const handleConfirmationClose = () => {
@@ -29,15 +29,10 @@ const CCUPSFormElements = (props) => {
         }, 2000);
         
       };
-      const showSuccessMessage = (message) => {
-        enqueueSnackbar(message, {
-          variant: "success",
-          onExited: handleSnackExit(),
-        });
-      };
+      
     return (
         
-            <Form >
+            <Form noValidate >
                 {
 
                         <Grid container spacing={2}>

@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
-import { SaveAppToLocalStorage, SetSelectedInstitution } from './CCUPSHelper';
+import { SaveAppToLocalStorage, SetSelectedInstitution, getSelfLink } from './CCUPSHelper';
 const useStyles = makeStyles({
     table: {
       minWidth: 650,
@@ -24,8 +24,8 @@ const CCUPSTable = (props) => {
 const handleSelect=(event,item)=>{
  
 console.log(item);
-SaveAppToLocalStorage(item);
-SetSelectedInstitution(item.institution);
+SaveAppToLocalStorage(getSelfLink(item));
+// SetSelectedInstitution(item.institution);
 history.push(detailsUrl);
 }
 

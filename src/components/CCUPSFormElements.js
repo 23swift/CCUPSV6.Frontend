@@ -12,11 +12,13 @@ import CCUPSConfirmationDialog from './CCUPSConfirmationDialog';
 import CCUPSProgress from './CCUPSProgress';
 import { useSnackbar } from 'notistack';
 import CCUPSCheckBox from './CCUPSCheckBox';
-
+import PropTypes from 'prop-types';
 const CCUPSFormElements = (props) => {
-    const {values, errors,touched,formElements,handleChange,handleBlur,submitAction,resourceName,handleSubmit,formSchema,model,isSubmitting} = props;
+    const {values, errors,touched,formElements,handleChange,handleBlur,handleSubmit,formSchema,model,isSubmitting,
+      cancelAction} = props;
   
     const [confirmationOpen, setConfirmationOpen] = useState(false);
+console.log(model);
 
     const handleConfirmationClose = () => {
         setConfirmationOpen(false);
@@ -43,18 +45,18 @@ const CCUPSFormElements = (props) => {
                 
                 <Grid item xs={12} md={6} key={index} >
                
-                            {formSchema && formSchema[item].format===undefined && (formSchema[item].type == "string" ||  formSchema[item].type == "integer") &&  (
+                            {formSchema && formSchema[item] && formSchema[item].format===undefined && (formSchema[item].type == "string" ||  formSchema[item].type == "integer") &&  (
 
                             <CCUPSTextBox  fieldName={item} errors={errors}  touched={touched} label={formSchema[item].title} handleChange={handleChange}
                             handleBlur={handleBlur} value={values[item]} />
                             
                             )}
-                            {formSchema && !formSchema[item].hidden && formSchema[item].format==='uri' && formSchema[item].type === "string" && (
+                            {formSchema && formSchema[item] && formSchema[item].format==='uri' && formSchema[item].type === "string" && (
                            
                             <CCUPSDropDown label={formSchema[item].title}  fieldName={item}  control={item} errors={errors} touched={touched}
                             value={values[item]} handleChange={handleChange}  handleBlur={handleBlur}/>
                             )}
-                            {formSchema[item].type == "boolean" && (
+                            {formSchema && formSchema[item] && formSchema[item].type == "boolean" && (
                                  <CCUPSCheckBox  name={item} handleChange={handleChange}   label={formSchema[item].title}                                                        // errors={errors}
                                     touched={touched} value={values[item]}                                                      
                                     />
@@ -73,7 +75,7 @@ const CCUPSFormElements = (props) => {
 
               </Box>
               <Box mr={1}>   
-                    <Button color="secondary"  >
+                    <Button color="secondary" onClick={cancelAction}  >
                         Cancel
                     </Button>
                 </Box>
@@ -101,4 +103,18 @@ const CCUPSFormElements = (props) => {
     )
 }
 
+
+CCUPSFormElements.propTypes = {
+
+  values:PropTypes.object.isRequired,
+  errors:PropTypes.object.isRequired,
+  touched:PropTypes.object.isRequired,
+  
+  // update,
+  model:PropTypes.object.isRequired,
+  // returnUrl:PropTypes.string,
+  // resourceName:PropTypes.string.isRequired,
+  // handleSubmit:PropTypes.func.isRequired,
+
+}
 export default CCUPSFormElements

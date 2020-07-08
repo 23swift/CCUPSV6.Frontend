@@ -7,23 +7,16 @@ import { createTextBox } from '../../../../components/CCUPSFormElement';
 import * as Yup from 'yup';
 import { callApi } from '../../../../components/CCUPSApiService';
 import CCUPSFormDialog from '../../../../components/CCUPSFormDialog';
-import { getSelfLink, getResource } from '../../../../components/CCUPSHelper';
+import { getSelfLink, getResource, getProfile } from '../../../../components/CCUPSHelper';
+import ProductDialog from './ProductDialog';
 
 const formModel={
-    // id:0,
     code:'',
     name:'',
-    institution:''
     
 }
-export const formConfig=[
-  
-    createTextBox("code","Code *"),
-    createTextBox("name","Name *"),
-    // createTextBox("merchant_Id","Merchant Id"),
 
-  ]
-  export const ApplicationFormValidation = Yup.object().shape({
+   const productFormValidation = Yup.object().shape({
     code: Yup.string()
     .trim()
     .required('Code Required!'),
@@ -38,15 +31,16 @@ const ProductList = (props) => {
     const [dataRows, setDataRows] = useState();
     const [createdEntity, setCreatedEntity] = useState();
     const [dialogOpen, setDialogOpen] = useState(false);
-   
+   const [formSchema, setFormSchema] = useState();
     formModel.institution=master.links.find(getSelfLink).href;
+
 
     const handleOnClose=(value)=>{
         setCreatedEntity(value);
         setDialogOpen(false);
       }
   const handleOnSubmit=(values)=>{
-      
+    
       return callApi(getResource('products'),values,'POST').then(data=>{
      
           setCreatedEntity(data);
@@ -58,18 +52,12 @@ const ProductList = (props) => {
       .then(res => res.json())
       .then(
         (result) => {
-         
-          // console.log(result._embedded.applications);
-          
           setDataRows(result.content);
         },
-       
-        (error) => {
-         
-          console.log(error);
-          
-        }
-      )
+        (error) => {  console.log(error);})
+
+        getProfile('products')
+        .then(data=>{ setFormSchema(data.properties); });
         
         return () => {
             // cleanup
@@ -103,7 +91,7 @@ const ProductList = (props) => {
                                             
                                             
                                         </List>
-                                        <CCUPSFormDialog open={dialogOpen} submitUrl="/api/data/products" validationScheme={ApplicationFormValidation} formConfig={formConfig} model={formModel} handleClose={handleOnClose} handleOnSubmit={handleOnSubmit} />
+                                        <CCUPSFormDialog resourceName="products"  title="Create Product Entry" formSchema={formSchema} open={dialogOpen} submitUrl={getResource('products')} validationScheme={productFormValidation} model={formModel} handleClose={handleOnClose} handleOnSubmit={handleOnSubmit} />
                 
         </div>
     )

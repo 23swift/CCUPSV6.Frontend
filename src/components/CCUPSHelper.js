@@ -28,22 +28,35 @@ export const GetAppFromLocalStorage=(app)=>{
 }
 
 
-export const getSelfLink=(entity)=>{
+export const getSelfLink=(resource)=>{
 
-    return entity.rel==="self"
+    return resource.links.find(entity=>{
+        return entity.rel==="self"
+    }).href
 }
 
-export const getResource=(resourceName)=>{
+export const getResource=(resourceName,projection,page,size,sort)=>{
 
     const profile= GetObjectFromLocalStorage('rest_data');
     
     
-    // return profile.links.find(entity=>{
-    //     return entity.rel===resourceName
-    // }).href.replace('{?projection}','').replace('{?page,size,sort,projection}','');
+    
+    
     return profile.links.find(entity=>{
         return entity.rel===resourceName
-    }).href;
+    }).href.replace('{?projection}',projection===undefined ? '' :'?projection='+projection)
+    .replace('{?page,size,sort,projection}',page===undefined || size==undefined || sort==undefined ? '':'?page='+page+',size='+size+',sort='+sort+',projection='+projection);
+   
+}
+export const getActionUrl=(resourceName)=>{
+
+    const profile= GetObjectFromLocalStorage('rest_data');
+    
+    
+    return profile.links.find(entity=>{
+        return entity.rel===resourceName
+    }).href.replace('{?projection}','').replace('{?page,size,sort,projection}','');
+   
 }
 
 export const getProfile=(resourceName)=>{

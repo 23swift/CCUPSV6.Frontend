@@ -17,7 +17,7 @@ const [dropDownVal, setDropDownVal] = useState('');
 
 const getMenuItems= async (url)=>{
   let resource='';
-  if(url){resource=url}else{resource=getResource(fieldName+'s').replace('{?projection}','?projection=forDropDown')}
+  if(url){resource=url}else{resource=getResource(fieldName+'s','forDropDown')}
   const response = await fetch(resource);
   const json = await response.json();
 
@@ -81,7 +81,7 @@ useEffect(() => {
           </MenuItem>
           
           {data && data.map((item,index)=>(
-              item.links &&  <MenuItem  value={item.links.find(getSelfLink).href} key={index}>{item.name}</MenuItem>
+              item.links &&  <MenuItem  value={getSelfLink(item)} key={index}>{item.name}</MenuItem>
 
           ))}
           

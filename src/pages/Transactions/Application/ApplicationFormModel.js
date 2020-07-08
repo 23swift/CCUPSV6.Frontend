@@ -38,30 +38,11 @@ export const ApplicationFormValidation = Yup.object().shape({
     
 });
 
-export const formConfig=(institution)=>{
-  
-  // institution.links.find(getSelfLink)
-  
-  return [
-  
-  // createField("card_number","Card Number *",FormElementType.text)
-  createTextBox("card_number","Card Number *")
-  ,createDropDownNumber("card_product", "Card Product",null,[{id:19,name:"PHP"},{id:20,name:"USD"}])
-  ,createTextBox("reference_no","Reference Number *")
-  ,createTextBox("first_name","First Name *")
-  ,createTextBox("last_name","Last Name *")
-  ,createTextBox("middle_name","Middle Name *")
-  ,createDropDown("product", "Product",getResource('products')+"/search/findByInstitutionId?id="+institution.id,null)
-  ,createCheckBox("merchant", "Merchant")
-  ,createHidden("institution","Institution *",)
-  // ,createField("product", "Product", Type.object,null,[{id:1,name:"BDO GOLD"},{id:2,name:"BDO PLATINUM"}])
-//   
-]
-}
+
 
 export const Model={
-  "cardNumber":""
-  ,"cardProduct":0
+  cardNumber:""
+  ,cardProduct:0
   ,referenceNo:""
   ,firstName:""
   ,lastName:""
@@ -69,7 +50,7 @@ export const Model={
   // ,product:{id:0}
   ,product:""
   ,merchant:false
-  ,institution:""
+  // ,institution:""
   // ,id:0
 }
 

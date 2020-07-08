@@ -10,14 +10,14 @@ const CCCUPSErroNotification = (props) => {
 const [showNotifIcon, setShowNotifIcon] = useState(false);
    
     return (
-        <div style={{marginTop:10}}>
+        <div >
          
           
            
                 
             
             <Collapse in={open && openNotification} onExit={()=>setShowNotifIcon(true)} >
-                <Paper    >
+                <Paper  variant="outlined" style={{backgroundColor:"#efefef"}}  >
                 <Box p={2} pt={1} 
                  color="error.main">
                     <Box display="flex">

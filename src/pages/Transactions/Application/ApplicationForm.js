@@ -37,75 +37,47 @@ const ApplicationForm = () => {
     const selectedApp=GetAppFromLocalStorage('selectedApp');
     // const selectedInstitution=GetSelectedInstitution();
     // Model.institution=selectedInstitution.links.find(getSelfLink).href;
-    const [formSchema, setFormSchema] = useState();
+
     
-    const [formModel, setFormModel] = useState(Model);
+    const [formModel, setFormModel] = useState();
 
      if(selectedApp){setFormModel(selectedApp)}else{setFormModel(Model)}
   
     // const [hasSelectedApp, setHasSelectedApp] = useState(()=>{return selectedApp ? true :false});
     
     useEffect(() => {
-    
-     
-         getProfile('applications')
-      .then(data=>{  
-         
-        data.properties.institution.hidden=true;
-          setFormSchema(data.properties);
-          
-       });
-     
-     
-      return () => {
-          // cleanup
+      console.log(selectedApp);
+      
+      if(selectedApp!=null){
+          fetch(selectedApp)
+          .then(res=>res.json()).then(data=>{
+
+            setFormModel(data);
+          });
+
+      }else{
+        setFormModel(Model);
+
       }
-  }, [])
+      return () => {
+        // cleanup
+      }
+    }, [])
+
         
     return (
         <div>
             <PageHeader title="Application Data Entry" icon={faDatabase} returnUrl="/applicationDataEntry"
-            subTitle="Create an entry"
-            tools={
-              <Box display="flex" flexWrap="nowrap"  p={1}>
-                
-                
-  
-                <Box ml={1} mr={1}>
-                  <Button color="secondary" startIcon={<AddIcon />} disableElevation variant="contained"
-                    // size="small" component={Link} to="/applicationForm" 
-                   size="small"
-                    >
-                    New Application
-                  </Button>
-                
-                </Box>
-                
-               
-              </Box>
-            }
-            />
-          <Box mr={1} ml={1} component={Paper}  pb={1} pt={1} pr={2} pl={2}  elevation={1}
+            subTitle="Create an entry"/>
+          <Box mr={1} ml={1} component={Paper}  pb={2} pt={1} pr={2} pl={2}  elevation={1}
          
           >
              
-                      {/* <Typography variant="body1" color="primary"  style={{marginBottom:5,marginTop:5}} >{GetSelectedInstitution().name}</Typography>              */}
-                    
-                      {/* <ProductDropDown /> */}
-             {/* <Divider style={{marginBottom:20,marginTop:10}}/> */}
-           
-           
-           
-            {/* {formModel &&  <CCUPSForm formConfig={formConfig(selectedInstitution)} validationScheme={ApplicationFormValidation} submitUrl="/api/data/applications" 
-              model={formModel} returnUrl="/applicationDataEntry"
-              update={hasSelectedApp}
-            />} */}
-
-                  {formSchema &&  <CCUPSRestForm model={formModel} resourceName="applications" formSchema ={formSchema} submitUrl="/api/data/applications" validationScheme={ApplicationFormValidation}   />}
+                   {formModel && <CCUPSRestForm model={formModel} resourceName="applications"  validationScheme={ApplicationFormValidation}   />}
              
               </Box>
         
-            
+    <p>{JSON.stringify( formModel)}</p>
 
                
         </div>

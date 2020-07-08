@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,6 +11,7 @@ import CCUPSForm from '../../../../components/CCUPSForm';
 import CCUPSFormDialog from '../../../../components/CCUPSFormDialog';
 import * as Yup from 'yup';
 import { makeStyles } from '@material-ui/core';
+import { getProfile } from '../../../../components/CCUPSHelper';
 const formModel={
     id:0,
     code:'',
@@ -49,41 +50,62 @@ export const formConfig=[
     
 }));
 const ProductDialog = (props) => {
+  const { formConfig, submitUrl, validationScheme,legend,update,model,returnUrl,handleClose,
+    handleOnSubmit, open} = props;
   const [dialogOpen, setDialogOpen] = useState(false);
     const [dataRows, setDataRows] = useState();
     const [createdEntity, setCreatedEntity] = useState();
+    const [formSchema, setFormSchema] = useState();
     const handleOnClose=(value)=>{
       setCreatedEntity(value);
       setDialogOpen(false);
     }
 
-    useEffect(() => {
-        fetch("/api/institutions")
-      .then(res => res.json())
-      .then(
-        (result) => {
+    // useEffect(() => {
+    //     fetch("/api/institutions")
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
          
-          // console.log(result._embedded.applications);
-          setDataRows(result);
-        },
+    //       // console.log(result._embedded.applications);
+    //       setDataRows(result);
+    //     },
        
-        (error) => {
+    //     (error) => {
          
-          console.log(error);
+    //       console.log(error);
           
-        }
-      )
+    //     }
+    //   )
         
-        return () => {
-            // cleanup
-        }
-    }, [createdEntity])
+    //     return () => {
+    //         // cleanup
+    //     }
+    // }, [createdEntity])
+    useEffect(() => {
+    
+     
+      getProfile('applications')
+   .then(data=>{  
+      
+  
+       setFormSchema(data.properties);
+      
+       
+       
+    });
+  
+  
+   return () => {
+       // cleanup
+   }
+}, [])
     return (
         <div style={{width:'100%'}}>
         
        
           
-          <CCUPSFormDialog submitUrl="/api/institutions" validationScheme={ApplicationFormValidation} formConfig={formConfig} model={formModel} handleClose={handleClose} />
+          <CCUPSFormDialog formSchema={formSchema} submitUrl="/api/institutions" validationScheme={ApplicationFormValidation} formConfig={formConfig} model={formModel} handleClose={handleOnClose} />
         
      
         </div>

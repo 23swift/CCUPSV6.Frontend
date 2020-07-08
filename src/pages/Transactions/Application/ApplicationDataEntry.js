@@ -115,7 +115,7 @@ const ApplicationDataEntry = () => {
 
   useEffect(() => {
     // fetch('/api/data/profile');
-    fetch(getResource('applications').replace('{?projection}',"?projection=applicationWithInstitution"))
+    fetch(getResource('applications','applicationWithInstitution'))
       .then(res => res.json())
       .then(
         (result) => {

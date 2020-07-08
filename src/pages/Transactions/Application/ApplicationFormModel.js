@@ -50,7 +50,7 @@ export const Model={
   // ,product:{id:0}
   
   ,merchant:false
-  ,institution:""
+  // ,institution:""
   // ,id:0
 }
 

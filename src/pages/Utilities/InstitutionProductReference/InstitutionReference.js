@@ -12,23 +12,17 @@ import * as Yup from 'yup';
 import { createTextBox } from '../../../components/CCUPSFormElement';
 import { faTools } from '@fortawesome/free-solid-svg-icons';
 import ProductList from './components/ProductList';
-import { getSelfLink, getResource } from '../../../components/CCUPSHelper';
+import { getSelfLink, getResource, getProfile } from '../../../components/CCUPSHelper';
+import { callApi } from '../../../components/CCUPSApiService';
 
 const formModel={
-    id:0,
     code:'',
     name:'',
-    merchant_Id:''
+    merchantId:''
 }
 
-export const formConfig=[
-  
-    createTextBox("code","Code *"),
-    createTextBox("name","Name *"),
-    createTextBox("merchant_Id","Merchant Id"),
 
-  ]
-  export const ApplicationFormValidation = Yup.object().shape({
+  export const institutionFormValidation = Yup.object().shape({
     code: Yup.string()
     .trim()
     .required('Code Required!'),
@@ -43,27 +37,24 @@ const InstitutionReference = () => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dataRows, setDataRows] = useState();
     const [createdEntity, setCreatedEntity] = useState();
+
     const handleOnClose=(value)=>{
       setCreatedEntity(value);
       setDialogOpen(false);
     }
-
+    const handleOnSubmit=(values)=>{
+      return callApi(getResource('institutions'),values,'POST').then(data=>{
+          setCreatedEntity(data);
+      });
+  }
     useEffect(() => {
-        fetch(getResource("institutions")+"?projection=withProducts")
+        fetch(getResource("institutions",'withProducts'))
       .then(res => res.json())
-      .then(
-        (result) => {
-         
-          console.log(result.content.applications);
-          setDataRows(result.content);
-        },
-       
-        (error) => {
-         
-          console.log(error);
-          
-        }
-      )
+      .then( (result) => { setDataRows(result.content); },
+             (error) => { console.log(error); }
+      );
+
+     
         
         return () => {
             // cleanup
@@ -121,8 +112,8 @@ const InstitutionReference = () => {
            
            {/* <InstitutionDialog open={dialogOpen} handleClose={()=>setDialogOpen(false)} setCreatedEntity={setCreatedEntity}/> */}
 
-           <CCUPSFormDialog submitUrl="/api/institutions"  validationScheme={ApplicationFormValidation}
-           formConfig={formConfig} model={formModel} open={dialogOpen} handleClose={handleOnClose}/>
+          { <CCUPSFormDialog title="Create Institution Entry" resourceName="institutions" validationScheme={institutionFormValidation} model={formModel}
+           model={formModel} open={dialogOpen} handleClose={handleOnClose} handleOnSubmit={handleOnSubmit} />}
             
         </div>
     )

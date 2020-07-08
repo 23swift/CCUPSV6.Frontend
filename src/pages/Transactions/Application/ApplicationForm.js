@@ -34,14 +34,14 @@ const useStyles = makeStyles((theme)=>({
 const ApplicationForm = () => {
   
     const classes = useStyles();
-    // const selectedApp=GetAppFromLocalStorage('selectedApp');
+    const selectedApp=GetAppFromLocalStorage('selectedApp');
     // const selectedInstitution=GetSelectedInstitution();
     // Model.institution=selectedInstitution.links.find(getSelfLink).href;
     const [formSchema, setFormSchema] = useState();
     
     const [formModel, setFormModel] = useState(Model);
 
-    //  if(selectedApp){setFormModel(selectedApp)}else{setFormModel(Model)}
+     if(selectedApp){setFormModel(selectedApp)}else{setFormModel(Model)}
   
     // const [hasSelectedApp, setHasSelectedApp] = useState(()=>{return selectedApp ? true :false});
     

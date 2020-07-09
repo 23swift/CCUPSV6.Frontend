@@ -24,7 +24,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import PageHeader from '../../../components/PageHeader';
 import InstitutionSelection from '../../../components/InstitutionSelection';
 import CCUPSTable from '../../../components/CCUPSTable';
-import { getResource, SetSelectedInstitution } from '../../../components/CCUPSHelper';
+import { getResource, SetSelectedInstitution, RemoveAppToLocalStorage } from '../../../components/CCUPSHelper';
 
 const   tableSchema=[{displayText:'Card Number',fieldName:'cardNumber'},
 {displayText:'Name',fieldName:'name'},
@@ -115,24 +115,11 @@ const ApplicationDataEntry = () => {
 
   useEffect(() => {
     // fetch('/api/data/profile');
-    fetch(getResource('applications','applicationWithInstitution'))
-      .then(res => res.json())
-      .then(
-        (result) => {
-         
-          // console.log(result._embedded.applications);
-          setRows(result.content);
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          // setIsLoaded(true);
-          // setError(error);
-          console.log(JSON.stringify( error));
-          
-        }
-      )
+    RemoveAppToLocalStorage();
+    getResource('applications','applicationWithInstitution').then(data=>{
+      setRows(data.content);
+    });
+    
   }, [])
 
     return (

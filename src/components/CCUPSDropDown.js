@@ -15,16 +15,7 @@ const [data, setData] = useState([]);
 const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 const [dropDownVal, setDropDownVal] = useState('');
 
-const getMenuItems= async (url)=>{
-  let resource='';
-  if(url){resource=url}else{resource=getResource(fieldName+'s','forDropDown')}
-  const response = await fetch(resource);
-  const json = await response.json();
 
-   setData(json.content);
-   setDropDownVal(value);
-   
-}
 
 useEffect(() => {
   if(props.control.menuItems){
@@ -32,7 +23,13 @@ useEffect(() => {
     setData( props.control.menuItems );
   }else{
 
-    getMenuItems(props.control.itemsUrl);
+    // getMenuItems(props.control.itemsUrl);
+
+    getResource(fieldName+'s','forDropDown').then(data=>{
+        setData(data.content);
+        
+        setDropDownVal(value);
+     })
   }
   
   return () => {
@@ -43,11 +40,8 @@ useEffect(() => {
 
 
   const handleLocalChange = (event) => {
-    // console.log(data.filter(prod => prod.id === event.target.value)[0]);
-    // const selectedItem=data.filter(prod => prod.id === event.target.value)[0];
     // event.target.value=selectedItem.links.find(getSelfLink).href;
     // event.target.value=data.filter(prod => prod.id === event.target.value)[0];
-    console.log(event.target.value);
     
     // getSelfLink
     handleChange(event)

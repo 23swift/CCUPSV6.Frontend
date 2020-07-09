@@ -7,11 +7,11 @@ import { makeStyles } from '@material-ui/styles';
 import { blue, amber, grey } from '@material-ui/core/colors';
 
 import CCUPSForm from '../../../components/CCUPSForm';
-import { ApplicationFormValidation,formConfig, Model } from './ApplicationFormModel';
+import { ApplicationFormValidation,formConfig,  resetModel, getModel} from './ApplicationFormModel';
 import {   faDatabase} from "@fortawesome/free-solid-svg-icons";
 import * as Yup from 'yup';
 import InstitutionSelection from '../../../components/InstitutionSelection';
-import { GetSelectedInstitution, GetAppFromLocalStorage, getSelfLink, getProfile } from '../../../components/CCUPSHelper';
+import { GetSelectedInstitution, GetAppFromLocalStorage, getSelfLink, getProfile, getLinkedResource } from '../../../components/CCUPSHelper';
 import { CCUPSPaper } from '../../../components/CCUPSPaper';
 import CCUPSRestForm from '../../../components/CCUPSRestForm';
 import AddIcon from '@material-ui/icons/Add';
@@ -19,6 +19,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import { BootstrapInput } from './../../../components/CCUPSFormHelper';
 import ProductDropDown from './components/ProductDropDown';
+import { getLinkedResources } from './../../../components/CCUPSHelper';
 const useStyles = makeStyles((theme)=>({
   
       closeBUtton:{
@@ -37,30 +38,43 @@ const ApplicationForm = () => {
     const selectedApp=GetAppFromLocalStorage('selectedApp');
     // const selectedInstitution=GetSelectedInstitution();
     // Model.institution=selectedInstitution.links.find(getSelfLink).href;
-
+    // const Model={
+    //   product:"",
+    //   cardNumber:""
+    //   ,cardProduct:0
+    //   ,referenceNo:""
+    //   ,firstName:""
+    //   ,lastName:""
+    //   ,middleName:""
+    //   // ,product:{id:0}
+      
+    //   ,merchant:false
+    //   // ,institution:""
+    //   // ,id:0
+    // }
     
     const [formModel, setFormModel] = useState();
-
-     if(selectedApp){setFormModel(selectedApp)}else{setFormModel(Model)}
   
-    // const [hasSelectedApp, setHasSelectedApp] = useState(()=>{return selectedApp ? true :false});
-    
     useEffect(() => {
-      console.log(selectedApp);
+      
       
       if(selectedApp!=null){
-          fetch(selectedApp)
-          .then(res=>res.json()).then(data=>{
-
-            setFormModel(data);
+        console.log(selectedApp);
+        
+        getLinkedResources(getModel(),selectedApp).then(model=>{
+          fetch(model.product).then(res=>res.json()).then(data=>{
+            model.product=getSelfLink(data);
+            setFormModel(model);
           });
-
+        });
+        
       }else{
-        setFormModel(Model);
+        setFormModel(getModel());
 
       }
       return () => {
-        // cleanup
+        setFormModel(null);
+        resetModel();
       }
     }, [])
 
@@ -77,7 +91,7 @@ const ApplicationForm = () => {
              
               </Box>
         
-    <p>{JSON.stringify( formModel)}</p>
+    
 
                
         </div>

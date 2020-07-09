@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
 import * as Yup from 'yup';
-import { createTextBox, createCheckBox, createDropDown, createDropDownNumber, createHidden } from '../../../components/CCUPSFormElement'
-import { createField, FormElementType,createFormElement } from '../../../components/CCUPSFormHelper';
-import { GetObjectFromLocalStorage, GetAppFromLocalStorage, GetSelectedInstitution, getSelfLink, getResource } from '../../../components/CCUPSHelper';
-
 
 //Validaton
 export const ApplicationFormValidation = Yup.object().shape({
@@ -39,7 +35,8 @@ export const ApplicationFormValidation = Yup.object().shape({
 });
 
 
-export const Model={
+
+let  Model={
   product:"",
   cardNumber:""
   ,cardProduct:0
@@ -53,6 +50,27 @@ export const Model={
   // ,institution:""
   // ,id:0
 }
+export const getModel=()=>{ 
+  return Model
+}
 
+export const resetModel=()=>{
+
+  Model={
+    product:"",
+    cardNumber:""
+    ,cardProduct:0
+    ,referenceNo:""
+    ,firstName:""
+    ,lastName:""
+    ,middleName:""
+    // ,product:{id:0}
+    
+    ,merchant:false
+    // ,institution:""
+    // ,id:0
+  }
+
+}
 
     

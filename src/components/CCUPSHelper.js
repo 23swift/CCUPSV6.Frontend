@@ -21,6 +21,12 @@ export const SaveAppToLocalStorage=(app)=>{
     localStorage.removeItem('selectedApp');
     return(localStorage.setItem('selectedApp',JSON.stringify(app)));
 }
+
+export const RemoveAppToLocalStorage=(app)=>{
+    localStorage.removeItem('selectedApp');
+    
+}
+
 export const GetAppFromLocalStorage=(app)=>{
 
 
@@ -37,16 +43,20 @@ export const getSelfLink=(resource)=>{
 
 export const getResource=(resourceName,projection,page,size,sort)=>{
 
-    const profile= GetObjectFromLocalStorage('rest_data');
-    
-    
-    
-    
-    return profile.links.find(entity=>{
-        return entity.rel===resourceName
-    }).href.replace('{?projection}',projection===undefined ? '' :'?projection='+projection)
-    .replace('{?page,size,sort,projection}',page===undefined || size==undefined || sort==undefined ? '':'?page='+page+',size='+size+',sort='+sort+',projection='+projection);
-   
+    // const rest_data= GetObjectFromLocalStorage('rest_data');
+
+    return fetch(process.env.REACT_APP_REST_DATA)
+    .then(res => res.json())
+    .then((data)=>{
+        return data.links.find(entity=>{
+            return entity.rel===resourceName
+        }).href.replace('{?projection}',projection===undefined ? '' :'?projection='+projection)
+        .replace('{?page,size,sort,projection}',page===undefined || size==undefined || sort==undefined ? '':'?page='+page+',size='+size+',sort='+sort+',projection='+projection);
+    }).then(href=>{
+
+        return fetch(href).then(res=>res.json());
+    });
+
 }
 export const getActionUrl=(resourceName)=>{
 
@@ -65,3 +75,50 @@ export const getProfile=(resourceName)=>{
     .then(res=>res.json());
     
 }
+
+export const getRestData=()=>{
+
+    fetch(process.env.REACT_APP_REST_DATA)
+    .then(res => res.json())
+    .then((data)=>{
+        SaveObjectToLocalStorage('rest_data',data);
+    });
+}
+
+
+export const getLinkedResources =(model,resourceHref)=> new Promise(function(resolve, reject) {
+         
+        return fetch(resourceHref).then(res=>res.json()).then(data=>{
+                    Object.keys(model).map(key=>{
+         
+                        if( data.links!=undefined && data.links.find(entity=>{ return entity.rel===key })!=undefined  )
+                        { 
+                            var href=data.links.find(entity=>{ return entity.rel===key }).href.replace('{?projection}','')
+                                    .replace('{?page,size,sort,projection}','');
+                                    model[key]=href;
+                            // fetch(href).then(res=>res.json()).then(data=>{
+                            //     data[key]=getSelfLink(data);
+                            //     // data.product="test product" ;
+                                
+                            // }).then();
+                            
+                        }  else{ model[key]=data[key];}  
+                        
+                })
+                resolve(model)
+        });
+
+
+})
+
+
+// return fetch(process.env.REACT_APP_REST_DATA)
+//     .then(res => res.json())
+//     .then((data)=>{
+//         return data.links.find(entity=>{
+//             return entity.rel===resourceName
+//         }).href.replace('{?projection}','')
+//         .replace('{?page,size,sort,projection}','');
+//     });
+
+// }

@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { getResource, getProfile, getActionUrl } from './CCUPSHelper';
 import CCUPSFormElements from './CCUPSFormElements';
 import CCCUPSErroNotification from './CCCUPSErroNotification';
+import { Button } from '@material-ui/core';
 const CCUPSRestForm = (props) => {
   const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName, } = props;
   const [apiAction, setApiAction] = useState(update?"PUT":"POST");
@@ -32,7 +33,13 @@ const CCUPSRestForm = (props) => {
     })
 };
 
+const cancelAction=(resetForm)=>{
+  resetForm();
+
+}
+
   useEffect(() => {
+    
     getProfile(resourceName)
   .then(data=>{  
     setFormSchema(data.properties);
@@ -41,6 +48,7 @@ const CCUPSRestForm = (props) => {
 
 return () => {
    // cleanup
+   setFormSchema(null);
 }
 }, [])
     return (
@@ -65,7 +73,7 @@ return () => {
                     }, 2000);
                   }}
            >
-             {({ values, errors,  touched,   handleChange, handleBlur, handleSubmit, validateForm,setSubmitting,status,setTouched,isSubmitting}
+             {({ values, errors,  touched,   handleChange, handleBlur, handleSubmit, validateForm,setSubmitting,status,setTouched,isSubmitting,resetForm}
              ) => (
                       
                   
@@ -74,7 +82,7 @@ return () => {
                
                {Object.keys(errors).length>0 && <CCCUPSErroNotification errorList={errors} open={Object.keys(errors).length>0}/>}
                   {formSchema && <CCUPSFormElements formSchema={formSchema} model={model} values={values} errors={errors} touched={touched} handleChange={handleChange}
-                  isSubmitting={isSubmitting} handleBlur={handleBlur} handleSubmit={handleSubmit}/> }
+                  isSubmitting={isSubmitting} handleBlur={handleBlur} handleSubmit={handleSubmit} resetForm={resetForm}/> }
                  
                   </>
                 

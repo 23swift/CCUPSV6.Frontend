@@ -15,10 +15,10 @@ import CCUPSCheckBox from './CCUPSCheckBox';
 import PropTypes from 'prop-types';
 const CCUPSFormElements = (props) => {
     const {values, errors,touched,formElements,handleChange,handleBlur,handleSubmit,formSchema,model,isSubmitting,
-      cancelAction} = props;
+      resetForm} = props;
   
     const [confirmationOpen, setConfirmationOpen] = useState(false);
-console.log(model);
+
 
     const handleConfirmationClose = () => {
         setConfirmationOpen(false);
@@ -75,7 +75,7 @@ console.log(model);
 
               </Box>
               <Box mr={1}>   
-                    <Button color="secondary" onClick={cancelAction}  >
+                    <Button color="secondary" onClick={()=>resetForm()}  >
                         Cancel
                     </Button>
                 </Box>

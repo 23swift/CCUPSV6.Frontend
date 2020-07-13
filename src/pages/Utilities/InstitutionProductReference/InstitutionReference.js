@@ -48,11 +48,16 @@ const InstitutionReference = () => {
       });
   }
     useEffect(() => {
-        fetch(getResource("institutions",'withProducts'))
-      .then(res => res.json())
-      .then( (result) => { setDataRows(result.content); },
-             (error) => { console.log(error); }
-      );
+        getResource("institutions",'withProducts').then(href=>{
+
+            // setDataRows(result.content)
+                fetch(href)
+                    .then(res => res.json())
+                    .then( (result) => { setDataRows(result.content); },
+                            (error) => { console.log(error); }
+                    );
+        });
+       
 
      
         

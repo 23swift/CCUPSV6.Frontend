@@ -23,7 +23,7 @@ const CCUPSTable = (props) => {
     const classes = useStyles();
 const handleSelect=(event,item)=>{
  
-console.log(item);
+
 SaveAppToLocalStorage(getSelfLink(item));
 // SetSelectedInstitution(item.institution);
 history.push(detailsUrl);

@@ -38,22 +38,9 @@ const ApplicationForm = () => {
     const selectedApp=GetAppFromLocalStorage('selectedApp');
     // const selectedInstitution=GetSelectedInstitution();
     // Model.institution=selectedInstitution.links.find(getSelfLink).href;
-    // const Model={
-    //   product:"",
-    //   cardNumber:""
-    //   ,cardProduct:0
-    //   ,referenceNo:""
-    //   ,firstName:""
-    //   ,lastName:""
-    //   ,middleName:""
-    //   // ,product:{id:0}
-      
-    //   ,merchant:false
-    //   // ,institution:""
-    //   // ,id:0
-    // }
+   
     
-    const [formModel, setFormModel] = useState();
+const [formModel, setFormModel] = useState();
   
     useEffect(() => {
       
@@ -62,10 +49,8 @@ const ApplicationForm = () => {
         console.log(selectedApp);
         
         getLinkedResources(getModel(),selectedApp).then(model=>{
-          fetch(model.product).then(res=>res.json()).then(data=>{
-            model.product=getSelfLink(data);
-            setFormModel(model);
-          });
+          
+          setFormModel(model);
         });
         
       }else{

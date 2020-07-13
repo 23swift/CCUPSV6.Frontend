@@ -7,7 +7,7 @@ import { createTextBox } from '../../../../components/CCUPSFormElement';
 import * as Yup from 'yup';
 import { callApi } from '../../../../components/CCUPSApiService';
 import CCUPSFormDialog from '../../../../components/CCUPSFormDialog';
-import { getSelfLink, getResource, getProfile } from '../../../../components/CCUPSHelper';
+import { getSelfLink, getResource, getProfile, getActionUrl } from '../../../../components/CCUPSHelper';
 import ProductDialog from './ProductDialog';
 
 const formModel={
@@ -32,7 +32,7 @@ const ProductList = (props) => {
     const [createdEntity, setCreatedEntity] = useState();
     const [dialogOpen, setDialogOpen] = useState(false);
    const [formSchema, setFormSchema] = useState();
-    formModel.institution=master.links.find(getSelfLink).href;
+    // formModel.institution=master.links.find(getSelfLink).href;
 
 
     const handleOnClose=(value)=>{
@@ -41,14 +41,23 @@ const ProductList = (props) => {
       }
   const handleOnSubmit=(values)=>{
     
-      return callApi(getResource('products'),values,'POST').then(data=>{
+
+
+        return callApi(getActionUrl('products'),values,'POST').then(data=>{
      
-          setCreatedEntity(data);
-          
-      });
+            setCreatedEntity(data);
+            
+        });
+
+
+      
   }
     useEffect(() => {
-        fetch(getResource("products")+"/search/findByInstitutionId?id="+ master.id)
+
+    getResource("products").then(href=>{
+        // console.log(result);
+       
+        fetch(href+"/search/findByInstitutionId?id="+ master.id)
       .then(res => res.json())
       .then(
         (result) => {
@@ -58,6 +67,7 @@ const ProductList = (props) => {
 
         getProfile('products')
         .then(data=>{ setFormSchema(data.properties); });
+    });
         
         return () => {
             // cleanup

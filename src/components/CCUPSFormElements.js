@@ -51,7 +51,7 @@ const CCUPSFormElements = (props) => {
                             handleBlur={handleBlur} value={values[item]} />
                             
                             )}
-                            {formSchema && formSchema[item] && formSchema[item].format==='uri' && formSchema[item].type === "string" && (
+                            {formSchema && formSchema[item] && formSchema[item].$ref && formSchema[item].type === "object" && (
                            
                             <CCUPSDropDown label={formSchema[item].title}  fieldName={item}  control={item} errors={errors} touched={touched}
                             value={values[item]} handleChange={handleChange}  handleBlur={handleBlur}/>
@@ -70,7 +70,7 @@ const CCUPSFormElements = (props) => {
                        
                 </Grid>
                 }
-          <Box display="flex">
+          <Box display="flex" pt={2}> 
               <Box flexGrow={1}>
 
               </Box>

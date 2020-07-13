@@ -52,10 +52,12 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
             return entity.rel===resourceName
         }).href.replace('{?projection}',projection===undefined ? '' :'?projection='+projection)
         .replace('{?page,size,sort,projection}',page===undefined || size==undefined || sort==undefined ? '':'?page='+page+',size='+size+',sort='+sort+',projection='+projection);
-    }).then(href=>{
-
-        return fetch(href).then(res=>res.json());
     });
+    
+    // .then(href=>{
+
+    //     return fetch(href).then(res=>res.json());
+    // });
 
 }
 export const getActionUrl=(resourceName)=>{
@@ -111,14 +113,43 @@ export const getLinkedResources =(model,resourceHref)=> new Promise(function(res
 
 })
 
+// export const follow=(api, rootPath, relArray)=> {
+// 	const root = api({
+// 		method: 'GET',
+// 		path: rootPath
+// 	});
 
-// return fetch(process.env.REACT_APP_REST_DATA)
-//     .then(res => res.json())
-//     .then((data)=>{
-//         return data.links.find(entity=>{
-//             return entity.rel===resourceName
-//         }).href.replace('{?projection}','')
-//         .replace('{?page,size,sort,projection}','');
-//     });
+// 	return relArray.reduce(function(root, arrayItem) {
+// 		const rel = typeof arrayItem === 'string' ? arrayItem : arrayItem.rel;
+// 		return traverseNext(root, rel, arrayItem);
+// 	}, root);
 
-// }
+// 	function traverseNext (root, rel, arrayItem) {
+// 		return root.then(function (response) {
+// 			if (hasEmbeddedRel(response.entity, rel)) {
+// 				return response.entity._embedded[rel];
+// 			}
+
+// 			if(!response.entity._links) {
+// 				return [];
+// 			}
+
+// 			if (typeof arrayItem === 'string') {
+// 				return api({
+// 					method: 'GET',
+// 					path: response.entity._links[rel].href
+// 				});
+// 			} else {
+// 				return api({
+// 					method: 'GET',
+// 					path: response.entity._links[rel].href,
+// 					params: arrayItem.params
+// 				});
+// 			}
+// 		});
+// 	}
+
+// 	function hasEmbeddedRel (entity, rel) {
+// 		return entity._embedded && entity._embedded.hasOwnProperty(rel);
+// 	}
+// };

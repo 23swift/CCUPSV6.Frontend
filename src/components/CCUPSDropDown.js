@@ -27,7 +27,7 @@ useEffect(() => {
 
     getResource(fieldName+'s','forDropDown').then(data=>{
         setData(data.content);
-        
+        console.log(data.content);
         setDropDownVal(value);
      })
   }

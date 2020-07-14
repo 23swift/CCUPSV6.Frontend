@@ -51,10 +51,10 @@ let  Model={
   // ,institution:""
   // ,id:0
   ,links:[ {
-    "rel": "controls"
+    "rel": "action"
     ,"href": process.env.REACT_APP_REST_DATA + '/applications'
     ,"title": "Save"
-    ,"type": "button"
+    ,"type": "POST"
     ,"name": "save"
     
 }]
@@ -79,7 +79,7 @@ export const resetModel=()=>{
     ,merchant:false
    
     ,links:[ {
-      "rel": "controls"
+      "rel": "action"
       ,"href": process.env.REACT_APP_REST_DATA + '/applications'
       ,"title": "Save"
       ,"type": "button"

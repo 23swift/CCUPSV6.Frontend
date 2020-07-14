@@ -13,9 +13,12 @@ import PropTypes from 'prop-types';
 import { getResource, getProfile, getActionUrl } from './CCUPSHelper';
 import CCUPSFormElements from './CCUPSFormElements';
 import CCCUPSErroNotification from './CCCUPSErroNotification';
-import { Button } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
+import CCUPSActionButton from './CCUPSActionButton';
+import { withFormik } from 'formik';
+
 const CCUPSRestForm = (props) => {
-  const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName, } = props;
+  const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName,handleOnSubmit } = props;
   const [apiAction, setApiAction] = useState(update?"PUT":"POST");
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [formSchema, setFormSchema] = useState();
@@ -54,30 +57,36 @@ return () => {
     return (
         <div style={{paddingTop:10}}>
            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-           <Formik  initialValues={model}    validationSchema={validationScheme}
-                onSubmit={(values, { setSubmitting,resetForm }) => {
+           <Formik  initialValues={model}    validationSchema={validationScheme} 
+                onSubmit={(values, { setSubmitting,resetForm,...props }) => {
                     setTimeout(() => {
-                      getResource(resourceName).then(href=>{
+                      // getResource(resourceName).then(href=>{
 
-                      callApi(href,values,'POST').then(data => {
-                                              // console.log(data); // JSON data parsed by `response.json()` call
-                                              setSubmitting(false);
-                                              showSuccessMessage("Entry Saved!");
-                                              resetForm();
-                                            },
-                                            (error) => {
-                                              // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');
-                                              showSubmitErrorMessage(JSON.stringify(error, null, 2));
-                                              setSubmitting(false);
+                      // callApi(href,values,'POST').then(data => {
+                      //                         // console.log(data); // JSON data parsed by `response.json()` call
+                      //                         setSubmitting(false);
+                      //                         showSuccessMessage("Entry Saved!");
+                      //                         resetForm();
+                      //                       },
+                      //                       (error) => {
+                      //                         // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');
+                      //                         showSubmitErrorMessage(JSON.stringify(error, null, 2));
+                      //                         setSubmitting(false);
                                               
-                                            })
+                      //                       })
 
-                      });
+                      // });
+
+
+
+                   
+                      console.log(values);
+                      setSubmitting(false);
                       
                     }, 2000);
                   }}
            >
-             {({ values, errors,  touched,   handleChange, handleBlur, handleSubmit, validateForm,setSubmitting,status,setTouched,isSubmitting,resetForm}
+             {({ values, errors,  touched,   handleChange, handleBlur, handleSubmit, validateForm,setSubmitting,status,setTouched,isSubmitting,resetForm,action}
              ) => (
                       
                   
@@ -87,7 +96,26 @@ return () => {
                {Object.keys(errors).length>0 && <CCCUPSErroNotification errorList={errors} open={Object.keys(errors).length>0}/>}
                   {formSchema && <CCUPSFormElements formSchema={formSchema} model={model} values={values} errors={errors} touched={touched} handleChange={handleChange}
                   isSubmitting={isSubmitting} handleBlur={handleBlur} handleSubmit={handleSubmit} resetForm={resetForm}/> }
-                 
+                  <Box display="flex" pt={2}> 
+              <Box flexGrow={1}>
+
+              </Box>
+             
+
+                  {values.links && values.links.filter(entity=>{ return entity.rel=='action'}).map((item,index)=>(
+
+                       <Box key={index} mr={1}>   
+                          {/* <Button color="secondary" variant="contained" disableElevation onClick={()=> setConfirmationOpen(true)} style={{minWidth:100}}>
+                          {item.title}
+                          </Button> */}
+
+                           <CCUPSActionButton item={item} handleSubmit={handleSubmit} isSubmitting={isSubmitting}  />
+                          </Box> 
+                      
+
+                  ))}
+                
+          </Box>
                   </>
                 
               )}
@@ -114,4 +142,8 @@ CCUPSRestForm.propTypes = {
   // handleSubmit:PropTypes.func.isRequired,
 
 }
+
+
+
+
 export default CCUPSRestForm

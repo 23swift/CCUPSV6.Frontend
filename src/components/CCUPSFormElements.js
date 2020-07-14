@@ -80,38 +80,8 @@ const actionButtonClick=(event,id)=>{
                        
                 </Grid>
                 }
-          <Box display="flex" pt={2}> 
-              <Box flexGrow={1}>
-
-              </Box>
-              {/* <Box mr={1}>   
-                    <Button color="secondary" onClick={()=>resetForm()}  >
-                        Cancel
-                    </Button>
-                </Box> */}
-               
-                
-                          {/* <Box>   
-                          <Button color="secondary" variant="contained" disableElevation onClick={()=> setConfirmationOpen(true)} style={{minWidth:100}}>
-                          Save
-                          </Button>
-                          </Box> */}
-
-                  {values.links && values.links.filter(entity=>{ return entity.rel=='controls'}).map((item,index)=>(
-
-                       <Box key={index} mr={1}>   
-                          {/* <Button color="secondary" variant="contained" disableElevation onClick={()=> setConfirmationOpen(true)} style={{minWidth:100}}>
-                          {item.title}
-                          </Button> */}
-
-                           <CCUPSActionButton item={item} onClick={actionButtonClick} />
-                          </Box> 
-                      
-
-                  ))}
-                
-          </Box>
-          <CCUPSConfirmationDialog
+         
+          {/* <CCUPSConfirmationDialog
                       open={confirmationOpen}
                       handleClose={handleConfirmationClose}
                       isSubmitting={isSubmitting}
@@ -122,7 +92,7 @@ const actionButtonClick=(event,id)=>{
                       open={isSubmitting}
                     
                       displayText="Saving Please wait..."
-                    />
+                    /> */}
             </Form>
            
         

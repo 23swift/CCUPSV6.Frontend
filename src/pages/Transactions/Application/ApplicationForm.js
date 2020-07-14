@@ -46,11 +46,9 @@ const [formModel, setFormModel] = useState();
       
       
       if(selectedApp!=null){
-        console.log(selectedApp);
-        
+       
         getLinkedResources(getModel(),selectedApp).then(model=>{
-          console.log(model);
-          
+         
           setFormModel(model);
         });
         
@@ -72,10 +70,9 @@ const [formModel, setFormModel] = useState();
             subTitle="Create an entry"/>
           <Box mr={1} ml={1} component={Paper}  pb={2} pt={1} pr={2} pl={2}  elevation={1}
          
-          >
-             
+          >  
                    {formModel && <CCUPSRestForm model={formModel} resourceName="applications"  validationScheme={ApplicationFormValidation}   />}
-             
+              
               </Box>
         
     

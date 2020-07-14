@@ -94,7 +94,8 @@ const ProductList = (props) => {
                                             
                                             
                                         </List>
-                                        <CCUPSFormDialog resourceName="products"  title="Create Product Entry" formSchema={formSchema} open={dialogOpen} submitUrl={getResource('products')} validationScheme={productFormValidation} model={formModel} handleClose={handleOnClose} handleOnSubmit={handleOnSubmit} />
+                                        <CCUPSFormDialog resourceName="products"  title="Create Product Entry" formSchema={formSchema} open={dialogOpen} submitUrl={getResource('products')} validationScheme={productFormValidation} model={formModel} handleClose={handleOnClose}
+                                         handleOnSubmit={handleOnSubmit} />
                 
         </div>
     )

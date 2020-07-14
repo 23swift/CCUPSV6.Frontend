@@ -49,11 +49,13 @@ const [formModel, setFormModel] = useState();
         console.log(selectedApp);
         
         getLinkedResources(getModel(),selectedApp).then(model=>{
+          console.log(model);
           
           setFormModel(model);
         });
         
       }else{
+        
         setFormModel(getModel());
 
       }

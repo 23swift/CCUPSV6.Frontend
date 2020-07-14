@@ -57,7 +57,7 @@ return () => {
            <Formik  initialValues={model}    validationSchema={validationScheme}
                 onSubmit={(values, { setSubmitting,resetForm }) => {
                     setTimeout(() => {
-                      getActionUrl(resourceName).then(href=>{
+                      getResource(resourceName).then(href=>{
 
                       callApi(href,values,'POST').then(data => {
                                               // console.log(data); // JSON data parsed by `response.json()` call

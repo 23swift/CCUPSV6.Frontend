@@ -44,10 +44,12 @@ export const getSelfLink=(resource)=>{
 export const getResource=(resourceName,projection,page,size,sort)=>{
 
     // const rest_data= GetObjectFromLocalStorage('rest_data');
-
+    
     return fetch(process.env.REACT_APP_REST_DATA)
     .then(res => res.json())
     .then((data)=>{
+    
+        
         return data.links.find(entity=>{
             return entity.rel===resourceName
         }).href.replace('{?projection}',projection===undefined ? '' :'?projection='+projection)
@@ -93,63 +95,14 @@ export const getLinkedResources =(model,resourceHref)=> new Promise(function(res
         return fetch(resourceHref).then(res=>res.json()).then(data=>{
                     Object.keys(model).map(key=>{
          
-                        if( data.links!=undefined && data.links.find(entity=>{ return entity.rel===key })!=undefined  )
-                        { 
-                            var href=data.links.find(entity=>{ return entity.rel===key }).href.replace('{?projection}','')
-                                    .replace('{?page,size,sort,projection}','');
-                                    model[key]=href;
-                            // fetch(href).then(res=>res.json()).then(data=>{
-                            //     data[key]=getSelfLink(data);
-                            //     // data.product="test product" ;
-                                
-                            // }).then();
-                            
-                        }  else{ model[key]=data[key];}  
-                        
+                        if(data.links.find(entity=>{ return entity.name===key })!=undefined){
+
+                            model[key]=data.links.find(entity=>{ return entity.name===key }).href;
+                        }else{ model[key]=data[key];}  
+                 
                 })
                 resolve(model)
         });
 
 
 })
-
-// export const follow=(api, rootPath, relArray)=> {
-// 	const root = api({
-// 		method: 'GET',
-// 		path: rootPath
-// 	});
-
-// 	return relArray.reduce(function(root, arrayItem) {
-// 		const rel = typeof arrayItem === 'string' ? arrayItem : arrayItem.rel;
-// 		return traverseNext(root, rel, arrayItem);
-// 	}, root);
-
-// 	function traverseNext (root, rel, arrayItem) {
-// 		return root.then(function (response) {
-// 			if (hasEmbeddedRel(response.entity, rel)) {
-// 				return response.entity._embedded[rel];
-// 			}
-
-// 			if(!response.entity._links) {
-// 				return [];
-// 			}
-
-// 			if (typeof arrayItem === 'string') {
-// 				return api({
-// 					method: 'GET',
-// 					path: response.entity._links[rel].href
-// 				});
-// 			} else {
-// 				return api({
-// 					method: 'GET',
-// 					path: response.entity._links[rel].href,
-// 					params: arrayItem.params
-// 				});
-// 			}
-// 		});
-// 	}
-
-// 	function hasEmbeddedRel (entity, rel) {
-// 		return entity._embedded && entity._embedded.hasOwnProperty(rel);
-// 	}
-// };

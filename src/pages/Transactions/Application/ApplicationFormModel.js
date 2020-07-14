@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import * as Yup from 'yup';
+import { getResource } from './../../../components/CCUPSHelper';
 
 //Validaton
 export const ApplicationFormValidation = Yup.object().shape({
@@ -49,16 +50,25 @@ let  Model={
   ,merchant:false
   // ,institution:""
   // ,id:0
+  ,links:[ {
+    "rel": "controls"
+    ,"href": process.env.REACT_APP_REST_DATA + '/applications'
+    ,"title": "Save"
+    ,"type": "button"
+    ,"name": "save"
+    
+}]
 }
 export const getModel=()=>{ 
+  resetModel();
   return Model
 }
 
 export const resetModel=()=>{
 
   Model={
-    product:"",
-    cardNumber:""
+    product:""
+    ,cardNumber:""
     ,cardProduct:0
     ,referenceNo:""
     ,firstName:""
@@ -67,8 +77,15 @@ export const resetModel=()=>{
     // ,product:{id:0}
     
     ,merchant:false
-    // ,institution:""
-    // ,id:0
+   
+    ,links:[ {
+      "rel": "controls"
+      ,"href": process.env.REACT_APP_REST_DATA + '/applications'
+      ,"title": "Save"
+      ,"type": "button"
+      ,"name": "save"
+      
+  }]
   }
 
 }

@@ -25,10 +25,13 @@ useEffect(() => {
 
     // getMenuItems(props.control.itemsUrl);
 
-    getResource(fieldName+'s','forDropDown').then(data=>{
+    getResource(fieldName+'s','forDropDown').then(href=>{
+      fetch(href).then(res=>res.json()).then(data=>{
         setData(data.content);
-        console.log(data.content);
+    
         setDropDownVal(value);
+      });
+        
      })
   }
   

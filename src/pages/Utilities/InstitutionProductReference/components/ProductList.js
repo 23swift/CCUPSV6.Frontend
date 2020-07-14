@@ -40,30 +40,23 @@ const ProductList = (props) => {
         setDialogOpen(false);
       }
   const handleOnSubmit=(values)=>{
-    
-
-
+     values.institution=getSelfLink( master);
         return callApi(getActionUrl('products'),values,'POST').then(data=>{
-     
+            console.log(values);
             setCreatedEntity(data);
             
         });
-
-
       
   }
     useEffect(() => {
+
 
     getResource("products").then(href=>{
         // console.log(result);
        
         fetch(href+"/search/findByInstitutionId?id="+ master.id)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setDataRows(result.content);
-        },
-        (error) => {  console.log(error);})
+        .then(res => res.json())
+        .then((result) => { setDataRows(result.content); }, (error) => {  console.log(error);});
 
         getProfile('products')
         .then(data=>{ setFormSchema(data.properties); });

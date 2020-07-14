@@ -116,9 +116,14 @@ const ApplicationDataEntry = () => {
   useEffect(() => {
     // fetch('/api/data/profile');
     RemoveAppToLocalStorage();
-    getResource('applications','applicationWithInstitution').then(data=>{
-      setRows(data.content);
+    getResource('applications','applicationWithInstitution').then(href=>{
+
+      
+      fetch(href).then(res=>res.json()).then(data=>{
+        setRows(data.content);
+      });
     });
+      
     
   }, [])
 

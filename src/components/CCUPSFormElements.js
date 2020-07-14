@@ -13,12 +13,14 @@ import CCUPSProgress from './CCUPSProgress';
 import { useSnackbar } from 'notistack';
 import CCUPSCheckBox from './CCUPSCheckBox';
 import PropTypes from 'prop-types';
+import CCUPSActionButton from './CCUPSActionButton';
 const CCUPSFormElements = (props) => {
     const {values, errors,touched,formElements,handleChange,handleBlur,handleSubmit,formSchema,model,isSubmitting,
       resetForm} = props;
   
     const [confirmationOpen, setConfirmationOpen] = useState(false);
 
+            
 
     const handleConfirmationClose = () => {
         setConfirmationOpen(false);
@@ -32,6 +34,14 @@ const CCUPSFormElements = (props) => {
         
       };
       
+const actionButtonClick=(event,id)=>{
+
+  setConfirmationOpen(true)
+  console.log(event.target);
+  
+
+}
+
     return (
         
             <Form noValidate >
@@ -51,7 +61,7 @@ const CCUPSFormElements = (props) => {
                             handleBlur={handleBlur} value={values[item]} />
                             
                             )}
-                            {formSchema && formSchema[item] && formSchema[item].$ref && formSchema[item].type === "object" && (
+                            {formSchema && formSchema[item] && formSchema[item].format=="uri" && formSchema[item].type === "string" && (
                            
                             <CCUPSDropDown label={formSchema[item].title}  fieldName={item}  control={item} errors={errors} touched={touched}
                             value={values[item]} handleChange={handleChange}  handleBlur={handleBlur}/>
@@ -74,16 +84,32 @@ const CCUPSFormElements = (props) => {
               <Box flexGrow={1}>
 
               </Box>
-              <Box mr={1}>   
+              {/* <Box mr={1}>   
                     <Button color="secondary" onClick={()=>resetForm()}  >
                         Cancel
                     </Button>
-                </Box>
-                <Box>   
-                    <Button color="secondary" variant="contained" disableElevation onClick={()=> setConfirmationOpen(true)} style={{minWidth:100}}>
-                        Save
-                    </Button>
-                </Box>
+                </Box> */}
+               
+                
+                          {/* <Box>   
+                          <Button color="secondary" variant="contained" disableElevation onClick={()=> setConfirmationOpen(true)} style={{minWidth:100}}>
+                          Save
+                          </Button>
+                          </Box> */}
+
+                  {values.links && values.links.filter(entity=>{ return entity.rel=='controls'}).map((item,index)=>(
+
+                       <Box key={index} mr={1}>   
+                          {/* <Button color="secondary" variant="contained" disableElevation onClick={()=> setConfirmationOpen(true)} style={{minWidth:100}}>
+                          {item.title}
+                          </Button> */}
+
+                           <CCUPSActionButton item={item} onClick={actionButtonClick} />
+                          </Box> 
+                      
+
+                  ))}
+                
           </Box>
           <CCUPSConfirmationDialog
                       open={confirmationOpen}

@@ -17,6 +17,8 @@ import {    Box,    Divider,    Button,    IconButton,    Slide,
 import CCUPSFormElements from './CCUPSFormElements';
 import CCCUPSErroNotification from './CCCUPSErroNotification';
 import { getProfile } from './CCUPSHelper';
+import CCUPSActionButton from './CCUPSActionButton';
+import { callApi } from './CCUPSApiService';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -69,7 +71,7 @@ const isEmpty = (obj) => {
 
 const CCUPSFormDialog = (props) => {
     const { formConfig, submitUrl, validationScheme,legend,update,model,returnUrl,handleClose,
-      handleOnSubmit, open,title ,resourceName} = props;
+       open,title ,resourceName} = props;
 
 
   const classes = useStyles();
@@ -139,6 +141,40 @@ pErrors=null
     }
     return false;
   }
+  let selectedAction=null;
+
+  const setSelectedAction=(val)=>{
+    selectedAction=val;
+    
+  }
+
+  const handleOnSubmit =  (values, actions) => {
+
+    setTimeout(() => {
+    
+      callApi(selectedAction.href,values,selectedAction.type).then(data => {
+                              // console.log(data); // JSON data parsed by `response.json()` call
+                              actions.setSubmitting(false);
+                              showSuccessMessage("Entry Saved!");
+                              if(selectedAction.type=="POST"){ actions.resetForm();}
+                              // else{actions.setValues(data);}
+                              handleClose(data);
+                            },
+                            (error) => {
+                              // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');
+                              showSubmitErrorMessage(JSON.stringify(error, null, 2));
+                               actions.setSubmitting(false);
+                              
+                            })
+    
+
+                            
+      
+    }, 2000);
+
+
+
+}
 
 useEffect(() => {
   getProfile(resourceName)
@@ -157,26 +193,7 @@ useEffect(() => {
             // validate={validateValues}
             validationSchema={validationScheme}
             //  validateOnMount={true}
-            onSubmit={(values, { setSubmitting,resetForm }) => {
-              setTimeout(() => {
-              
-                handleOnSubmit(values).then(data => {
-                    // console.log(data); // JSON data parsed by `response.json()` call
-                    setSubmitting(false);
-                    showSuccessMessage("Entry Saved!");
-                    resetForm();
-                    handleClose(data);
-                  },
-                  (error) => {
-                    // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');
-                    showSubmitErrorMessage(JSON.stringify(error, null, 2));
-                    setSubmitting(false);
-                    // handleClose(false);
-                    
-                  })
-                
-              }, 2000);
-            }}
+            onSubmit={handleOnSubmit}
           >
             {({
               values,
@@ -212,10 +229,33 @@ useEffect(() => {
                  
               </DialogContent>
            
-              <CCUPSProgress
+              {/* <CCUPSProgress
                 open={isSubmitting}
                 displayText="Saving Please wait..."
-              />
+              /> */}
+              <DialogActions>
+              <Box display="flex" pt={2}> 
+              <Box flexGrow={1}>
+              
+              </Box>
+             
+
+                  {values.links && values.links.filter(entity=>{ return entity.rel=='action'}).map((item,index)=>(
+
+                       <Box key={index} mr={1}>   
+                          {/* <Button color="secondary" variant="contained" disableElevation onClick={()=> setConfirmationOpen(true)} style={{minWidth:100}}>
+                          {item.title}
+                          </Button> */}
+
+                           <CCUPSActionButton item={item} handleSubmit={handleSubmit} isSubmitting={isSubmitting} setSelectedAction={setSelectedAction} />
+                       
+                          </Box> 
+                      
+
+                  ))}
+                
+          </Box>
+              </DialogActions>
               </Dialog>
               
             )}

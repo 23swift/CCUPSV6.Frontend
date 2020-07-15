@@ -19,6 +19,14 @@ const formModel={
     code:'',
     name:'',
     merchantId:''
+    ,links:[ {
+        "rel": "action"
+        ,"href": process.env.REACT_APP_REST_DATA + '/institutions'
+        ,"title": "Save"
+        ,"type": "POST"
+        ,"name": "save"
+        
+    }]
 }
 
 
@@ -42,11 +50,11 @@ const InstitutionReference = () => {
       setCreatedEntity(value);
       setDialogOpen(false);
     }
-    const handleOnSubmit=(values)=>{
-      return callApi(getResource('institutions'),values,'POST').then(data=>{
-          setCreatedEntity(data);
-      });
-  }
+//     const handleOnSubmit=(values)=>{
+//       return callApi(getResource('institutions'),values,'POST').then(data=>{
+//           setCreatedEntity(data);
+//       });
+//   }
     useEffect(() => {
         getResource("institutions",'withProducts').then(href=>{
 
@@ -118,7 +126,9 @@ const InstitutionReference = () => {
            {/* <InstitutionDialog open={dialogOpen} handleClose={()=>setDialogOpen(false)} setCreatedEntity={setCreatedEntity}/> */}
 
           { <CCUPSFormDialog title="Create Institution Entry" resourceName="institutions" validationScheme={institutionFormValidation} model={formModel}
-           model={formModel} open={dialogOpen} handleClose={handleOnClose} handleOnSubmit={handleOnSubmit} />}
+           model={formModel} open={dialogOpen} handleClose={handleOnClose}
+            // handleOnSubmit={handleOnSubmit} 
+            />}
             
         </div>
     )

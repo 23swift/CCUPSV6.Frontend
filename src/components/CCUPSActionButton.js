@@ -7,7 +7,7 @@ import CCUPSConfirmationDialog from './CCUPSConfirmationDialog';
 import CCUPSProgress from './CCUPSProgress';
 const CCUPSActionButton = (props) => {
     const [confirmationOpen, setConfirmationOpen] = useState(false);
-    const{item,handleClose,action,message,isSubmitting,handleSubmit}=props;
+    const{item,isSubmitting,handleSubmit,setSelectedAction}=props;
  
     const onButtonClick=(href)=>{
         // alert(href);
@@ -15,10 +15,11 @@ const CCUPSActionButton = (props) => {
         setConfirmationOpen(true);
     }
     const dialogAction=()=>{
-        console.log(item);
+        
         // setConfirmationOpen(true);
-        let action=item.type;
-        handleSubmit({action:action});
+        // let action=item.type;
+        setSelectedAction(item);
+        handleSubmit();
     }
     return (
         <div>

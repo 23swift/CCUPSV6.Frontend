@@ -17,8 +17,10 @@ import { Button, Box } from '@material-ui/core';
 import CCUPSActionButton from './CCUPSActionButton';
 import { withFormik } from 'formik';
 
+
+
 const CCUPSRestForm = (props) => {
-  const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName,handleOnSubmit } = props;
+  const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName } = props;
   const [apiAction, setApiAction] = useState(update?"PUT":"POST");
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [formSchema, setFormSchema] = useState();
@@ -41,6 +43,42 @@ const cancelAction=(resetForm)=>{
 
 }
 
+const handleOnSubmit =  (values, actions) => {
+  
+                    setTimeout(() => {
+                    console.log(selectedAction);
+                    
+                      callApi(selectedAction.href,values,selectedAction.type).then(data => {
+                                              // console.log(data); // JSON data parsed by `response.json()` call
+                                              actions.setSubmitting(false);
+                                              showSuccessMessage("Entry Saved!");
+                                              if(selectedAction.type=="POST"){ actions.resetForm();}
+                                              // else{actions.setValues(data);}
+                                              
+                                            },
+                                            (error) => {
+                                              // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');
+                                              showSubmitErrorMessage(JSON.stringify(error, null, 2));
+                                               actions.setSubmitting(false);
+                                              
+                                            })
+                    
+
+                                            
+                      
+                    }, 2000);
+                
+  
+ 
+}
+
+let selectedAction=null;
+
+const setSelectedAction=(val)=>{
+  selectedAction=val;
+  
+}
+
   useEffect(() => {
     
     getProfile(resourceName)
@@ -58,35 +96,10 @@ return () => {
         <div style={{paddingTop:10}}>
            <MuiPickersUtilsProvider utils={DateFnsUtils}>
            <Formik  initialValues={model}    validationSchema={validationScheme} 
-                onSubmit={(values, { setSubmitting,resetForm,...props }) => {
-                    setTimeout(() => {
-                      // getResource(resourceName).then(href=>{
-
-                      // callApi(href,values,'POST').then(data => {
-                      //                         // console.log(data); // JSON data parsed by `response.json()` call
-                      //                         setSubmitting(false);
-                      //                         showSuccessMessage("Entry Saved!");
-                      //                         resetForm();
-                      //                       },
-                      //                       (error) => {
-                      //                         // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');
-                      //                         showSubmitErrorMessage(JSON.stringify(error, null, 2));
-                      //                         setSubmitting(false);
-                                              
-                      //                       })
-
-                      // });
-
-
-
-                   
-                      console.log(values);
-                      setSubmitting(false);
-                      
-                    }, 2000);
-                  }}
+                onSubmit={handleOnSubmit}
+               
            >
-             {({ values, errors,  touched,   handleChange, handleBlur, handleSubmit, validateForm,setSubmitting,status,setTouched,isSubmitting,resetForm,action}
+             {({ values, errors,  touched,   handleChange, handleBlur,handleSubmit,  validateForm,setSubmitting,setValues ,setTouched,isSubmitting,resetForm}
              ) => (
                       
                   
@@ -96,9 +109,9 @@ return () => {
                {Object.keys(errors).length>0 && <CCCUPSErroNotification errorList={errors} open={Object.keys(errors).length>0}/>}
                   {formSchema && <CCUPSFormElements formSchema={formSchema} model={model} values={values} errors={errors} touched={touched} handleChange={handleChange}
                   isSubmitting={isSubmitting} handleBlur={handleBlur} handleSubmit={handleSubmit} resetForm={resetForm}/> }
-                  <Box display="flex" pt={2}> 
+            <Box display="flex" pt={2}> 
               <Box flexGrow={1}>
-
+              
               </Box>
              
 
@@ -109,7 +122,8 @@ return () => {
                           {item.title}
                           </Button> */}
 
-                           <CCUPSActionButton item={item} handleSubmit={handleSubmit} isSubmitting={isSubmitting}  />
+                           <CCUPSActionButton item={item} handleSubmit={handleSubmit} isSubmitting={isSubmitting} setSelectedAction={setSelectedAction} />
+                       
                           </Box> 
                       
 

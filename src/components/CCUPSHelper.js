@@ -45,6 +45,7 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
 
     // const rest_data= GetObjectFromLocalStorage('rest_data');
     
+    
     return fetch(process.env.REACT_APP_REST_DATA)
     .then(res => res.json())
     .then((data)=>{
@@ -52,8 +53,8 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
         
         return data.links.find(entity=>{
             return entity.rel===resourceName
-        }).href.replace('{?projection}',projection===undefined ? '' :'?projection='+projection)
-        .replace('{?page,size,sort,projection}',page===undefined || size==undefined || sort==undefined ? '':'?page='+page+',size='+size+',sort='+sort+',projection='+projection);
+        }).href.replace('{?projection}',projection ? '?projection='+projection:'' )
+        .replace('{?page,size,sort,projection}',page==undefined || size==undefined || sort==undefined ? '':'?page='+page+',size='+size+',sort='+sort+',projection='+projection);
     });
     
     // .then(href=>{

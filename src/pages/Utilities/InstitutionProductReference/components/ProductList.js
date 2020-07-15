@@ -12,7 +12,16 @@ import ProductDialog from './ProductDialog';
 
 const formModel={
     code:'',
-    name:'',
+    name:''
+    ,institution:""
+    ,links:[ {
+        "rel": "action"
+        ,"href": process.env.REACT_APP_REST_DATA + '/products'
+        ,"title": "Save"
+        ,"type": "POST"
+        ,"name": "save"
+        
+    }]
     
 }
 
@@ -32,25 +41,24 @@ const ProductList = (props) => {
     const [createdEntity, setCreatedEntity] = useState();
     const [dialogOpen, setDialogOpen] = useState(false);
    const [formSchema, setFormSchema] = useState();
-    // formModel.institution=master.links.find(getSelfLink).href;
-
+     formModel.institution=getSelfLink( master);
 
     const handleOnClose=(value)=>{
         setCreatedEntity(value);
         setDialogOpen(false);
       }
-  const handleOnSubmit=(values)=>{
-     values.institution=getSelfLink( master);
-        return callApi(getActionUrl('products'),values,'POST').then(data=>{
-            console.log(values);
-            setCreatedEntity(data);
+//   const handleOnSubmit=(values)=>{
+//      values.institution=getSelfLink( master);
+//         return callApi(getActionUrl('products'),values,'POST').then(data=>{
+//             console.log(values);
+//             setCreatedEntity(data);
             
-        });
+//         });
       
-  }
+//   }
     useEffect(() => {
-
-
+       
+        
     getResource("products").then(href=>{
         // console.log(result);
        
@@ -94,8 +102,9 @@ const ProductList = (props) => {
                                             
                                             
                                         </List>
-                                        <CCUPSFormDialog resourceName="products"  title="Create Product Entry" formSchema={formSchema} open={dialogOpen} submitUrl={getResource('products')} validationScheme={productFormValidation} model={formModel} handleClose={handleOnClose}
-                                         handleOnSubmit={handleOnSubmit} />
+                                        <CCUPSFormDialog resourceName="products"  title="Create Product Entry" formSchema={formSchema} open={dialogOpen} validationScheme={productFormValidation} model={formModel} handleClose={handleOnClose}
+                                        //  handleOnSubmit={handleOnSubmit} 
+                                         />
                 
         </div>
     )

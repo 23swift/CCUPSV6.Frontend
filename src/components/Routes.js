@@ -13,6 +13,8 @@ import MobileMenu from '../pages/MobileMenu';
 
 import InstitutionReference from '../pages/Utilities/InstitutionProductReference/InstitutionReference';
 import InstitutionEnrollment from '../pages/Transactions/Institution/InstitutionEnrollment';
+import AuthenticatedRoute from './AuthenticatedRoute';
+import Login from '../pages/Login';
 function usePageViews() {
   let location = useLocation();
   React.useEffect(() => {
@@ -38,16 +40,17 @@ const Routes = () => {
          />
         <Switch>
           <Route exact path="/" component={Main1} />
+          <Route exact path="/login" component={Login} />
           
-          <Route exact path="/transactions" component={Transactions} />
-          <Route exact path="/applicationDataEntry" component={ApplicationDataEntry}/>
-          <Route exact path="/applicationForm" component={ApplicationForm}/>
-          <Route exact path="/addEmployee" component={AddEmployee} />
-          <Route exact path="/view" component={SimpleTable} />
-          <Route exact path="/mobileMenu" component={MobileMenu} />
-          <Route exact path="/instProdRef" component={InstitutionReference} />
+          <AuthenticatedRoute exact path="/transactions" component={Transactions} />
+          <AuthenticatedRoute exact path="/applicationDataEntry" component={ApplicationDataEntry}/>
+          <AuthenticatedRoute exact path="/applicationForm" component={ApplicationForm}/>
+          <AuthenticatedRoute exact path="/addEmployee" component={AddEmployee} />
+          <AuthenticatedRoute exact path="/view" component={SimpleTable} />
+          <AuthenticatedRoute exact path="/mobileMenu" component={MobileMenu} />
+          <AuthenticatedRoute exact path="/instProdRef" component={InstitutionReference} />
           
-          <Route path="/institutionEnrollment" component={InstitutionEnrollment} />
+          <AuthenticatedRoute path="/institutionEnrollment" component={InstitutionEnrollment} />
           
           <Route path="*" component={NotFoundPage} />
         </Switch>

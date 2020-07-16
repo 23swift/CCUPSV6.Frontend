@@ -37,28 +37,7 @@ export const ApplicationFormValidation = Yup.object().shape({
 
 
 
-let  Model={
-  product:"",
-  cardNumber:""
-  ,cardProduct:0
-  ,referenceNo:""
-  ,firstName:""
-  ,lastName:""
-  ,middleName:""
-  // ,product:{id:0}
-  
-  ,merchant:false
-  // ,institution:""
-  // ,id:0
-  ,links:[ {
-    "rel": "action"
-    ,"href": process.env.REACT_APP_REST_DATA + '/applications'
-    ,"title": "Save"
-    ,"type": "POST"
-    ,"name": "save"
-    
-}]
-}
+let  Model={}
 export const getModel=()=>{ 
   resetModel();
   return Model
@@ -67,7 +46,8 @@ export const getModel=()=>{
 export const resetModel=()=>{
 
   Model={
-    product:""
+     status:""
+    ,product:""
     ,cardNumber:""
     ,cardProduct:0
     ,referenceNo:""
@@ -75,7 +55,7 @@ export const resetModel=()=>{
     ,lastName:""
     ,middleName:""
     // ,product:{id:0}
-    
+
     ,merchant:false
    
     ,links:[ {

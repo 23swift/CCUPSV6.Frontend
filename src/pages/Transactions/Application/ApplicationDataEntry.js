@@ -30,7 +30,8 @@ const   tableSchema=[{displayText:'Card Number',fieldName:'cardNumber'},
 {displayText:'Name',fieldName:'name'},
 {displayText:'Institution',fieldName:'institutionName'},
 {displayText:'Product',fieldName:'product'},
-{displayText:'Reference',fieldName:'referenceNo'}
+{displayText:'Reference',fieldName:'referenceNo'},
+{displayText:'Status',fieldName:'status'}
 ]
 const useStyles = makeStyles((theme) => ({
 

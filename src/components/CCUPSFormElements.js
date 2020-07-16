@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {    Box,    Divider,    Button,    IconButton,    Slide,    AppBar,    Grid,
-    CircularProgress,    Typography,    Badge, TextField, InputLabel, Select, MenuItem, FormControl, FormControlLabel, Checkbox, InputBase, List, ListItem, ListItemIcon, ListItemText, ListSubheader,  } from "@material-ui/core";
+    CircularProgress,    Typography,    Badge, TextField, InputLabel, Select, MenuItem, FormControl, FormControlLabel, Checkbox, InputBase, List, ListItem, ListItemIcon, ListItemText, ListSubheader, Paper,  } from "@material-ui/core";
   import InfoIcon from "@material-ui/icons/Info";
   import { makeStyles, withStyles } from "@material-ui/styles";
 import { getProfile } from './CCUPSHelper';
@@ -14,6 +14,10 @@ import { useSnackbar } from 'notistack';
 import CCUPSCheckBox from './CCUPSCheckBox';
 import PropTypes from 'prop-types';
 import CCUPSActionButton from './CCUPSActionButton';
+import { blue } from '@material-ui/core/colors';
+import CCUPSStatus from './CCUPSStatus';
+
+
 const CCUPSFormElements = (props) => {
     const {values, errors,touched,formElements,handleChange,handleBlur,handleSubmit,formSchema,model,isSubmitting,
       resetForm} = props;
@@ -47,15 +51,24 @@ const actionButtonClick=(event,id)=>{
             <Form noValidate >
                 {
 
-                        <Grid container spacing={2}>
+                        <Grid container spacing={2} style={{marginTop:5}}>
                         
                            
                 {model && formSchema && Object.keys(model).map((item,index)=>(
                     
                 
-                <Grid item xs={12} md={6} key={index} >
-               
-                            {formSchema && formSchema[item] && formSchema[item].format===undefined && (formSchema[item].type == "string" ||  formSchema[item].type == "integer") &&  (
+                <Grid item xs={12} md={item=="status"?12:6} key={index} >
+
+                            {formSchema &&   item=="status" && values[item]!=="" &&
+
+                                
+                                // <Alert severity="info">{values[item]}</Alert>
+                              
+                                <CCUPSStatus displayText= {values[item]}/>
+                            }
+                            {formSchema && formSchema[item] && formSchema[item].format===undefined && (formSchema[item].type == "string" ||  formSchema[item].type == "integer") &&  
+                               item!=="status" &&
+                            (
 
                             <CCUPSTextBox  fieldName={item} errors={errors}  touched={touched} label={formSchema[item].title} handleChange={handleChange}
                             handleBlur={handleBlur} value={values[item]} />

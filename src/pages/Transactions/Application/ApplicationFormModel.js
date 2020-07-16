@@ -46,7 +46,7 @@ let  Model={
   ,lastName:""
   ,middleName:""
   // ,product:{id:0}
-  
+  // ,status:""
   ,merchant:false
   // ,institution:""
   // ,id:0
@@ -77,7 +77,7 @@ export const resetModel=()=>{
     // ,product:{id:0}
     
     ,merchant:false
-   
+    // ,status:""
     ,links:[ {
       "rel": "action"
       ,"href": process.env.REACT_APP_REST_DATA + '/applications'

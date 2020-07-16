@@ -69,7 +69,7 @@ const [formModel, setFormModel] = useState();
             <PageHeader title="Application Data Entry" icon={faDatabase} returnUrl="/applicationDataEntry"
             subTitle="Create an entry"/>
           <Box mr={1} ml={1} component={Paper}  pb={2} pt={1} pr={2} pl={2}  elevation={1}
-         
+
           >  
                    {formModel && <CCUPSRestForm model={formModel} resourceName="applications"  validationScheme={ApplicationFormValidation}   />}
               

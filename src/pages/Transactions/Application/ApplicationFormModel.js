@@ -37,6 +37,7 @@ export const ApplicationFormValidation = Yup.object().shape({
 
 
 
+<<<<<<< HEAD
 let  Model={
   product:"",
   cardNumber:""
@@ -59,6 +60,9 @@ let  Model={
     
 }]
 }
+=======
+let  Model={}
+>>>>>>> 95a96efb1845aac4c111e4f6bcd641b2196cd451
 export const getModel=()=>{ 
   resetModel();
   return Model
@@ -67,7 +71,8 @@ export const getModel=()=>{
 export const resetModel=()=>{
 
   Model={
-    product:""
+     status:""
+    ,product:""
     ,cardNumber:""
     ,cardProduct:0
     ,referenceNo:""
@@ -75,7 +80,7 @@ export const resetModel=()=>{
     ,lastName:""
     ,middleName:""
     // ,product:{id:0}
-    
+
     ,merchant:false
     // ,status:""
     ,links:[ {

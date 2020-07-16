@@ -51,7 +51,7 @@ const handleOnSubmit =  (values, actions) => {
                       callApi(selectedAction.href,values,selectedAction.type).then(data => {
                                               // console.log(data); // JSON data parsed by `response.json()` call
                                               actions.setSubmitting(false);
-                                              showSuccessMessage("Entry Saved!");
+                                              showSuccessMessage("Entry " +selectedAction.title +"ed !");
                                               if(selectedAction.type=="POST"){ actions.resetForm();}
                                               // else{actions.setValues(data);}
                                               

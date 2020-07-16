@@ -42,7 +42,7 @@ const CCUPSActionButton = (props) => {
                                 handleClose={()=>setConfirmationOpen(false)}
                                 isSubmitting={isSubmitting}
                                 action={dialogAction}
-                                message="Saving your entry, Please Confirm..."
+                                message={"Are you sure you want to " + item.title+" this entry, Please Confirm..."}
                         />
                     <CCUPSProgress
                       open={isSubmitting}

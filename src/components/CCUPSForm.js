@@ -311,7 +311,7 @@ function CCUPSForm(props) {
 
 <Divider />
 
-<Box display="flex" padding={1}>
+<Box display="flex" p={1} >
   <Box flexGrow={1}></Box>
   {errors && hasError(errors) &&
     <Box mr={1}>

@@ -26,8 +26,7 @@ useEffect(() => {
     // getMenuItems(props.control.itemsUrl);
 
     getResource(fieldName+'s','forDropDown').then(href=>{
-      console.log("2nd");
-      console.log(href);
+
       
       fetch(href).then(res=>res.json()).then(data=>{
         setData(data.content);

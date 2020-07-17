@@ -47,7 +47,22 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
     
     
     return fetch(process.env.REACT_APP_REST_DATA)
-    .then(res => res.json())
+    .then(response => {
+        const result = response.json()
+
+        if(response.ok){return result}
+        else{ 
+          
+          result.then(data=>{
+          console.log(data);
+          throw new Error(data.message);
+          // if(data.message==='Unauthorized')
+          // {fakeAuth.authenticate(); }
+
+        });
+        // return Error('Test Error');
+        }
+    })
     .then((data)=>{
     
         
@@ -57,10 +72,7 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
         .replace('{?page,size,sort,projection}',page==undefined || size==undefined || sort==undefined ? '':'?page='+page+',size='+size+',sort='+sort+',projection='+projection);
     });
     
-    // .then(href=>{
-
-    //     return fetch(href).then(res=>res.json());
-    // });
+   
 
 }
 export const getActionUrl=(resourceName)=>{

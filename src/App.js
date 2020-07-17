@@ -12,32 +12,32 @@ import { fakeAuth } from './components/AuthenticatedRoute';
 function App() {
   // const history=useHistory();
   useEffect(() => { 
-    fetch(process.env.REACT_APP_REST_DATA)
-    .then(response => 
-      {
-        const result = response.json()
+    // fetch(process.env.REACT_APP_REST_DATA)
+    // .then(response => 
+    //   {
+    //     const result = response.json()
 
-        if(response.ok){return result}
-        else{ 
+    //     if(response.ok){return result}
+    //     else{ 
           
-          result.then(data=>{
-          // console.log(data);
-          // throw new Error(data.message);
-          if(data.message==='Unauthorized')
-          {fakeAuth.authenticate(); }
+    //       result.then(data=>{
+    //       // console.log(data);
+    //       throw new Error(data.message);
+    //       // if(data.message==='Unauthorized')
+    //       // {fakeAuth.authenticate(); }
 
-        });
-        // return Error('Test Error');
-        }
-      }
+    //     });
+    //     // return Error('Test Error');
+    //     }
+    //   }
     
-    )
-    .then((data)=>{
-        SaveObjectToLocalStorage('rest_data',data);
-    }).catch((error) => { 
-     console.log(error);
-      console.error( error);
-    });
+    // )
+    // .then((data)=>{
+    //     if(data) {SaveObjectToLocalStorage('rest_data',data);}
+    // }).catch((error) => { 
+    //  console.log(error);
+    //   console.error( error);
+    // });
 
    
     

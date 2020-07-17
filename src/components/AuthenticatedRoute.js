@@ -13,20 +13,26 @@ export const fakeAuth = {
     }
   }
 
-const AuthenticatedRoute = ({ children, ...rest }) => {
-    const { pathname, search } = useLocation();
+const AuthenticatedRoute = ({ component:Component, ...rest }) => {
+    
 
     return (
-        <Route {...rest}>
-      {fakeAuth.isAuthenticated  ? (
-        children
-      ) : (
-        // <Redirect to={
-        //   `/login?redirect=${pathname}${search}`
-        // } />
-        <Redirect to="/login" />
-      )}
-    </Route>
+        <Route {...rest}
+          render={props=>
+            localStorage.getItem("auth_token")?
+            (<Component {...props}/>):
+            (
+              <Redirect
+                to={{
+                  pathname:"/login",
+                  state:{from:props.location}
+                }}
+              />
+            )
+
+          }
+        />
+    
     )
 }
 

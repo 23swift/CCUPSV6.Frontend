@@ -155,14 +155,16 @@ import { withStyles } from '@material-ui/styles';
 export const ConfirmationButton = withStyles(theme => ({
   root: {
     label:{
-      color: blue[900],
+      color: "#fff",
     },
-     color: theme.palette.primary.main,
-    //  boxShadow:" 0 2px 2px 0 rgba(255, 152, 0, 0.14), 0 3px 1px -2px rgba(255, 152, 0, 0.2), 0 1px 5px 0 rgba(255, 152, 0, 0.12)",
-    backgroundColor: amber[500],
+    //  color: theme.palette.primary.main,
+    color:"#fff",
+     boxShadow:" 0 2px 2px 0 rgba(255, 152, 0, 0.14), 0 3px 1px -2px rgba(255, 152, 0, 0.2), 0 1px 5px 0 rgba(255, 152, 0, 0.12)",
+    backgroundColor: amber[600],
     '&:hover': {
-      backgroundColor: amber[600],
-      color: blue[900],
+      backgroundColor: amber[500],
+      // color: blue[900],
+      color:"#fff",
     },
     
     

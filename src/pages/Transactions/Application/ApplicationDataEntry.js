@@ -118,6 +118,7 @@ const ApplicationDataEntry = () => {
     // fetch('/api/data/profile');
     RemoveAppToLocalStorage();
     getResource('applications','applicationWithInstitution').then(href=>{
+      console.log(href);
 
       
       fetch(href).then(res=>res.json()).then(data=>{

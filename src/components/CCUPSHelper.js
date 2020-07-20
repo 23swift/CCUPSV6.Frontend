@@ -46,9 +46,23 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
     // const rest_data= GetObjectFromLocalStorage('rest_data');
     
     
-    return fetch(process.env.REACT_APP_REST_DATA)
+    // process.env.REACT_APP_REST_DATA
+    const myHeaders = new Headers();
+    // myHeaders.append('Authorization',localStorage.key('auth_token') ?`Bearer ${localStorage.getItem("auth_token")}`:"");
+    // myHeaders.append('Content-Type', 'application/json');
+    
+    
+    const myRequest = new Request('http://localhost:8080/api/', {
+      method: 'GET',
+      headers: myHeaders,
+      mode: 'cors',
+      cache: 'default',
+    });
+
+    return fetch('http://localhost:8080/api/')
     .then(response => {
         const result = response.json()
+
 
         if(response.ok){return result}
         else{ 
@@ -65,7 +79,6 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
     })
     .then((data)=>{
     
-        
         return data.links.find(entity=>{
             return entity.rel===resourceName
         }).href.replace('{?projection}',projection ? '?projection='+projection:'' )

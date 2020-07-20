@@ -1,6 +1,6 @@
 import React from 'react'
 import PageHeader from '../components/PageHeader'
-import { TextField, Grid, Button, Container, Box,Typography } from '@material-ui/core'
+import { TextField, Grid, Button, Container, Box,Typography, InputAdornment } from '@material-ui/core'
 import{CCUPSPaper} from '../components/CCUPSPaper'
 import payBillsImg from '../img/payBills.png'
 import { fakeAuth } from '../components/AuthenticatedRoute'
@@ -9,14 +9,28 @@ import CCUPSTextBox from '../components/CCUPSTextBox'
 import { postData } from '../components/CCUPSApiService'
 import CCUPSProgress from '../components/CCUPSProgress'
 import { useHistory } from 'react-router'
+import { useSnackbar } from 'notistack'
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import PersonIcon from '@material-ui/icons/Person';
+import { ConfirmationButton } from '../components/theme/customTheme'
 
 const model={
     username:""
     ,password:""
 }
+
+
 const Login = () => {
 const history=useHistory();
-  
+const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+const showSubmitErrorMessage = (error) => {
+   
+    enqueueSnackbar(error, {
+      variant: "error",
+      // onExited: handleSnackExit(),
+    })
+}
     return (
         <div>
             <PageHeader />
@@ -30,12 +44,12 @@ const history=useHistory();
                         initialValues={model}
                         onSubmit={(values, actions) => {
                             setTimeout(() => {
-                            // alert(JSON.stringify(values, null, 2));
-                            // actions.setSubmitting(false);
+                         
+                         
                             postData(process.env.REACT_APP_REST_SERVER+"/api/authenticate",values)
                               .then(data=>{
 
-                                // console.log(data);
+                                console.log(data);
                                 localStorage.removeItem('auth_token');
                                 localStorage.setItem('auth_token',JSON.stringify(data));
 
@@ -45,14 +59,12 @@ const history=useHistory();
                              }).catch(err=>{
 
                                 actions.setSubmitting(false);
-                                console.log("err");
-                                
-                                // error.then(err=>{
-                                //     alert(err.message);
-                                // });
+                                           console.log("Error: "+  err);
 
+                                           showSubmitErrorMessage( err.message);
                                 
-                             });
+                                 });
+                             
                             }, 1000);
 
                         }}
@@ -80,15 +92,22 @@ const history=useHistory();
                                     <Grid item xs={12} md={12}>
                                        
 
-                                        <CCUPSTextBox  fieldName="username" errors={errors}  touched={touched} label="User Name" handleChange={handleChange}
+                                        <CCUPSTextBox InputProps={{
+                                                            startAdornment: <InputAdornment position="start"><PersonIcon/></InputAdornment>,
+                                                        }}
+                                         fieldName="username" errors={errors}  touched={touched} label="User Name" handleChange={handleChange}
                                          handleBlur={handleBlur} value={values["username"]} />
                                     </Grid>
                                     <Grid item xs={12} md={12}>
-                                    <CCUPSTextBox  fieldName="password" errors={errors}  touched={touched} label="Password" handleChange={handleChange}
+                                    <CCUPSTextBox type="password"  InputProps={{
+                                                            startAdornment: <InputAdornment position="start"><VpnKeyIcon/></InputAdornment>,
+                                                        }}
+                                    
+                                    fieldName="password" errors={errors}  touched={touched} label="Password" handleChange={handleChange}
                                          handleBlur={handleBlur} value={values["password"]} />
                                     </Grid>
                                 <Grid item xs={12} md={12} >
-                                    <Button type="submit"  size="large" color="secondary" variant="contained" disableElevation style={{minWidth:'100%'}}> Submit </Button>
+                                    <ConfirmationButton type="submit"  size="large" color="secondary" variant="contained" disableElevation style={{minWidth:'100%'}}> Submit </ConfirmationButton>
                                 </Grid>
 
                                                         

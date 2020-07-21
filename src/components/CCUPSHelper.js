@@ -1,3 +1,5 @@
+import { callApi } from "./CCUPSApiService";
+
 export const GetSelectedInstitution=()=>{
 
 
@@ -48,18 +50,16 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
     
     // process.env.REACT_APP_REST_DATA
     const myHeaders = new Headers();
-    // myHeaders.append('Authorization',localStorage.key('auth_token') ?`Bearer ${localStorage.getItem("auth_token")}`:"");
-    // myHeaders.append('Content-Type', 'application/json');
-    
-    
-    const myRequest = new Request('http://localhost:8080/api/', {
-      method: 'GET',
-      headers: myHeaders,
-      mode: 'cors',
-      cache: 'default',
-    });
+    myHeaders.append('Authorization',localStorage.key('auth_token') ?`Bearer ${JSON.parse( localStorage.getItem("auth_token")).token}`:"");
+    myHeaders.append('Content-Type', 'application/json');
 
-    return fetch('http://localhost:8080/api/')
+    const myRequest = new Request(process.env.REACT_APP_REST_DATA, {
+      method: 'GET',
+      headers: myHeaders
+    });
+    
+
+    return fetch(myRequest)
     .then(response => {
         const result = response.json()
 
@@ -70,15 +70,15 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
           result.then(data=>{
           console.log(data);
           throw new Error(data.message);
-          // if(data.message==='Unauthorized')
-          // {fakeAuth.authenticate(); }
-
+      
         });
-        // return Error('Test Error');
+      
         }
     })
     .then((data)=>{
-    
+        // console.log(data.links.find(entity=>{
+        //         return entity.rel===resourceName
+        //     }));
         return data.links.find(entity=>{
             return entity.rel===resourceName
         }).href.replace('{?projection}',projection ? '?projection='+projection:'' )
@@ -100,8 +100,17 @@ export const getActionUrl=(resourceName)=>{
 }
 
 export const getProfile=(resourceName)=>{
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization',localStorage.key('auth_token') ?`Bearer ${JSON.parse( localStorage.getItem("auth_token")).token}`:"");
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Accept', 'application/schema+json');
 
-    return fetch(process.env.REACT_APP_REST_PROFILE+'/'+resourceName,{ headers: {'Accept': 'application/schema+json'}})
+    const myRequest = new Request(process.env.REACT_APP_REST_PROFILE+'/'+resourceName, {
+      method: 'GET',
+      headers: myHeaders,
+      // body: httpVerb ==="GET"?"": JSON.stringify(data)
+    });
+    return fetch(myRequest)
     .then(res=>res.json());
     
 }
@@ -118,7 +127,7 @@ export const getRestData=()=>{
 
 export const getLinkedResources =(model,resourceHref)=> new Promise(function(resolve, reject) {
          
-        return fetch(resourceHref).then(res=>res.json()).then(data=>{
+        return callApi(resourceHref).then(data=>{
                     Object.keys(model).map(key=>{
          
                         if(data.links.find(entity=>{ return entity.name===key })!=undefined){

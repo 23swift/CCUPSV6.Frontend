@@ -25,6 +25,7 @@ import PageHeader from '../../../components/PageHeader';
 import InstitutionSelection from '../../../components/InstitutionSelection';
 import CCUPSTable from '../../../components/CCUPSTable';
 import { getResource, SetSelectedInstitution, RemoveAppToLocalStorage } from '../../../components/CCUPSHelper';
+import { callApi } from '../../../components/CCUPSApiService';
 
 const   tableSchema=[{displayText:'Card Number',fieldName:'cardNumber'},
 {displayText:'Name',fieldName:'name'},
@@ -118,10 +119,7 @@ const ApplicationDataEntry = () => {
     // fetch('/api/data/profile');
     RemoveAppToLocalStorage();
     getResource('applications','applicationWithInstitution').then(href=>{
-      console.log(href);
-
-      
-      fetch(href).then(res=>res.json()).then(data=>{
+      callApi(href).then(data=>{
         setRows(data.content);
       });
     });

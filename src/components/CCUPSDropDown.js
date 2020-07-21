@@ -5,6 +5,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import { MenuItem, FormControl, InputLabel, InputAdornment, IconButton,Select, TextField } from '@material-ui/core';
 import {  Field, ErrorMessage, useFormik } from 'formik';
 import { getSelfLink, getResource } from './CCUPSHelper';
+import { callApi } from './CCUPSApiService';
 
 
 
@@ -28,7 +29,7 @@ useEffect(() => {
     getResource(fieldName+'s','forDropDown').then(href=>{
 
       
-      fetch(href).then(res=>res.json()).then(data=>{
+      callApi(href).then(data=>{
         setData(data.content);
     
         setDropDownVal(value);

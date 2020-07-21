@@ -1,8 +1,11 @@
 
 import React from 'react'
 import { useHistory } from 'react-router';
-export const postData= async (url = '', data = {},token='')=>{
 
+export const postData= async (url = '', data = {},token='')=>{
+  const myHeaders = new Headers();
+    myHeaders.append('Authorization',localStorage.key('auth_token') ?`Bearer ${JSON.parse( localStorage.getItem("auth_token")).token}`:"");
+  
   
     // Default options are marked with *
     const response = await fetch(url, {
@@ -15,7 +18,7 @@ export const postData= async (url = '', data = {},token='')=>{
         'Content-Type': 'application/json',
       
         // 'Content-Type': 'application/x-www-form-urlencoded',
-        // 'Authorization': "Bearer " + localStorage.key('auth_token') ? JSON.parse(localStorage.getItem('auth_token').token):""
+        'Authorization':localStorage.key('auth_token') ?`Bearer ${JSON.parse( localStorage.getItem("auth_token")).token}`:""
       },
       redirect: 'follow', // manual, *follow, error
       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
@@ -37,24 +40,27 @@ export const postData= async (url = '', data = {},token='')=>{
   
 }
 
-export const callApi= async (url = '', data = {},httpVerb)=>{
+export const callApi= async (url = '', data = {},httpVerb='GET')=>{
   // console.log(JSON.stringify(data));
   // Default options are marked with *
   
-  const response = await fetch(url, {
-    method: httpVerb, // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
-    headers: {
-      'Content-Type': 'application/json',
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': "Bearer " +localStorage.key('auth_token')!==null ? JSON.parse(localStorage.getItem('auth_token')).token:""
-    },
-    redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    body: JSON.stringify(data) // body data type must match "Content-Type" header
-  });
+    
+    // process.env.REACT_APP_REST_DATA
+  
+const options={
+      method:httpVerb,
+      mode: 'cors', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization':localStorage.key('auth_token') ?`Bearer ${JSON.parse( localStorage.getItem("auth_token")).token}`:""
+      },
+
+};
+if( httpVerb!=='GET'){options.body= JSON.stringify(data) }
+
+
+  const response = await fetch(url,options);
+  
     if(response.ok){return response.json();}
     else{
       response.then(result=>{
@@ -64,7 +70,7 @@ export const callApi= async (url = '', data = {},httpVerb)=>{
     }
 
    // parses JSON response into native JavaScript objects
-
+  
 }
 
 export const deleteData= async (url = '', data = {})=>{

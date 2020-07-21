@@ -16,6 +16,7 @@ import CCCUPSErroNotification from './CCCUPSErroNotification';
 import { Button, Box } from '@material-ui/core';
 import CCUPSActionButton from './CCUPSActionButton';
 import { withFormik } from 'formik';
+import { useHistory } from 'react-router';
 
 
 
@@ -24,17 +25,18 @@ const CCUPSRestForm = (props) => {
   const [apiAction, setApiAction] = useState(update?"PUT":"POST");
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [formSchema, setFormSchema] = useState();
+  let history = useHistory();
   const showSuccessMessage = (message) => {
     enqueueSnackbar(message, {
       variant: "success",
-      // onExited: handleSnackExit(),
+      onExited: handleSnackExit(),
     });
   };
   const showSubmitErrorMessage = (error) => {
    
     enqueueSnackbar(error, {
       variant: "error",
-      // onExited: handleSnackExit(),
+      onExited: handleSnackExit(),
     })
 };
 
@@ -42,13 +44,20 @@ const cancelAction=(resetForm)=>{
   resetForm();
 
 }
+const handleSnackExit = () => {
+  //setConfirmationOpen(false);
 
+  setTimeout(() => {
+     history.push(returnUrl);
+  }, 2000);
+  
+};
 const handleOnSubmit =  (values, actions) => {
   
                     setTimeout(() => {
                     console.log(selectedAction);
                     
-                      callApi(selectedAction.href,values,selectedAction.type).then(data => {
+                    callApi(selectedAction.href,values,selectedAction.type).then(data => {
                                               // console.log(data); // JSON data parsed by `response.json()` call
                                               actions.setSubmitting(false);
                                               showSuccessMessage("Entry " +selectedAction.title +"ed !");

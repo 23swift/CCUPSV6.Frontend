@@ -59,9 +59,7 @@ const InstitutionReference = () => {
         getResource("institutions",'withProducts').then(href=>{
 
             // setDataRows(result.content)
-                fetch(href)
-                    .then(res => res.json())
-                    .then( (result) => { setDataRows(result.content); },
+                callApi(href).then( (result) => { setDataRows(result.content); },
                             (error) => { console.log(error); }
                     );
         });

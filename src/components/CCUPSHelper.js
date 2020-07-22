@@ -1,4 +1,6 @@
+import React from 'react'
 import { callApi } from "./CCUPSApiService";
+import { useHistory } from "react-router";
 
 export const GetSelectedInstitution=()=>{
 
@@ -50,6 +52,7 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
     
     // process.env.REACT_APP_REST_DATA
     const myHeaders = new Headers();
+    
     myHeaders.append('Authorization',localStorage.key('auth_token') ?`Bearer ${JSON.parse( localStorage.getItem("auth_token")).token}`:"");
     myHeaders.append('Content-Type', 'application/json');
 
@@ -69,6 +72,9 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
           
           result.then(data=>{
           console.log(data);
+        //   window.location("/login");
+          localStorage.removeItem('auth_token');
+          window.location.replace("/login");
           throw new Error(data.message);
       
         });

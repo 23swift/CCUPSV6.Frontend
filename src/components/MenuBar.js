@@ -56,13 +56,13 @@ const MenuBar = (props) => {
                 onClick={() => toggleDrawer(true, item.mainMenu)}
                 key={index}
                 startIcon={  
-                  <Box color="secondary.main" >
+                  <Box color="primary.main" >
                     <FontAwesomeIcon icon={item.icon} />
                   </Box>
                   
               }
               >   <Typography  variant="caption">
-              <Box color="text.primary">
+              <Box color="text.secondary">
                  {item.displayText}
               </Box>
                

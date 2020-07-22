@@ -1,6 +1,6 @@
 import React from 'react'
 import { createMuiTheme, Button } from '@material-ui/core';
-import { blue, amber, grey, yellow, indigo } from '@material-ui/core/colors';
+import { blue, amber, grey, yellow, indigo, green } from '@material-ui/core/colors';
 import { withStyles } from '@material-ui/styles';
 
  const customTheme = createMuiTheme({
@@ -133,9 +133,9 @@ import { withStyles } from '@material-ui/styles';
       contrastText:"#fff"
     },
     secondary: {
-      main: "#065fd4",
+      // main: "#065fd4",
       // main:"#FDB913",
-      // main:"#0095ff",
+      main:"#0095ff",
       // main: "#2b7de9",
       // main:"#0067B8",
       contrastText: "#fff",
@@ -145,6 +145,10 @@ import { withStyles } from '@material-ui/styles';
     },
     error: {
       main: "#f44336",
+      contrastText: "#fff",
+    },
+    success: {
+      main: green[400],
       contrastText: "#fff",
     },
   },

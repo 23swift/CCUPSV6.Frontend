@@ -62,8 +62,7 @@ const ProductList = (props) => {
     getResource("products").then(href=>{
         // console.log(result);
        
-        fetch(href+"/search/findByInstitutionId?id="+ master.id)
-        .then(res => res.json())
+        callApi(href+"/search/findByInstitutionId?id="+ master.id)
         .then((result) => { setDataRows(result.content); }, (error) => {  console.log(error);});
 
         getProfile('products')

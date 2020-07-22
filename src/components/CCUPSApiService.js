@@ -40,7 +40,7 @@ export const postData= async (url = '', data = {},token='')=>{
   
 }
 
-export const callApi= async (url = '', data = {},httpVerb='GET')=>{
+export const callApi=  (url = '', data = {},httpVerb='GET')=>{
   // console.log(JSON.stringify(data));
   // Default options are marked with *
   
@@ -59,15 +59,35 @@ const options={
 if( httpVerb!=='GET'){options.body= JSON.stringify(data) }
 
 
-  const response = await fetch(url,options);
+  return fetch(url,options).then(response => {
+    const result = response.json()
+
+
+    if(response.ok){return result}
+    else{ 
+      
+      result.then(data=>{
+      console.log(data);
+    //   window.location("/login");
+      localStorage.removeItem('auth_token');
+      window.location.replace("/login");
+      throw new Error(data.message);
   
-    if(response.ok){return response.json();}
-    else{
-      response.then(result=>{
-        // window.location("/loginsdasd")    ;
-        throw Error(result.message);
-      });
+    });
+  
     }
+});
+  
+    // if(response.ok){return response.json();}
+    // else{
+    //   console.log(response);
+      
+    //   response.then(result=>{
+    //     localStorage.removeItem('auth_token');
+    //     window.location.replace("/login");
+    //     throw Error(result.message);
+    //   });
+    // }
 
    // parses JSON response into native JavaScript objects
   

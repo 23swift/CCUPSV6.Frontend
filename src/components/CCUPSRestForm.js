@@ -48,14 +48,14 @@ const handleSnackExit = () => {
   //setConfirmationOpen(false);
 
   setTimeout(() => {
-     history.push(returnUrl);
+   
   }, 2000);
   
 };
 const handleOnSubmit =  (values, actions) => {
   
                     setTimeout(() => {
-                    console.log(selectedAction);
+                  
                     
                     callApi(selectedAction.href,values,selectedAction.type).then(data => {
                                               // console.log(data); // JSON data parsed by `response.json()` call
@@ -63,7 +63,7 @@ const handleOnSubmit =  (values, actions) => {
                                               showSuccessMessage("Entry " +selectedAction.title +"ed !");
                                               if(selectedAction.type=="POST"){ actions.resetForm();}
                                               // else{actions.setValues(data);}
-                                              
+                                              history.push(returnUrl);
                                             },
                                             (error) => {
                                               // showSubmitErrorMessage('An Error has occured! Please Coordinate with ITSD.');

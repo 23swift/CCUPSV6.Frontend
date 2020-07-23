@@ -49,7 +49,7 @@ const showSubmitErrorMessage = (error) => {
                             postData(process.env.REACT_APP_REST_SERVER+"/api/authenticate",values)
                               .then(data=>{
 
-                                console.log(data);
+                                
                                 localStorage.removeItem('auth_token');
                                 localStorage.setItem('auth_token',JSON.stringify(data));
 

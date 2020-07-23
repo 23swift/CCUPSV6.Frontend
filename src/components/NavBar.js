@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AppBar, Toolbar, Typography, Badge, makeStyles, IconButton, Divider, Box, Paper, Hidden, Fab, Button, Drawer, ListItemIcon, ListItem, ListItemText } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Badge, makeStyles, IconButton, Divider, Box, Paper, Hidden, Fab, Button, Drawer, ListItemIcon, ListItem, ListItemText, Menu, MenuItem } from '@material-ui/core'
 import bdoLogo from '../img/bdoLogo2.png'
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
@@ -7,11 +7,13 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { blue } from '@material-ui/core/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDatabase, faTools, faSearch, faShieldAlt, faClipboardList, faEnvelopeOpenText, faHeartbeat } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import MenuBar from './MenuBar';
 import {mainMenuList,MenuManager} from '../components/MenuManager';
 import DrawerHeader from './DrawerHeader';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import { callApi } from './CCUPSApiService';
 const useStyles = makeStyles(theme => ({
 
     navTitle: {
@@ -94,6 +96,23 @@ const useStyles = makeStyles(theme => ({
 const NavBar = (props) => {
     const classes = useStyles();
     const [openDrawer, setOpenDrawer] = useState({open:false,menu:[]});
+    const [openUserMenu, setOpenUserMenu] = useState(null);
+const history = useHistory();
+    const handleUserClick = (event) => {
+      setOpenUserMenu(event.currentTarget);
+    };
+  
+    const handleUserClose = () => {
+      setOpenUserMenu(null);
+    };
+
+    const handleLogout=()=>{
+      
+      callApi(process.env.REACT_APP_REST_SERVER+"/api/logout",null,"PUT").then(data=>{
+        localStorage.clear();
+        history.push('/login');
+      });
+    }
     const toggleDrawer = (isOpen,mainMenuText)  => {
     
         const menuList=MenuManager(mainMenuText);
@@ -164,12 +183,23 @@ const NavBar = (props) => {
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
-              <IconButton
+              <IconButton onClick={handleLogout}
                 className={classes.icon}
                 color="inherit"
               >
-                <PersonIcon />
+                <PowerSettingsNewIcon />
               </IconButton>
+              {/* <Menu
+                id="simple-menu"
+                anchorEl={openUserMenu}
+                keepMounted
+                open={Boolean(openUserMenu)}
+                onClose={handleUserClose}
+              >
+                <MenuItem onClick={handleUserClose}>Profile</MenuItem>
+                <MenuItem onClick={handleUserClose}>My account</MenuItem>
+                <MenuItem onClick={handleUserClose}>Logout</MenuItem>
+              </Menu> */}
             </Box>
           </Toolbar>
           <Box mt={0}>

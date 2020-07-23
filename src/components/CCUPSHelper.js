@@ -82,6 +82,8 @@ export const getResource=(resourceName,projection,page,size,sort)=>{
         }
     })
     .then((data)=>{
+        
+        
         // console.log(data.links.find(entity=>{
         //         return entity.rel===resourceName
         //     }));

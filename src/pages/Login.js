@@ -54,7 +54,7 @@ const showSubmitErrorMessage = (error) => {
                                 localStorage.setItem('auth_token',JSON.stringify(data));
 
                                 actions.setSubmitting(false);
-                                history.push("/applicationDataEntry");
+                                history.push("/");
                     
                              }).catch(err=>{
 

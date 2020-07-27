@@ -7,7 +7,7 @@ export const menuList=[
                     // {displayText:'Institution Enrollment',url:'/institutionEnrollment'},
                     // {displayText:'Institution Approval',url:''},
                     {displayText:'Auto Charge Application Enrollment',url:'/applicationDataEntry'},
-                    {displayText:'Auto Charge Application Approval',url:''},
+                    {displayText:'Auto Charge Application Approval',url:'/applicationApproval'},
                     
                     {displayText:'List of Enrolled Cardholders',url:''},
                     {displayText:'List of Unenrolled Cardholders',url:''},

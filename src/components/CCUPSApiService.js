@@ -69,8 +69,14 @@ if( httpVerb!=='GET'){options.body= JSON.stringify(data) }
       result.then(data=>{
       console.log(data);
     //   window.location("/login");
-      localStorage.removeItem('auth_token');
-      window.location.replace("/login");
+      
+      if (data.error==='Unauthorized') {
+        localStorage.removeItem('auth_token');
+        window.location.replace("/login");
+      }else{
+        window.location.replace("/forbidden");
+      }
+      // 
       throw new Error(data.message);
   
     });

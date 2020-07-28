@@ -73,8 +73,10 @@ if( httpVerb!=='GET'){options.body= JSON.stringify(data) }
       if (data.error==='Unauthorized') {
         localStorage.removeItem('auth_token');
         window.location.replace("/login");
-      }else{
+      }else if (data.error==='Forbidden'){
         window.location.replace("/forbidden");
+      }else{
+        window.location.replace("/error");
       }
       // 
       throw new Error(data.message);

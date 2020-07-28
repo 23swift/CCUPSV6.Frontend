@@ -24,7 +24,7 @@ const ApplicationApproval = () => {
         //     setRows(data.content);
         //   });
           getResource('applications').then(href=>{
-            callApi(href+'/search/findAllApplicationsForApproval').then(data=>{
+            callApi(href+'/search/findAllApplicationsForApproval?projection=applicationWithInstitution').then(data=>{
               setRows(data.content);
             });
           });

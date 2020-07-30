@@ -97,12 +97,12 @@ import { withStyles } from '@material-ui/styles';
     MuiTableCell: {
       head: {
         // backgroundColor: blue[500],
-        backgroundColor:"#054594",
+        backgroundColor:"#043a7b",
         // color: "#054594",
         color:"#fff",
       },
       stickyHeader:{
-        backgroundColor: "#043673",
+        backgroundColor: "#043a7b",
         // backgroundColor:"#0072ce",
          // backgroundColor:"#fff",
         color:"#fff",
@@ -163,7 +163,7 @@ export const ConfirmationButton = withStyles(theme => ({
     },
     //  color: theme.palette.primary.main,
     color:"#fff",
-     boxShadow:" 0 2px 2px 0 rgba(255, 152, 0, 0.14), 0 3px 1px -2px rgba(255, 152, 0, 0.2), 0 1px 5px 0 rgba(255, 152, 0, 0.12)",
+    //  boxShadow:" 0 2px 2px 0 rgba(255, 152, 0, 0.14), 0 3px 1px -2px rgba(255, 152, 0, 0.2), 0 1px 5px 0 rgba(255, 152, 0, 0.12)",
     backgroundColor: amber[600],
     '&:hover': {
       backgroundColor: amber[500],

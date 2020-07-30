@@ -43,6 +43,7 @@ export const menuList=[
             {displayText:'Submenu Maintenance',url:''},
             {displayText:'Group Profile',url:''},
             {displayText:'Group Access Maintenance',url:''},
+            {displayText:'Group Access Maintenance',url:''},
             {displayText:'User Profile',url:''},
             {displayText:'Audit Log',url:''},
             {displayText:'Monitor Users',url:''},

@@ -148,12 +148,12 @@ const ApplicationDataEntry = () => {
               </Box>
 
               <Box ml={1} mr={1}>
-                <Button color="secondary" startIcon={<AddIcon />} disableElevation variant="contained"
+                <ConfirmationButton   startIcon={<AddIcon />} disableElevation variant="contained"
                   size="small" component={Link} to="/applicationForm" 
                   // onClick={handleClickOpen} size="small"
                   >
                   Add New Application
-                </Button>
+                </ConfirmationButton>
               
               </Box>
               <Box mr={1}>
@@ -176,7 +176,7 @@ const ApplicationDataEntry = () => {
         />
 
         <Box mr={2} ml={2}>
-         
+        
           <CCUPSTable tableSchema={tableSchema} rows={rows} detailsUrl="/applicationForm" />
         </Box>
         

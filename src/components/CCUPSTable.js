@@ -43,7 +43,7 @@ history.push(detailsUrl);
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows && rows.map((row,index) => (
+            {rows && rows.length>0 &&  rows.map((row,index) => (
               <TableRow key={index} hover onClick={(event) => handleSelect(event, row)}>
                    {tableSchema.map((item,index)=>
                         <TableCell key={index}> {row[item.fieldName]}</TableCell>

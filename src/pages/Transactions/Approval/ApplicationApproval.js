@@ -34,7 +34,7 @@ const ApplicationApproval = () => {
             <PageHeader  title="Application Approval" icon={faDatabase}/>
             <Box mr={2} ml={2}>
          
-         <CCUPSTable tableSchema={tableSchema} rows={rows} detailsUrl="/applicationForm" />
+         <CCUPSTable tableSchema={tableSchema} rows={rows} detailsUrl="/applicationApprovalForm" />
        </Box>
         </div>
     )

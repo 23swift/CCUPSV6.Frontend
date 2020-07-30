@@ -92,6 +92,7 @@ const setSelectedAction=(val)=>{
     
     getProfile(resourceName)
   .then(data=>{  
+
     setFormSchema(data.properties);
   });
 

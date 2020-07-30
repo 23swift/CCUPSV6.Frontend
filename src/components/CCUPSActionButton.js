@@ -5,6 +5,7 @@ import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import PublishIcon from '@material-ui/icons/Publish';
 import CCUPSConfirmationDialog from './CCUPSConfirmationDialog';
 import CCUPSProgress from './CCUPSProgress';
+import StorageIcon from '@material-ui/icons/Storage';
 const CCUPSActionButton = (props) => {
     const [confirmationOpen, setConfirmationOpen] = useState(false);
     const{item,isSubmitting,handleSubmit,setSelectedAction}=props;
@@ -30,7 +31,7 @@ const CCUPSActionButton = (props) => {
                             {item.name=='delete'&& <DeleteOutlineIcon/>}
                             {item.name=='update'&& <SystemUpdateAltIcon/>}
                             {item.name=='submit'&& <PublishIcon/>}
-                            {item.name=='save'&& <SystemUpdateAltIcon/>}
+                            {item.name=='save'&& <StorageIcon/>}
                             </>
                          
                       }>

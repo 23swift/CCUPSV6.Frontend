@@ -18,6 +18,7 @@ import Login from '../pages/Login';
 import PropTypes from 'prop-types'
 import ApplicationApproval from '../pages/Transactions/Approval/ApplicationApproval';
 import Forbiden from './../pages/Forbiden';
+import ApplicationApprovalForm from '../pages/Transactions/Approval/ApplicationApprovalForm';
 function usePageViews() {
   let location = useLocation();
   React.useEffect(() => {
@@ -55,6 +56,7 @@ const Routes = () => {
           
           <AuthenticatedRoute path="/institutionEnrollment" component={InstitutionEnrollment} />
           <AuthenticatedRoute path="/applicationApproval" component={ApplicationApproval} />
+          <AuthenticatedRoute path="/applicationApprovalForm" component={ApplicationApprovalForm} />
           <Route path="/forbidden" component={Forbiden} />
           
           <Route path="*" component={NotFoundPage} />

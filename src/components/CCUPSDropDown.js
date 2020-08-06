@@ -11,7 +11,7 @@ import { callApi } from './CCUPSApiService';
 
 
 const CCUPSDropDown = (props) => {
-  const {value, errors, touched,fieldName,label,handleBlur,handleChange} = props;
+  const {value, errors, touched,fieldName,label,handleBlur,handleChange, disabled} = props;
 const [data, setData] = useState([]);
 const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 const [dropDownVal, setDropDownVal] = useState('');
@@ -59,7 +59,7 @@ useEffect(() => {
 
     return (
      
-      <FormControl variant="outlined" fullWidth size="small" 
+      <FormControl variant="outlined" fullWidth size="small" disabled={disabled}
       // error={errors[fieldName] && touched[fieldName]}
        error={errors[fieldName] && true}
       >

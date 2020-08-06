@@ -71,7 +71,7 @@ const [formModel, setFormModel] = useState();
           <Box mr={1} ml={1} component={Paper}  pb={2} pt={1} pr={2} pl={2}  elevation={1}
 
           >  
-                   {formModel && <CCUPSRestForm model={formModel} resourceName="applications" returnUrl="/applicationDataEntry"  validationScheme={ApplicationFormValidation}   />}
+                   {formModel && <CCUPSRestForm model={formModel} disabled={formModel.status!==""  ?true:false} resourceName="applications" returnUrl="/applicationDataEntry"  validationScheme={ApplicationFormValidation}   />}
               
               </Box>
         

@@ -2,13 +2,13 @@ import React from 'react'
 import { FormControlLabel, Checkbox, Typography } from '@material-ui/core'
 
 function CCUPSCheckBox(props) {
-    const{value,handleChange,name,label}=props;
+    const{value,handleChange,name,label,disabled}=props;
     
     
     return (
         <FormControlLabel
                               control={
-                                <Checkbox
+                                <Checkbox disabled={disabled}
                                   onChange={handleChange}
                                   checked={value}
                                   name={name}

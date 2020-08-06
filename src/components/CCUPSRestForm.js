@@ -21,7 +21,7 @@ import { useHistory } from 'react-router';
 
 
 const CCUPSRestForm = (props) => {
-  const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName } = props;
+  const {  submitUrl, validationScheme,legend,update,model,returnUrl,resourceName,disabled } = props;
   const [apiAction, setApiAction] = useState(update?"PUT":"POST");
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [formSchema, setFormSchema] = useState();
@@ -117,7 +117,7 @@ return () => {
                 
                
                {Object.keys(errors).length>0 && <CCCUPSErroNotification errorList={errors} open={Object.keys(errors).length>0}/>}
-                  {formSchema && <CCUPSFormElements formSchema={formSchema} model={model} values={values} errors={errors} touched={touched} handleChange={handleChange}
+                  {formSchema && <CCUPSFormElements disabled={disabled} formSchema={formSchema} model={model} values={values} errors={errors} touched={touched} handleChange={handleChange}
                   isSubmitting={isSubmitting} handleBlur={handleBlur} handleSubmit={handleSubmit} resetForm={resetForm}/> }
             <Box display="flex" pt={2}> 
               <Box flexGrow={1}>

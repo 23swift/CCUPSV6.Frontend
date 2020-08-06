@@ -7,7 +7,7 @@ import { useSnackbar } from 'notistack';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const CCUPSTextBox = (props) => {
-    const {value, errors, touched,handleChange,handleBlur,fieldName,label,InputProps,type} = props;
+    const {value, errors, touched,handleChange,handleBlur,fieldName,label,InputProps,type,disabled} = props;
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
     useEffect(() => {
         // if(errors[fieldName] && touched[fieldName] ){
@@ -34,7 +34,7 @@ const CCUPSTextBox = (props) => {
 
     return (
         <div>
-              <TextField 
+              <TextField disabled={disabled}
               type={type}
               InputProps={InputProps}
               name={fieldName}   fullWidth variant='outlined' size="small" 

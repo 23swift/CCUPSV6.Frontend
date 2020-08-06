@@ -20,7 +20,7 @@ import CCUPSStatus from './CCUPSStatus';
 
 const CCUPSFormElements = (props) => {
     const {values, errors,touched,formElements,handleChange,handleBlur,handleSubmit,formSchema,model,isSubmitting,
-      resetForm} = props;
+      resetForm,disabled} = props;
   
     const [confirmationOpen, setConfirmationOpen] = useState(false);
 
@@ -70,17 +70,17 @@ const actionButtonClick=(event,id)=>{
                                item!=="status" &&
                             (
 
-                            <CCUPSTextBox  fieldName={item} errors={errors}  touched={touched} label={formSchema[item].title} handleChange={handleChange}
+                            <CCUPSTextBox disabled={disabled}  fieldName={item} errors={errors}  touched={touched} label={formSchema[item].title} handleChange={handleChange}
                             handleBlur={handleBlur} value={values[item]} />
                             
                             )}
                             {formSchema && formSchema[item] && formSchema[item].format=="uri" && formSchema[item].type === "string" && (
                            
-                            <CCUPSDropDown label={formSchema[item].title}  fieldName={item}  control={item} errors={errors} touched={touched}
+                            <CCUPSDropDown  disabled={disabled} label={formSchema[item].title}  fieldName={item}  control={item} errors={errors} touched={touched}
                             value={values[item]} handleChange={handleChange}  handleBlur={handleBlur}/>
                             )}
                             {formSchema && formSchema[item] && formSchema[item].type == "boolean" && (
-                                 <CCUPSCheckBox  name={item} handleChange={handleChange}   label={formSchema[item].title}                                                        // errors={errors}
+                                 <CCUPSCheckBox disabled={disabled}  name={item} handleChange={handleChange}   label={formSchema[item].title}                                                        // errors={errors}
                                     touched={touched} value={values[item]}                                                      
                                     />
 

@@ -149,3 +149,9 @@ export const getLinkedResources =(model,resourceHref)=> new Promise(function(res
 
 
 })
+export const getLinkedResource=(resource,linkedResource)=>{
+
+    return resource.links.find(entity=>{
+        return entity.rel===linkedResource
+    }).href.replace('{?projection}','');
+}

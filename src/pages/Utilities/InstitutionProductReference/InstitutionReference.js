@@ -56,10 +56,10 @@ const InstitutionReference = () => {
 //       });
 //   }
     useEffect(() => {
-        getResource("institutions",'withProducts').then(href=>{
+        getResource("institutions").then(href=>{
 
             // setDataRows(result.content)
-                callApi(href).then( (result) => { setDataRows(result.content); },
+                callApi(href+'/search/findAllInstitutionsForMaintenace').then( (result) => { setDataRows(result.content); },
                             (error) => { console.log(error); }
                     );
         });

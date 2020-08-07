@@ -7,7 +7,7 @@ import { createTextBox } from '../../../../components/CCUPSFormElement';
 import * as Yup from 'yup';
 import { callApi } from '../../../../components/CCUPSApiService';
 import CCUPSFormDialog from '../../../../components/CCUPSFormDialog';
-import { getSelfLink, getResource, getProfile, getActionUrl } from '../../../../components/CCUPSHelper';
+import { getSelfLink, getResource, getProfile, getActionUrl, getLinkedResource } from '../../../../components/CCUPSHelper';
 import ProductDialog from './ProductDialog';
 
 const formModel={
@@ -58,17 +58,25 @@ const ProductList = (props) => {
 //   }
     useEffect(() => {
        
-        
-    getResource("products").then(href=>{
-        // console.log(result);
+        // {?projection}
+    // getResource("products").then(href=>{
+    //     // console.log(result);
        
-        callApi(href+"/search/findByInstitutionId?id="+ master.id)
-        .then((result) => { setDataRows(result.content); }, (error) => {  console.log(error);});
+    //     callApi(href+"/search/findByInstitutionId?id="+ master.id)
+    //     .then((result) => { setDataRows(result.content); }, (error) => {  console.log(error);});
 
-        getProfile('products')
-        .then(data=>{ setFormSchema(data.properties); });
-    });
-        
+    //     getProfile('products')
+    //     .then(data=>{ setFormSchema(data.properties); });
+    // });
+
+
+    callApi(getLinkedResource(master,'products'))
+    .then((result) => { setDataRows(result.content); }, (error) => {  console.log(error);});
+
+    getProfile('products')
+    .then(data=>{ setFormSchema(data.properties); });
+
+
         return () => {
             // cleanup
             // setCreatedEntity({});
